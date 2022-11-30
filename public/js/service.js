@@ -37,12 +37,14 @@ $(document).ready(function () {
                 data: "price",
             },
             {
+                // dito na gagana join table name gamit ko pero wala name sa service
                 data: "name",
             },
             {
                 data: null,
                 render: function (data, type, JsonResultRow, row) {
                     return (
+                        // storage kasi dun naten nilagay publicly
                         '<img src="storage/' +
                         JsonResultRow.image_path +
                         '" height="100px" width="100px">'
@@ -167,6 +169,7 @@ $(document).ready(function () {
                 $("#date_of_service").val(data.date_of_service);
                 $("#price").val(data.price);
                 $("#operator_id").val(data.operator_id);
+                // dito kasama foreign key kasi diba normal lang siya iinput explain ko na yan sa controller
             },
             error: function (error) {
                 console.log(error);

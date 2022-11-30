@@ -33,5 +33,6 @@ Route::get('/service/all',['uses' => 'serviceController@getserviceAll','as' => '
 Route::resource('service', 'serviceController');
 Route::post('service/post/{id}','serviceController@update');
 
+// dito lalagay lang resource tapos yung all para lang makita yung mga data mo in json format tapos itong post para maoverride fucking update na bulok HAHAHAHA
 
 

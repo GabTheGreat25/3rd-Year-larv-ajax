@@ -68,7 +68,9 @@
                         <label for="operator_id" class="control-label">Service Type</label>
                         {!! Form::select('operator_id', App\Models\operator::pluck('name', 'operator_id'), null, [
                         'class' => 'form-control',
-                        ]) !!}
+                        ]) !!} {{-- ito kahit nakagento toh pinipili lang na parang normal na toh gumagana na toh both
+                        create and edit pag pumili ka sa edit na bago at clinick mo mag ststay siya dun sa pinili mo
+                        good good toh haha ako pinka una dito kita ko sa stem at saten wala pa sila hahaha --}}
                     </div>
                     <div class="form-group">
                         <label for="uploads" class="control-label">service Image</label>

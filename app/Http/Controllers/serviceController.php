@@ -19,7 +19,7 @@ class serviceController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {   // normal join to call the other table information
        $service = service::join('operator','services.operator_id','operator.operator_id')->select('services.*','operator.name')->orderBy('services.services_id','DESC')->get();
         // $service = service::with(['operator'])->orderBy('services_id', 'DESC')->get();
         return response()->json($service);
@@ -27,7 +27,6 @@ class serviceController extends Controller
 
     public function getService()
     {
-        // $service = service::with(['operator'])->orderBy('service_id', 'DESC')->get();
         return view('service.index');
     }
 
@@ -38,10 +37,7 @@ class serviceController extends Controller
      */
     public function create()
     {
-        // $operator = operator::pluck("name", "operator_id");
-        // return view("service.index", [
-        //     "operator" => $operator,
-        // ]);
+        //
     }
 
     /**
@@ -51,7 +47,7 @@ class serviceController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {   // basic operator_id request just like normal inputting data 
         $service = new service;
 
         $service->service_type = $request->service_type;
@@ -97,7 +93,7 @@ class serviceController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
+    {   //same with create
         $service = service::find($id);
         $service->service_type = $request->service_type;
         $service->date_of_service = $request->date_of_service;

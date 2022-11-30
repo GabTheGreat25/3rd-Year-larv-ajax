@@ -18,13 +18,13 @@ class operatorController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {   //basic get all 
         $operator = operator::orderBy('operator_id', 'DESC')->get();
         return response()->json($operator);
     }
 
     public function getOperator()
-    {
+    {   //get the view in resource
         return view('operator.index');
     }
 
@@ -45,7 +45,7 @@ class operatorController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {   //basic create with image save in public storage
         $operator = new operator;
         $operator->name = $request->name;
         $operator->contact_number = $request->contact_number;
@@ -77,7 +77,7 @@ class operatorController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
+    {   //find existing data returning to json
         $operator = operator::find($id);
         return response()->json($operator);
     }
@@ -90,7 +90,7 @@ class operatorController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
+    {   //copy paste store just change new as find to override it
         $operator = operator::find($id);
         $operator->name = $request->name;
         $operator->contact_number = $request->contact_number;
@@ -111,7 +111,7 @@ class operatorController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
+    {   //delete with image
         $operator = operator::findOrFail($id);
 
         if (File::exists("storage/" . $operator->image_path)) {

@@ -1,6 +1,7 @@
 $(document).ready(function () {
     $("#otable").DataTable({
         ajax: {
+            //laman nung html ito basically
             url: "/api/operator",
             dataSrc: "",
         },
@@ -65,6 +66,7 @@ $(document).ready(function () {
     });
 
     $("#operatorSubmit").on("click", function (e) {
+        // when you click save or create ito
         e.preventDefault();
         var data = $("#oform")[0];
         console.log(data);
@@ -98,6 +100,7 @@ $(document).ready(function () {
     });
 
     $("#otable tbody").on("click", "a.deletebtn", function (e) {
+        // pag magbubura ka
         var table = $("#otable").DataTable();
         var id = $(this).data("id");
         var $row = $(this).closest("tr");
@@ -145,6 +148,7 @@ $(document).ready(function () {
     });
 
     $("#otable tbody").on("click", "a.editBtn", function (e) {
+        // pag mag edit ka pero titignan nya muna if existing ito
         e.preventDefault();
         $("#operatorModal").modal("show");
         var id = $(this).data("id");
@@ -175,6 +179,7 @@ $(document).ready(function () {
     });
 
     $("#operatorUpdate").on("click", function (e) {
+        //dito na nya uupdate
         e.preventDefault();
         var id = $("#operator_id").val();
         var data = $("#oform")[0];
