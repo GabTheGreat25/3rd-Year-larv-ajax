@@ -21,10 +21,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 route::view('/accessories-index', 'accessories.index');
+route::view('/camera-index', 'camera.index');
 route::view('/operator-index', 'operator.index');
 route::view('/service-index', 'service.index');
 
 Route::get('/accessories/all',['uses' => 'accessoriesController@getaccessoriesAll','as' => 'accessories.getaccessoriesall'] );
+Route::get('/camera/all',['uses' => 'cameraController@getcameraAll','as' => 'camera.getcameraall'] );
+
 
 Route::get('/operator/all',['uses' => 'operatorController@getoperatorAll','as' => 'operator.getoperatorall'] );
 
@@ -33,6 +36,9 @@ Route::post('operator/post/{id}','operatorController@update');
 
 Route::resource('accessories', 'accessoriesController');
 Route::post('accessories/post/{id}','accessoriesController@update');
+
+Route::resource('camera', 'cameraController');
+Route::post('camera/post/{id}','cameraController@update');
 
 Route::get('/service/all',['uses' => 'serviceController@getserviceAll','as' => 'service.getserviceall'] );
 
