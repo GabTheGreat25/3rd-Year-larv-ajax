@@ -123,7 +123,7 @@ $(document).ready(function () {
                 if (result)
                     $.ajax({
                         type: "DELETE",
-                        url: "/api/service/" + id,
+                        url: `/api/service/${id}`,
                         headers: {
                             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
                                 "content"
@@ -157,7 +157,7 @@ $(document).ready(function () {
             processData: false,
             contentType: false,
             cache: false,
-            url: "/api/service/" + id + "/edit",
+            url: `/api/service/${id}/edit`,
             headers: {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
             },
@@ -191,7 +191,7 @@ $(document).ready(function () {
 
         $.ajax({
             type: "POST",
-            url: "/api/service/post/" + id,
+            url: `/api/service/post/${id}`,
             data: formData,
             contentType: false,
             processData: false,
