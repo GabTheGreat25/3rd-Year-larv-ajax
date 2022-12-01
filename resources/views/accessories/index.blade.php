@@ -47,26 +47,26 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div style="padding: 0 2rem;">
-                <form id="oform" action="#" method="#" enctype="multipart/form-data"> {{-- just change the table form
+                <form id="aform" action="#" method="#" enctype="multipart/form-data"> {{-- just change the table form
                     body ng isang letter base dun sa umpisa gaya dito accessories kaya o --}}
                     <div class="form-group">
                         <input type="hidden" class="form-control" id="accessories_id" name="accessories_id">
-                        {{-- tapos ito accessories id ito primary key taz sa baba mga name contact number yung iba laman ng
+                        {{-- tapos ito accessories id ito primary key taz sa baba mga name contact number yung iba laman
+                        ng
                         table same dapat yan ah yun lang --}}
                     </div>
                     <div class="form-group">
-                        <label for="name" class="control-label">Description</label>
-                        <input type="text" class="form-control" id="name" name="name">
+                        <label for="description" class="control-label">Description</label>
+                        <input type="text" class="form-control" id="description" name="description">
                     </div>
                     <div class="form-group">
-                        <label for="contact_number" class="control-label">Quantity</label>
-                        <input type="text" class="form-control" id="contact_number" name="contact_number">
+                        <label for="quantity" class="control-label">Quantity</label>
+                        <input type="number" class="form-control" id="quantity" name="quantity" min="1" max="10">
                     </div>
                     <div class="form-group">
-                        <label for="age" class="control-label">Costs</label>
-                        <input type="number" class="form-control" id="age" name="age" min="1" max="100">
+                        <label for="costs" class="control-label">Costs</label>
+                        <input type="text" class="form-control" id="costs" name="costs">
                     </div>
-                
                     <div class="form-group">
                         <label for="uploads" class="control-label">accessories Image</label> {{-- uploads name nito kasi
                         yun name nya sa controller --}}

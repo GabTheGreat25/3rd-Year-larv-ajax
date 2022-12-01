@@ -18,7 +18,7 @@ class accessories extends Model
         "image_path"
     ];
 
-    public function services() {
-        return $this->hasMany('App\Models\service');
-    }
+    // public function services() {
+    //     return $this->hasMany('App\Models\service');
+    // }
 }

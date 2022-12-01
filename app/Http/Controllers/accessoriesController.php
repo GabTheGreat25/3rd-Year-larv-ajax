@@ -90,7 +90,7 @@ class accessoriesController extends Controller
      */
     public function update(Request $request, $id)
     {   //copy paste store just change new as find to override it
-        $accessories = new accessories;
+        $accessories = accessories::find($id);
         $accessories->description = $request->description;
         $accessories->quantity = $request->quantity;
         $accessories->costs = $request->costs;
@@ -99,7 +99,7 @@ class accessoriesController extends Controller
         $accessories->image_path = 'images/'.$files->getClientOriginalName();
         $accessories->save();
         Storage::put('/public/images/'.$files->getClientOriginalName(),file_get_contents($files));
-        return response()->json(["success" => "accessories Created Successfully.", "accessories" => $accessories, "status" => 200]);
+        return response()->json(["success" => "accessories Updated Successfully.", "accessories" => $accessories, "status" => 200]);
     }
 
     /**

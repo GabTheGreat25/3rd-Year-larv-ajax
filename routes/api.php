@@ -34,7 +34,6 @@ Route::post('operator/post/{id}','operatorController@update');
 Route::resource('accessories', 'accessoriesController');
 Route::post('accessories/post/{id}','accessoriesController@update');
 
-
 Route::get('/service/all',['uses' => 'serviceController@getserviceAll','as' => 'service.getserviceall'] );
 
 Route::resource('service', 'serviceController');

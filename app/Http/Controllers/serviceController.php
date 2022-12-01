@@ -104,7 +104,7 @@ class serviceController extends Controller
         $service->image_path = 'images/'.$files->getClientOriginalName();
         $service->save();
         Storage::put('/public/images/'.$files->getClientOriginalName(),file_get_contents($files));
-        return response()->json(["success" => "Service Created Successfully.", "service" => $service, "status" => 200]);
+        return response()->json(["success" => "Service Updated Successfully.", "service" => $service, "status" => 200]);
     }
 
     /**

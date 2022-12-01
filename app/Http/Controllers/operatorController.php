@@ -101,7 +101,7 @@ class operatorController extends Controller
         $operator->image_path = 'images/'.$files->getClientOriginalName();
         $operator->save();
         Storage::put('/public/images/'.$files->getClientOriginalName(),file_get_contents($files));
-        return response()->json(["success" => "Operator Created Successfully.", "operator" => $operator, "status" => 200]);
+        return response()->json(["success" => "Operator Updated Successfully.", "operator" => $operator, "status" => 200]);
     }
 
     /**
