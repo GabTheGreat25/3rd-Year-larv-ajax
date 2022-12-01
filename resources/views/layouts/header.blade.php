@@ -36,4 +36,5 @@
 {{-- this where we put all our scripts --}}
 <script src="js/operator.js"></script>
 <script src="js/service.js"></script>
+<script src="js/accessories.js"></script>
 {{-- <script src="js/dashboard.js"></script> --}}
