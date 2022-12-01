@@ -15,7 +15,7 @@ class service extends Model
         "service_type",
         "date_of_service",
         "price",
-        "operator_id ",
+        "operator_id",
         "image_path"
     ];
 
