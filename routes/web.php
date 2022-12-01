@@ -33,6 +33,10 @@ Route::resource('accessories', 'accessoriesController');
 
 route::view('/accessories-index', 'accessories.index');
 
+Route::resource('camera', 'cameraController');
+
+route::view('/camera-index', 'camera.index');
+
 Route::resource('service', 'serviceController');
 
 route::view('/service-index', 'service.index');
