@@ -1,8 +1,8 @@
 $(document).ready(function () {
-    $("#otable").DataTable({
+    $("#atable").DataTable({
         ajax: {
             //laman nung html ito basically
-            url: "/api/operator",
+            url: "/api/accessories",
             dataSrc: "",
         },
         dom: '<"top"<"left-col"B><"center-col"l><"right-col"f>>rtip',
@@ -16,29 +16,26 @@ $(document).ready(function () {
                 className: "btn btn-success glyphicon glyphicon-list-alt",
             },
             {
-                text: "Add Operator",
+                text: "Add Accessories",
                 className: "btn btn-success",
                 action: function (e, dt, node, config) {
-                    $("#oform").trigger("reset");
-                    $("#operatorModal").modal("show");
+                    $("#aform").trigger("reset");
+                    $("#accessoriesModal").modal("show");
                 },
             },
         ],
         columns: [
             {
-                data: "operator_id",
+                data: "accessories_id",
             },
             {
-                data: "name",
+                data: "description",
             },
             {
-                data: "contact_number",
+                data: "quantity",
             },
             {
-                data: "age",
-            },
-            {
-                data: "address",
+                data: "costs",
             },
             {
                 data: null,
@@ -55,9 +52,9 @@ $(document).ready(function () {
                 render: function (data, type, row) {
                     return (
                         "<a href='#' class='editBtn' id='editbtn' data-id=" +
-                        data.operator_id +
+                        data.accessories_id +
                         "><i class='fa-solid fa-pen' aria-hidden='true' style='font-size:24px' ></i></a><a href='#' class='deletebtn' data-id=" +
-                        data.operator_id +
+                        data.accessories_id +
                         "><i class='fa-solid fa-trash-can' style='font-size:24px; color:red; margin-left:15px;'></a></i>"
                     );
                 },
@@ -65,10 +62,10 @@ $(document).ready(function () {
         ],
     });
 
-    $("#operatorSubmit").on("click", function (e) {
+    $("#accessoriesSubmit").on("click", function (e) {
         // when you click save or create ito
         e.preventDefault();
-        var data = $("#oform")[0];
+        var data = $("#aform")[0];
         console.log(data);
         let formData = new FormData(data);
         console.log(formData);
@@ -78,7 +75,7 @@ $(document).ready(function () {
 
         $.ajax({
             type: "POST",
-            url: "/api/operator",
+            url: "/api/accessories",
             data: formData,
             contentType: false,
             processData: false,
@@ -88,10 +85,10 @@ $(document).ready(function () {
             dataType: "json",
             success: function (data) {
                 console.log(data);
-                $("#operatorModal").modal("hide");
-                var $otable = $("#otable").DataTable();
-                $otable.ajax.reload();
-                $otable.row.add(data.operator).draw(false);
+                $("#accessoriesModal").modal("hide");
+                var $atable = $("#atable").DataTable();
+                $atable.ajax.reload();
+                $atable.row.add(data.accessories).draw(false);
             },
             error: function (error) {
                 console.log(error);
@@ -99,16 +96,16 @@ $(document).ready(function () {
         });
     });
 
-    $("#otable tbody").on("click", "a.deletebtn", function (e) {
+    $("#atable tbody").on("click", "a.deletebtn", function (e) {
         // pag magbubura ka
-        var table = $("#otable").DataTable();
+        var table = $("#atable").DataTable();
         var id = $(this).data("id");
         var $row = $(this).closest("tr");
 
         console.log(id);
         e.preventDefault();
         bootbox.confirm({
-            message: "do you want to delete this operator",
+            message: "do you want to delete this accessories",
             buttons: {
                 confirm: {
                     label: "yes",
@@ -124,7 +121,7 @@ $(document).ready(function () {
                 if (result)
                     $.ajax({
                         type: "DELETE",
-                        url: `/api/operator/${id}`,
+                        url: `/api/accessories/${id}`,
                         headers: {
                             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
                                 "content"
@@ -147,10 +144,10 @@ $(document).ready(function () {
         });
     });
 
-    $("#otable tbody").on("click", "a.editBtn", function (e) {
+    $("#atable tbody").on("click", "a.editBtn", function (e) {
         // pag mag edit ka pero titignan nya muna if existing ito
         e.preventDefault();
-        $("#operatorModal").modal("show");
+        $("#accessoriesModal").modal("show");
         var id = $(this).data("id");
 
         $.ajax({
@@ -159,18 +156,17 @@ $(document).ready(function () {
             processData: false,
             contentType: false,
             cache: false,
-            url: `/api/operator/${id}/edit`,
+            url: `/api/accessories/${id}/edit`,
             headers: {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
             },
             dataType: "json",
             success: function (data) {
                 console.log(data);
-                $("#operator_id").val(data.operator_id);
-                $("#name").val(data.name);
-                $("#contact_number").val(data.contact_number);
-                $("#age").val(data.age);
-                $("#address").val(data.address);
+                $("#accessories_id").val(data.accessories_id);
+                $("#description").val(data.description);
+                $("#quantity").val(data.quantity);
+                $("#costs").val(data.costs);
             },
             error: function (error) {
                 console.log(error);
@@ -178,22 +174,22 @@ $(document).ready(function () {
         });
     });
 
-    $("#operatorUpdate").on("click", function (e) {
+    $("#accessoriesUpdate").on("click", function (e) {
         //dito na nya uupdate
         e.preventDefault();
-        var id = $("#operator_id").val();
-        var data = $("#oform")[0];
+        var id = $("#accessories_id").val();
+        var data = $("#aform")[0];
         let formData = new FormData(data);
         console.log(formData);
         for (var pair of formData.entries()) {
             console.log(pair[0] + "," + pair[1]);
         }
-        var table = $("#otable").DataTable();
+        var table = $("#atable").DataTable();
         console.log(id);
 
         $.ajax({
             type: "POST",
-            url: `/api/operator/post/${id}`,
+            url: `/api/accessories/post/${id}`,
             data: formData,
             contentType: false,
             processData: false,
@@ -203,7 +199,7 @@ $(document).ready(function () {
             dataType: "json",
             success: function (data) {
                 console.log(data);
-                $("#operatorModal").modal("hide");
+                $("#accessoriesModal").modal("hide");
                 table.ajax.reload();
             },
             error: function (error) {

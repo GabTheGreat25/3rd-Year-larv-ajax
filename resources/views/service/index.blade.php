@@ -65,7 +65,7 @@
                         <input type="text" class="form-control" id="price" name="price">
                     </div>
                     <div class="form-group">
-                        <label for="operator_id" class="control-label">Service Type</label>
+                        <label for="operator_id" class="control-label">Operator</label>
                         {!! Form::select('operator_id', App\Models\operator::pluck('name', 'operator_id'), null, [
                         'class' => 'form-control',
                         ]) !!} {{-- ito kahit nakagento toh pinipili lang na parang normal na toh gumagana na toh both
