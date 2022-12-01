@@ -38,4 +38,6 @@
 <script src="js/service.js"></script>
 <script src="js/accessories.js"></script>
 <script src="js/camera.js"></script>
+<script src="js/investor.js"></script>
+
 {{-- <script src="js/dashboard.js"></script> --}}
