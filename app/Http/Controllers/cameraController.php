@@ -92,7 +92,7 @@ class cameraController extends Controller
     public function update(Request $request, $id)
     {   //copy paste store just change new as find to override it
         $camera = camera::find($id);
-        $camera->description = $request->description;
+        $camera->model = $request->model;
         $camera->shuttercount = $request->shuttercount;
         $camera->quantity = $request->quantity;
         $camera->costs = $request->costs;
