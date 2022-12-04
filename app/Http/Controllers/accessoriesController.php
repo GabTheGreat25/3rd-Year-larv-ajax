@@ -9,9 +9,12 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\File;
+use App\Traits\ResponseTrait;
 
 class accessoriesController extends Controller
 {
+    use ResponseTrait;
+
     /**
      * Display a listing of the resource.
      *

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,17 +15,24 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::post('login', [LoginController::class, 'login']);
+
+route::view('/investor-index', 'investor.index');
+Route::get('/investor/all',['uses' => 'investorController@getinvestorAll','as' => 'investor.getinvestorall'] );
+Route::resource('investor', 'investorController');
+Route::post('investor/post/{id}','investorController@update');
+
 Route::middleware('auth:api')->group(function () {
     route::view('/accessories-index', 'accessories.index');
     route::view('/camera-index', 'camera.index');
     route::view('/operator-index', 'operator.index');
     route::view('/service-index', 'service.index');
-    route::view('/investor-index', 'investor.index');
+
 
 
     Route::get('/accessories/all',['uses' => 'accessoriesController@getaccessoriesAll','as' => 'accessories.getaccessoriesall'] );
     Route::get('/camera/all',['uses' => 'cameraController@getcameraAll','as' => 'camera.getcameraall'] );
-    Route::get('/investor/all',['uses' => 'investorController@getinvestorAll','as' => 'investor.getinvestorall'] );
+
     Route::get('/operator/all',['uses' => 'operatorController@getoperatorAll','as' => 'operator.getoperatorall'] );
     Route::get('/service/all',['uses' => 'serviceController@getserviceAll','as' => 'service.getserviceall'] );
 
@@ -32,8 +40,6 @@ Route::middleware('auth:api')->group(function () {
     Route::resource('operator', 'operatorController');
     Route::post('operator/post/{id}','operatorController@update');
 
-    Route::resource('investor', 'investorController');
-    Route::post('investor/post/{id}','investorController@update');
 
     Route::resource('accessories', 'accessoriesController');
     Route::post('accessories/post/{id}','accessoriesController@update');    

@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Hash;
 
 class investorController extends Controller
 {
@@ -51,7 +52,7 @@ class investorController extends Controller
         $investor->contact_number = $request->contact_number;
         $investor->age = $request->age;
         $investor->email = $request->email;
-        $investor->password = $request->password;
+        $investor->password = Hash::make($request->input("password"));
 
         $files = $request->file('uploads');
         $investor->image_path = 'images/'.$files->getClientOriginalName();
