@@ -17,10 +17,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Route::post('signin', [
-//     'uses' => 'LoginController@login',
-//     'as' => 'user.signin',
-// ]);
+Route::get('login-test', [
+    'uses' => 'LoginController@login',
+    'as' => 'user.login',
+]);
+
+Route::get('login', [
+    'uses' => 'LoginController@getLogin',
+]);
 
 Route::get('/signup', function () {
     return view('signup');
@@ -38,5 +42,5 @@ route::view('/camera-index', 'camera.index');
 Route::resource('service', 'serviceController');
 route::view('/service-index', 'service.index');
 
-// Route::resource('investor', 'investorController');
-// route::view('/investor-index', 'investor.index');
+Route::resource('investor', 'investorController');
+route::view('/investor-index', 'investor.index');

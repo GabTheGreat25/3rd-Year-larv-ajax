@@ -15,12 +15,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('login', [LoginController::class, 'login']);
+// Route::post('login', [LoginController::class, 'login']);
+Route::get('login-test', [
+    'uses' => 'LoginController@login',
+    'as' => 'user.login',
+]);
 
-route::view('/investor-index', 'investor.index');
-Route::get('/investor/all',['uses' => 'investorController@getinvestorAll','as' => 'investor.getinvestorall'] );
-Route::resource('investor', 'investorController');
-Route::post('investor/post/{id}','investorController@update');
+Route::get('login', [
+    'uses' => 'LoginController@getLogin',
+]);
+
 
 Route::middleware('auth:api')->group(function () {
     route::view('/accessories-index', 'accessories.index');
@@ -28,6 +32,11 @@ Route::middleware('auth:api')->group(function () {
     route::view('/operator-index', 'operator.index');
     route::view('/service-index', 'service.index');
 
+
+    route::view('/investor-index', 'investor.index');
+Route::get('/investor/all',['uses' => 'investorController@getinvestorAll','as' => 'investor.getinvestorall'] );
+Route::resource('investor', 'investorController');
+Route::post('investor/post/{id}','investorController@update');
 
 
     Route::get('/accessories/all',['uses' => 'accessoriesController@getaccessoriesAll','as' => 'accessories.getaccessoriesall'] );

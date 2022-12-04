@@ -18,7 +18,8 @@ class LoginController extends Controller
         $user = User::where('email', $request->email)->first();
 
         if (!$user) {
-            return $this->responseError([], 'No user found.');
+            // return $this->responseError([], 'No user found.');
+             return redirect()->route('user.login');
         }
 
         // Check the password
@@ -34,5 +35,9 @@ class LoginController extends Controller
 
             return $this->responseSuccess($data, 'Logged in successfully.');
         }
+    }
+
+    public function getLogin(){
+        return view('user.login');
     }
 }
