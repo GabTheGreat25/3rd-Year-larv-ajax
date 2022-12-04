@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Route::post('login', [LoginController::class, 'login']);
-Route::get('login-test', [
+Route::post('login-test', [
     'uses' => 'LoginController@login',
     'as' => 'user.login',
 ]);
@@ -25,6 +25,9 @@ Route::get('login', [
     'uses' => 'LoginController@getLogin',
 ]);
 
+Route::get('logout',[
+    'uses' => 'LoginController@logout',
+]);
 
 Route::middleware('auth:api')->group(function () {
     route::view('/accessories-index', 'accessories.index');
@@ -42,7 +45,7 @@ Route::post('investor/post/{id}','investorController@update');
     Route::get('/accessories/all',['uses' => 'accessoriesController@getaccessoriesAll','as' => 'accessories.getaccessoriesall'] );
     Route::get('/camera/all',['uses' => 'cameraController@getcameraAll','as' => 'camera.getcameraall'] );
 
-    Route::get('/operator/all',['uses' => 'operatorController@getoperatorAll','as' => 'operator.getoperatorall'] );
+    Route::get('/operator/all',['uses' => 'operatorController@getoperator','as' => 'operator.getoperatorall'] );
     Route::get('/service/all',['uses' => 'serviceController@getserviceAll','as' => 'service.getserviceall'] );
 
 

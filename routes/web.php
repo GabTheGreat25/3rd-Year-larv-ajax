@@ -17,13 +17,17 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('login-test', [
+Route::post('login-test', [
     'uses' => 'LoginController@login',
     'as' => 'user.login',
-]);
+]); 
 
 Route::get('login', [
     'uses' => 'LoginController@getLogin',
+]);
+
+Route::get('logout',[
+    'uses' => 'LoginController@logout',
 ]);
 
 Route::get('/signup', function () {

@@ -7,6 +7,7 @@ use App\Traits\ResponseTrait;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -18,8 +19,7 @@ class LoginController extends Controller
         $user = User::where('email', $request->email)->first();
 
         if (!$user) {
-            // return $this->responseError([], 'No user found.');
-             return redirect()->route('user.login');
+            return $this->responseError([], 'No user found.');
         }
 
         // Check the password
@@ -39,5 +39,10 @@ class LoginController extends Controller
 
     public function getLogin(){
         return view('user.login');
+    }
+
+    public function logout(){
+        Auth::logout();
+        return redirect()->guest('/');
     }
 }
