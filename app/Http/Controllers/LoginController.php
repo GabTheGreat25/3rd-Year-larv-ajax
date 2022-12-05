@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\ApiAuthController as ApiAuthController;
 
@@ -29,23 +30,24 @@ class LoginController extends ApiAuthController
 
         $user = User::create($input);
 
-        // $success['token'] = $user->createToken("AuthToken")->accessToken;
-        // $success['account'] = $user;
+        $success['token'] = $user->createToken("AuthToken")->accessToken;
+        $myItem = $success['token'];
 
-        $accessToken = $user->createToken('authToken-'.$user->id, ['*'])->accessToken;
+        if(isset($_COOKIE['mycookie'])) {
+            $myItem = $_COOKIE['mycookie'];
+        }
+        $success['account'] = $user;
+        // $accessToken = $user->createToken('authToken-'.$user->id, ['*'])->accessToken;
 
-        return redirect()->$this->sendResponse([$accessToken, $user],'Account Created Successfully!');
+        return $this->sendResponse([$success, $myItem],'Account Created Successfully!');
     }
 
     public function login(Request $request){
         if(Auth::attempt(['email' => $request->get('email'), 'password' => $request->password])){
-            $user = auth()->user();
-            $accessToken = auth()->user()->createToken('authToken-'.$user->id, ['*'])->accessToken;
-            return $this->sendResponse([$accessToken, $user], 'You Logged in Successfully!');
-
-            // if (Auth::attempt()  === true) {
-            //  return redirect()->route('operator');
-            // }
+             $user = auth()->user();
+            $success['token'] = $user->createToken("AuthToken")->accessToken;
+            $success['account'] = $user;
+            return $this->sendResponse($success, 'You Logged in Successfully!');
         }
         else {
             return $this->sendError('UnAuthenticated ' , ['error' => 'UnAuthorized']);

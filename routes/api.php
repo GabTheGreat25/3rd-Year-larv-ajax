@@ -38,7 +38,7 @@ Route::get('logout',[
     'uses' => 'LoginController@logout',
 ]);
 
-// Route::middleware('auth:api')->group(function () {
+Route::middleware('auth:api')->group(function () {
     route::view('/accessories-index', 'accessories.index');
     route::view('/camera-index', 'camera.index');
     route::view('/operator-index', 'operator.index');
@@ -71,7 +71,7 @@ Route::post('investor/post/{id}','investorController@update');
 
     Route::resource('service', 'serviceController');
     Route::post('service/post/{id}','serviceController@update');
-// });
+});
 
 
 

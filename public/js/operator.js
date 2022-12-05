@@ -3,7 +3,14 @@ $(document).ready(function () {
         ajax: {
             //laman nung html ito basically
             url: "/api/operator",
-            // headers: { Authorization: "Bearer" + accessToken },
+            beforeSend: function (header) {
+                /* Authorization header */
+                header.setRequestHeader(
+                    "Authorization",
+                    "Bearer " +
+                        "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZjhmYTdiYjg0MTgzNWI1MDY3YWM5NjIzZDZjM2IwMjJhNTQ4Yzk2OWZkZDA3ODMwYzMzNTY5YTgzZmViNWRiNTlhOWVkZGMyMmQwZDliZjEiLCJpYXQiOjE2NzAyNTM5NDMuODI5MjU5LCJuYmYiOjE2NzAyNTM5NDMuODI5Mjc0LCJleHAiOjE3MDE3ODk5NDMuODI2NzI0LCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.ciLfpVdQ-MzKfsDcE_Mn6ndNBOJr7tbw1gxLmSMNLH2MfrF9szSMnn2kVhhgTuaRH_FRz9KlMN0b2ZbzFj7F_w48t6ux2X4S7S4JMs0a59baB7wEz49Pon6mCgwY-NTeYD-yTlUCfVwAPYCqVBEVKrMt-crGS7ymxduQByzH01vftubh7fGv05ex5F-0Sbknz8GDsC6Tvpq6eoAhkI1dlUyIO3R-REOVi7vYBsmNGSYrR2AGy2nJUyWn352lYPb4DUNcho-SUZL0uc6a3Z7_6rS8Urt-ul4J3tMWzLt88ILILT3u5CtOOhAK_J4FhLfpykPBeXPXhBOtWvAcYBnwEk65ctLZABnBqJ_kujNwVDee63BGbY5awwbtdpqa5mYYZCIOW9VXxf3J0LmcXwll2Hzv2tcDGRbisQp4nyVPsso2lShcGJtQ0aINFI_ZxRCapp2Nf2jH6DXaH-x6nh1juUhkpZ6F8m9ah7WSddNYygtoxQJ2X6XKcWrA83tX0SVoIdr_rJMwbHdgIZOg4V-E0gX-scw2nAJOTAdReSk2MIFn-hI4HOfXHs_uajs0H7jV9COicdDOSA7sEF_ZDZw_4uJukPwH4Beg4sG60PXlBSq_w9kW7Nsq5DcU8rCCTbzor5iD55qEUz9TEr89U3mM94K6alC435UZ_hIE7t6innA"
+                );
+            },
             dataSrc: "",
         },
         dom: '<"top"<"left-col"B><"center-col"l><"right-col"f>>rtip',

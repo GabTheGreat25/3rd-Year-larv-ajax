@@ -40,7 +40,7 @@ Route::get('logout',[
 ]);
 
 Route::resource('operator', 'operatorController');
-route::view('/operator-index', 'operator.index');
+route::view('/operator-index', 'operator.index')->name('operator');
 
 Route::resource('accessories', 'accessoriesController');
 route::view('/accessories-index', 'accessories.index');
