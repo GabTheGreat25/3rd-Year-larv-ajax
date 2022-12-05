@@ -19,14 +19,14 @@ class operatorController extends Controller
      */
     public function index()
     {  //basic get all 
-    //     $operator = operator::orderBy('operator_id', 'DESC')->get();
-    //     return response()->json($operator);
-        return view('operator.index');
+        $operator = operator::orderBy('operator_id', 'DESC')->get();
+        return response()->json($operator);
+        // return view('operator.index');
     }
 
     public function getOperator()
     {   //get the view in resource
-        $operator = operator::orderBy('operator_id', 'DESC')->get();
+        // $operator = operator::orderBy('operator_id', 'DESC')->get();
         return response()->json($operator);
        
     }

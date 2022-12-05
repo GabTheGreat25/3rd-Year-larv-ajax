@@ -3,6 +3,7 @@ $(document).ready(function () {
         ajax: {
             //laman nung html ito basically
             url: "/api/operator",
+            // headers: { Authorization: "Bearer" + accessToken },
             dataSrc: "",
         },
         dom: '<"top"<"left-col"B><"center-col"l><"right-col"f>>rtip',

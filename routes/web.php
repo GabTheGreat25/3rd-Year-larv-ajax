@@ -17,22 +17,27 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::post('login-test', [
+Route::post('login-auth', [
     'uses' => 'LoginController@login',
     'as' => 'user.login',
-]); 
+]);
+
+Route::post('register-auth', [
+    'uses' => 'LoginController@register',
+    'as' => 'user.register',
+]);
 
 Route::get('login', [
     'uses' => 'LoginController@getLogin',
 ]);
 
+Route::get('register', [
+    'uses' => 'LoginController@getRegister',
+]);
+
 Route::get('logout',[
     'uses' => 'LoginController@logout',
 ]);
-
-Route::get('/signup', function () {
-    return view('signup');
-});
 
 Route::resource('operator', 'operatorController');
 route::view('/operator-index', 'operator.index');

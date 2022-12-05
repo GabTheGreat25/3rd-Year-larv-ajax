@@ -16,20 +16,29 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Route::post('login', [LoginController::class, 'login']);
-Route::post('login-test', [
+Route::post('login-auth', [
     'uses' => 'LoginController@login',
     'as' => 'user.login',
+]);
+
+Route::post('register-auth', [
+    'uses' => 'LoginController@register',
+    'as' => 'user.register',
 ]);
 
 Route::get('login', [
     'uses' => 'LoginController@getLogin',
 ]);
 
+Route::get('register', [
+    'uses' => 'LoginController@getRegister',
+]);
+
 Route::get('logout',[
     'uses' => 'LoginController@logout',
 ]);
 
-Route::middleware('auth:api')->group(function () {
+// Route::middleware('auth:api')->group(function () {
     route::view('/accessories-index', 'accessories.index');
     route::view('/camera-index', 'camera.index');
     route::view('/operator-index', 'operator.index');
@@ -62,7 +71,7 @@ Route::post('investor/post/{id}','investorController@update');
 
     Route::resource('service', 'serviceController');
     Route::post('service/post/{id}','serviceController@update');
-});
+// });
 
 
 

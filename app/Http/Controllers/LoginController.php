@@ -8,32 +8,47 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+use App\Http\Controllers\ApiAuthController as ApiAuthController;
 
-class LoginController extends Controller
+class LoginController extends ApiAuthController
 {
-    use ResponseTrait;
+    public function register(Request $request){
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'email' => 'required|email|unique:users',
+            'password' => 'required',
+        ]);
 
-    public function login(Request $request)
-    {
-        // Check the request if the valid user email
-        $user = User::where('email', $request->email)->first();
-
-        if (!$user) {
-            return $this->responseError([], 'No user found.');
+        if($validator->fails()){
+            return $this->sendError('Validator Error', $validator->errors());
         }
 
-        // Check the password
-        if (Hash::check($request->password, $user->password)) {
-            $tokenCreated = $user->createToken('authToken');
+        $input = $request->all();
+        $input['password'] = Hash::make($input['password']);
 
-            $data = [
-                'user'         => $user,
-                'access_token' => $tokenCreated->accessToken,
-                'token_type'   => 'Bearer',
-                'expires_at'   => Carbon::parse($tokenCreated->token->expires_at)->toDateTimeString()
-            ];
+        $user = User::create($input);
 
-            return $this->responseSuccess($data, 'Logged in successfully.');
+        // $success['token'] = $user->createToken("AuthToken")->accessToken;
+        // $success['account'] = $user;
+
+        $accessToken = $user->createToken('authToken-'.$user->id, ['*'])->accessToken;
+
+        return redirect()->$this->sendResponse([$accessToken, $user],'Account Created Successfully!');
+    }
+
+    public function login(Request $request){
+        if(Auth::attempt(['email' => $request->get('email'), 'password' => $request->password])){
+            $user = auth()->user();
+            $accessToken = auth()->user()->createToken('authToken-'.$user->id, ['*'])->accessToken;
+            return $this->sendResponse([$accessToken, $user], 'You Logged in Successfully!');
+
+            // if (Auth::attempt()  === true) {
+            //  return redirect()->route('operator');
+            // }
+        }
+        else {
+            return $this->sendError('UnAuthenticated ' , ['error' => 'UnAuthorized']);
         }
     }
 
@@ -41,8 +56,20 @@ class LoginController extends Controller
         return view('user.login');
     }
 
+    public function getRegister(){
+        return view('user.register');
+    }
+
     public function logout(){
-        Auth::logout();
+         Auth::logout();
         return redirect()->guest('/');
+    //      if (auth()->guard('api')->check()) {
+    //     auth()->guard('api')->user()->OauthAcessToken()->delete();
+
+    //     return response()->json([ 'msg' => 'Successfully logged out!' ]);
+    
+    // } else {
+    //     return abort(404, 'Must be logged in to log a user out');
+    // }
     }
 }
