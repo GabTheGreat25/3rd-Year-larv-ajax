@@ -164,6 +164,7 @@ $(document).ready(function () {
             dataType: "json",
             success: function (data) {
                 console.log(data);
+                localStorage.setItem("token");
                 $("#services_id").val(data.services_id);
                 $("#service_type").val(data.service_type);
                 $("#date_of_service").val(data.date_of_service);

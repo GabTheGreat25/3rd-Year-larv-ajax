@@ -102,7 +102,7 @@ class investorController extends Controller
 
         $files = $request->file('uploads');
         $investor->image_path = 'images/'.$files->getClientOriginalName();
-        $investor->save();
+        $investor->update();
         Storage::put('/public/images/'.$files->getClientOriginalName(),file_get_contents($files));
         return response()->json(["success" => "investor Updated Successfully.", "investor" => $investor, "status" => 200]);
     }

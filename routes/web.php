@@ -37,6 +37,7 @@ Route::get('register', [
 
 Route::get('logout',[
     'uses' => 'LoginController@logout',
+    'as' => 'logout',
 ]);
 
 Route::resource('operator', 'operatorController');

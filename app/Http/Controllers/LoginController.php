@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Redirect;
 use App\Http\Controllers\ApiAuthController as ApiAuthController;
 
 class LoginController extends ApiAuthController
@@ -31,28 +32,37 @@ class LoginController extends ApiAuthController
         $user = User::create($input);
 
         $success['token'] = $user->createToken("AuthToken")->accessToken;
-        $myItem = $success['token'];
-
-        if(isset($_COOKIE['mycookie'])) {
-            $myItem = $_COOKIE['mycookie'];
-        }
+        // $myItem = $success['token'];
+        // $cookie = cookie('token', $myItem, 60); 
+        // return redirect('/')->withCookie($cookie);
         $success['account'] = $user;
         // $accessToken = $user->createToken('authToken-'.$user->id, ['*'])->accessToken;
-
-        return $this->sendResponse([$success, $myItem],'Account Created Successfully!');
+        $redirect = Redirect::to("/login");
+        return $redirect;
+        if ($success) {
+            return $this->sendResponse($success, 'You Registered Successfully!');
+        }
+        else {
+            return $this->sendResponse([$success, $myItem],'Account Created Successfully!');
     }
+}
 
     public function login(Request $request){
         if(Auth::attempt(['email' => $request->get('email'), 'password' => $request->password])){
-             $user = auth()->user();
+            $user = auth()->user();
             $success['token'] = $user->createToken("AuthToken")->accessToken;
             $success['account'] = $user;
-            return $this->sendResponse($success, 'You Logged in Successfully!');
+            // $redirect = Redirect::to("/");
+            // return $redirect;
+            if ($success) {
+             return $this->sendResponse($success, 'You Logged in Successfully!');
+            }
         }
         else {
-            return $this->sendError('UnAuthenticated ' , ['error' => 'UnAuthorized']);
+            return $this->sendError('UnAuthenticated' , ['error' => 'Wrong Password Or Email']);
         }
     }
+
 
     public function getLogin(){
         return view('user.login');
@@ -62,16 +72,14 @@ class LoginController extends ApiAuthController
         return view('user.register');
     }
 
-    public function logout(){
-         Auth::logout();
-        return redirect()->guest('/');
-    //      if (auth()->guard('api')->check()) {
-    //     auth()->guard('api')->user()->OauthAcessToken()->delete();
-
-    //     return response()->json([ 'msg' => 'Successfully logged out!' ]);
-    
-    // } else {
-    //     return abort(404, 'Must be logged in to log a user out');
-    // }
+    public function logout(Request $request){
+    if ($request->user()) { 
+        $request->user()->tokens()->delete();
+        $redirect = Redirect::to("/login");
+        return $redirect;
+        if ($request->user()) {
+            return response()->json(['message' => 'Log Out Successfully'], 200);
+            }
+        }
     }
 }
