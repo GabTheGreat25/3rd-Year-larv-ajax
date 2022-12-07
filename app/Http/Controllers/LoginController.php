@@ -11,9 +11,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Redirect;
-use App\Http\Controllers\ApiAuthController as ApiAuthController;
 
-class LoginController extends ApiAuthController
+class LoginController extends Controller
 {
     public function register(Request $request){
         $validator = Validator::make($request->all(), [
@@ -28,23 +27,16 @@ class LoginController extends ApiAuthController
 
         $input = $request->all();
         $input['password'] = Hash::make($input['password']);
-
         $user = User::create($input);
-
-        $success['token'] = $user->createToken("AuthToken")->accessToken;
-        // $myItem = $success['token'];
-        // $cookie = cookie('token', $myItem, 60); 
-        // return redirect('/')->withCookie($cookie);
-        $success['account'] = $user;
-        // $accessToken = $user->createToken('authToken-'.$user->id, ['*'])->accessToken;
         $redirect = Redirect::to("/login");
         return $redirect;
-        if ($success) {
-            return $this->sendResponse($success, 'You Registered Successfully!');
+
+        if ($redirect == true) {
+            response()->json(["success" => "You have registered succesfully!", "user" => $user, "status" => 200])->throwResponse();
         }
         else {
-            return $this->sendResponse([$success, $myItem],'Account Created Successfully!');
-    }
+            return response()->json(["error" => "You have failed to register!", "user" => $user, "status" => 500]);
+        }
 }
 
     public function login(Request $request){
@@ -52,14 +44,16 @@ class LoginController extends ApiAuthController
             $user = auth()->user();
             $success['token'] = $user->createToken("AuthToken")->accessToken;
             $success['account'] = $user;
-            // $redirect = Redirect::to("/");
-            // return $redirect;
-            if ($success) {
-             return $this->sendResponse($success, 'You Logged in Successfully!');
-            }
+            $token = $success['token'];
+
+            echo "<script type='text/JavaScript'>
+                window.location = '/'
+                alert('You Login Successfully!');
+                document.write(localStorage.setItem('token', '".$token."'));
+                </script>";  
         }
         else {
-            return $this->sendError('UnAuthenticated' , ['error' => 'Wrong Password Or Email']);
+            return response()->json(["error" => "You have failed to login!", "user" => $user, "status" => 500]);
         }
     }
 
@@ -74,12 +68,13 @@ class LoginController extends ApiAuthController
 
     public function logout(Request $request){
     if ($request->user()) { 
-        $request->user()->tokens()->delete();
-        $redirect = Redirect::to("/login");
-        return $redirect;
-        if ($request->user()) {
-            return response()->json(['message' => 'Log Out Successfully'], 200);
-            }
+        echo "<script type='text/JavaScript'>
+               window.location = '/login'
+               alert('You Logout Successfully!');
+               localStorage.removeItem('token');
+              </script>"; 
+    } else{
+        return response()->json(['message' => 'Log Out Successfully'], 200);
         }
     }
 }
