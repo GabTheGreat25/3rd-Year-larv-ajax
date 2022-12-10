@@ -38,7 +38,7 @@ $(document).ready(function () {
             },
             {
                 // dito na gagana join table name gamit ko pero wala name sa service
-                data: "name",
+                data: "full_name",
             },
             {
                 data: null,

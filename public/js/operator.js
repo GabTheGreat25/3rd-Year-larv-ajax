@@ -3,10 +3,6 @@ $(document).ready(function () {
         ajax: {
             //laman nung html ito basically
             url: "/api/operator",
-            // crossDomain: true,
-            // xhrFields: {
-            //     withCredentials: true,
-            // },
             beforeSend: function (header) {
                 /* Authorization header */
                 header.setRequestHeader(
@@ -40,7 +36,7 @@ $(document).ready(function () {
                 data: "operator_id",
             },
             {
-                data: "name",
+                data: "full_name",
             },
             {
                 data: "contact_number",
@@ -210,7 +206,7 @@ $(document).ready(function () {
             success: function (data) {
                 console.log(data);
                 $("#operator_id").val(data.operator_id);
-                $("#name").val(data.name);
+                $("#full_name").val(data.full_name);
                 $("#contact_number").val(data.contact_number);
                 $("#age").val(data.age);
                 $("#address").val(data.address);
