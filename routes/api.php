@@ -38,7 +38,13 @@ Route::get('logout',[
     'uses' => 'LoginController@logout',
 ]);
 
-Route::middleware('auth:api')->group(function () {
+route::view('/admin-index', 'admin.index');
+route::view('/admin-register', 'admin.register');
+Route::get('/admin/all',['uses' => 'adminController@getadminAll','as' => 'admin.getadminall'] );
+Route::resource('admin', 'adminController');
+Route::post('admin/post/{id}','adminController@update');
+
+// Route::middleware('auth:api')->group(function () {
     route::view('/accessories-index', 'accessories.index');
     route::view('/camera-index', 'camera.index');
     route::view('/operator-index', 'operator.index');
@@ -71,7 +77,7 @@ Route::post('investor/post/{id}','investorController@update');
 
     Route::resource('service', 'serviceController');
     Route::post('service/post/{id}','serviceController@update');
-});
+// });
 
 
 

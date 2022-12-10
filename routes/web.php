@@ -54,3 +54,8 @@ route::view('/service-index', 'service.index');
 
 Route::resource('investor', 'investorController');
 route::view('/investor-index', 'investor.index');
+
+Route::resource('admin', 'adminController');
+route::view('/admin-index', 'admin.index');
+route::view('/admin-register', 'admin.register');
+
