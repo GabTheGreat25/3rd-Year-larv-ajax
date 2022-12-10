@@ -56,7 +56,7 @@ class accessoriesController extends Controller
 
         $files = $request->file('uploads');
         $accessories->image_path = 'images/'.$files->getClientOriginalName();
-        $accessories->update();
+        $accessories->save();
         Storage::put('/public/images/'.$files->getClientOriginalName(),file_get_contents($files));
         return response()->json(["success" => "accessories Created Successfully.", "accessories" => $accessories, "status" => 200]);
     }
@@ -100,7 +100,7 @@ class accessoriesController extends Controller
 
         $files = $request->file('uploads');
         $accessories->image_path = 'images/'.$files->getClientOriginalName();
-        $accessories->save();
+        $accessories->update();
         Storage::put('/public/images/'.$files->getClientOriginalName(),file_get_contents($files));
         return response()->json(["success" => "accessories Updated Successfully.", "accessories" => $accessories, "status" => 200]);
     }
