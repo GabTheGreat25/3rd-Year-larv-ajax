@@ -24,11 +24,9 @@ class operatorController extends Controller
         // return view('operator.index');
     }
 
-    public function getOperator()
+    public function getOperatorAll()
     {   //get the view in resource
-        // $operator = operator::orderBy('operator_id', 'DESC')->get();
-        return response()->json($operator);
-       
+        return view('operator.index');
     }
 
     /**
@@ -50,7 +48,7 @@ class operatorController extends Controller
     public function store(Request $request)
     {   //basic create with image save in public storage
         $operator = new operator;
-        $operator->name = $request->name;
+        $operator->full_name = $request->full_name;
         $operator->contact_number = $request->contact_number;
         $operator->age = $request->age;
         $operator->address = $request->address;
@@ -95,7 +93,7 @@ class operatorController extends Controller
     public function update(Request $request, $id)
     {   //copy paste store just change new as find to override it
         $operator = operator::find($id);
-        $operator->name = $request->name;
+        $operator->full_name = $request->full_name;
         $operator->contact_number = $request->contact_number;
         $operator->age = $request->age;
         $operator->address = $request->address;

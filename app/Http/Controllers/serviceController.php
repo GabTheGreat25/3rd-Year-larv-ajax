@@ -20,12 +20,12 @@ class serviceController extends Controller
      */
     public function index()
     {   // normal join to call the other table information
-       $service = service::join('operator','services.operator_id','operator.operator_id')->select('services.*','operator.name')->orderBy('services.services_id','DESC')->get();
+       $service = service::join('operator','services.operator_id','operator.operator_id')->select('services.*','operator.full_name')->orderBy('services.services_id','DESC')->get();
         // $service = service::with(['operator'])->orderBy('services_id', 'DESC')->get();
         return response()->json($service);
     }
 
-    public function getService()
+    public function getServiceAll()
     {
         return view('service.index');
     }

@@ -24,7 +24,7 @@ class investorController extends Controller
         return response()->json($investor);
     }
 
-    public function getInvestor()
+    public function getInvestorAll()
     {   //get the view in resource
         return view('investor.index');
     }
@@ -51,8 +51,8 @@ class investorController extends Controller
         $investor->name = $request->name;
         $investor->contact_number = $request->contact_number;
         $investor->age = $request->age;
-        $investor->email = $request->email;
-        $investor->password = Hash::make($request->input("password"));
+        // $investor->email = $request->email;
+        // $investor->password = Hash::make($request->input("password"));
 
         $files = $request->file('uploads');
         $investor->image_path = 'images/'.$files->getClientOriginalName();
@@ -97,8 +97,8 @@ class investorController extends Controller
         $investor->name = $request->name;
         $investor->contact_number = $request->contact_number;
         $investor->age = $request->age;
-        $investor->email = $request->email;
-        $investor->password = $request->password;
+        // $investor->email = $request->email;
+        // $investor->password = $request->password;
 
         $files = $request->file('uploads');
         $investor->image_path = 'images/'.$files->getClientOriginalName();

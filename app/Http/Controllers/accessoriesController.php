@@ -26,7 +26,7 @@ class accessoriesController extends Controller
         return response()->json($accessories);
     }
 
-    public function getAccessories()
+    public function getAccessoriesAll()
     {   //get the view in resource
         return view('accessories.index');
     }

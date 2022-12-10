@@ -23,7 +23,7 @@ class cameraController extends Controller
         return response()->json($camera);
     }
 
-    public function getCamera()
+    public function getCameraAll()
     {   //get the view in resource
         return view('camera.index');
     }
