@@ -21,7 +21,7 @@ class adminController extends Controller
      */
     public function index()
     {
-        $admin = admin::join('users','admin.user_id','users.id')->select('admin.*','users.email')->orderBy('admin.admin_id','DESC')->get();
+        $admin = admin::join('users','admin.user_id','users.id')->select('admin.*','users.email')->orderBy('admin.admin_id','DESC')->withTrashed()->get();
         return response()->json($admin);
     }
     
@@ -124,15 +124,29 @@ class adminController extends Controller
      */
     public function destroy($id)
     {
+        $admin = admin::with('users')->find($id);
+        $admin->users()->delete();
         $admin = admin::findOrFail($id);
 
-        if (File::exists("storage/" . $admin->image_path)) {
-            File::delete("storage/" . $admin->image_path);
-        }
+        // if (File::exists("storage/" . $admin->image_path)) {
+        //     File::delete("storage/" . $admin->image_path);
+        // }
 
         $admin->delete();
 
         $data = array('success' => 'deleted', 'code' => '200');
         return response()->json($data);
+    }
+
+    public function restore($id)
+    {
+      $admin = admin::onlyTrashed()->find($id);
+      $admin->restore();
+
+      $adminn =  admin::with('users')->find($id);
+      $adminn->users()->restore();
+
+      $data = array('success' => 'restored', 'code' => '200');
+      return response()->json($data);
     }
 }

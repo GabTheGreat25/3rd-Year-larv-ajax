@@ -55,7 +55,9 @@ $(document).ready(function () {
                         data.admin_id +
                         "><i class='fa-solid fa-pen' aria-hidden='true' style='font-size:24px' ></i></a><a href='#' class='deletebtn' data-id=" +
                         data.admin_id +
-                        "><i class='fa-solid fa-trash-can' style='font-size:24px; color:red; margin-left:15px;'></a></i>"
+                        "><i class='fa-solid fa-trash-can' style='font-size:24px; color:red; margin-left:15px;'></a></i><a href='#' class='restorebtn' data-id=" +
+                        data.admin_id +
+                        "><i class='fa-solid fa-trash-can-arrow-up' style='font-size:24px; color:green; margin-left:15px;'></a></i>"
                     );
                 },
             },
@@ -96,6 +98,47 @@ $(document).ready(function () {
         });
     });
 
+    $("#adtable tbody").on("click", "a.restorebtn", function (e) {
+        var table = $("#adtable").DataTable();
+        var id = $(this).data("id");
+        console.log(id);
+        e.preventDefault();
+        bootbox.confirm({
+            message: "do you want to restore this admin",
+            buttons: {
+                confirm: {
+                    label: "yes",
+                    className: "btn-success",
+                },
+                cancel: {
+                    label: "no",
+                    className: "btn-danger",
+                },
+            },
+            callback: function (result) {
+                console.log(result);
+                if (result)
+                    $.ajax({
+                        type: "PATCH",
+                        url: `/api/admin/restore/${id}`,
+                        dataType: "json",
+                        success: function (data) {
+                            console.log(data);
+                            // bootbox.alert('success');
+                            // $row.fadeOut(4000, function () {
+                            //     table.row($row).remove().draw(false);
+                            // });
+                            table.ajax.reload();
+                            bootbox.alert(data.success);
+                        },
+                        error: function (error) {
+                            console.log(error);
+                        },
+                    });
+            },
+        });
+    });
+
     $("#adtable tbody").on("click", "a.deletebtn", function (e) {
         var table = $("#adtable").DataTable();
         var id = $(this).data("id");
@@ -130,9 +173,10 @@ $(document).ready(function () {
                         success: function (data) {
                             console.log(data);
                             // bootbox.alert('success');
-                            $row.fadeOut(4000, function () {
-                                table.row($row).remove().draw(false);
-                            });
+                            // $row.fadeOut(4000, function () {
+                            //     table.row($row).remove().draw(false);
+                            // });
+                            table.ajax.reload();
                             bootbox.alert(data.success);
                         },
                         error: function (error) {

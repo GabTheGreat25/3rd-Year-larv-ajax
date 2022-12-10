@@ -43,6 +43,7 @@ route::view('/admin-register', 'admin.register');
 Route::get('/admin/all',['uses' => 'adminController@getadminAll','as' => 'admin.getadminall'] );
 Route::resource('admin', 'adminController');
 Route::post('admin/post/{id}','adminController@update');
+Route::patch('/admin/restore/{id}', 'adminController@restore');
 
 // Route::middleware('auth:api')->group(function () {
     route::view('/accessories-index', 'accessories.index');
