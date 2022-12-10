@@ -15,8 +15,6 @@ class investor extends Model
         "name",
         "age",
         "contact_number",
-        "email",
-        "password",
         "image_path"
     ];
     // public function services() {

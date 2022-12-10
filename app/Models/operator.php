@@ -12,7 +12,7 @@ class operator extends Model
     public $timestamps = false;
     public $primaryKey = "operator_id";
     protected $fillable = [
-        "name",
+        "full_name",
         "contact_number",
         "age",
         "address",
