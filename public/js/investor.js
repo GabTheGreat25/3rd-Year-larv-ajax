@@ -29,7 +29,7 @@ $(document).ready(function () {
                 data: "investor_id",
             },
             {
-                data: "name",
+                data: "full_name",
             },
             {
                 data: "age",
@@ -170,7 +170,7 @@ $(document).ready(function () {
             success: function (data) {
                 console.log(data);
                 $("#investor_id").val(data.investor_id);
-                $("#name").val(data.name);
+                $("#full_name").val(data.full_name);
                 $("#age").val(data.age);
                 $("#contact_number").val(data.contact_number);
                 // $("#email").val(data.email);

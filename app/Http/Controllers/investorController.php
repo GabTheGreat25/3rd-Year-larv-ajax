@@ -48,7 +48,7 @@ class investorController extends Controller
     public function store(Request $request)
     {   //basic create with image save in public storage
         $investor = new investor;
-        $investor->name = $request->name;
+        $investor->full_name = $request->full_name;
         $investor->contact_number = $request->contact_number;
         $investor->age = $request->age;
         // $investor->email = $request->email;
@@ -94,7 +94,7 @@ class investorController extends Controller
     public function update(Request $request, $id)
     {   //copy paste store just change new as find to override it
         $investor = investor::find($id);
-        $investor->name = $request->name;
+        $investor->full_name = $request->full_name;
         $investor->contact_number = $request->contact_number;
         $investor->age = $request->age;
         // $investor->email = $request->email;

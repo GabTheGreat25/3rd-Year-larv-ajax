@@ -58,8 +58,8 @@
                         table same dapat yan ah yun lang --}}
                     </div>
                     <div class="form-group">
-                        <label for="name" class="control-label">name</label>
-                        <input type="text" class="form-control" id="name" name="name">
+                        <label for="full_name" class="control-label">Full Name</label>
+                        <input type="text" class="form-control" id="full_name" name="full_name">
                     </div>
                     <div class="form-group">
                         <label for="age" class="control-label">age</label>

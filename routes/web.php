@@ -13,6 +13,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Route::post('register-auth', [
+//     'uses' => 'LoginController@register',
+//     'as' => 'user.register',
+// ]);
+
+// Route::get('register', [
+//     'uses' => 'LoginController@getRegister',
+// ]);
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -22,17 +31,8 @@ Route::post('login-auth', [
     'as' => 'user.login',
 ]);
 
-Route::post('register-auth', [
-    'uses' => 'LoginController@register',
-    'as' => 'user.register',
-]);
-
 Route::get('login', [
     'uses' => 'LoginController@getLogin',
-]);
-
-Route::get('register', [
-    'uses' => 'LoginController@getRegister',
 ]);
 
 Route::get('logout',[
@@ -40,22 +40,33 @@ Route::get('logout',[
     'as' => 'logout',
 ]);
 
+Route::resource('admin', 'adminController');
+route::view('/admin-index', 'admin.index');
+route::view('/admin-register', 'admin.register');
+
 Route::resource('operator', 'operatorController');
-route::view('/operator-index', 'operator.index')->name('operator');
+route::view('/operator-index', 'operator.index');
+route::view('/operator-register', 'operator.register');
 
-Route::resource('accessories', 'accessoriesController');
-route::view('/accessories-index', 'accessories.index');
+Route::resource('investor', 'investorController');
+route::view('/investor-index', 'investor.index');
+route::view('/investor-register', 'investor.register');
 
-Route::resource('camera', 'cameraController');
-route::view('/camera-index', 'camera.index');
+Route::resource('client', 'clientController');
+route::view('/client-index', 'client.index');
+route::view('/client-register', 'client.register');
 
 Route::resource('service', 'serviceController');
 route::view('/service-index', 'service.index');
 
-Route::resource('investor', 'investorController');
-route::view('/investor-index', 'investor.index');
+Route::resource('camera', 'cameraController');
+route::view('/camera-index', 'camera.index');
 
-Route::resource('admin', 'adminController');
-route::view('/admin-index', 'admin.index');
-route::view('/admin-register', 'admin.register');
+Route::resource('accessories', 'accessoriesController');
+route::view('/accessories-index', 'accessories.index');
+
+
+
+
+
 
