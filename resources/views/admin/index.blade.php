@@ -21,13 +21,14 @@
     }
 </style>
 
-<div class="container">
+<div class="container">{{-- all ajax is ID based remeber this --}}
     <table id="adtable" class="table table-striped table-hover">
         <thead>
             <tr>
                 <th>Admin ID</th>
                 <th>Full Name</th>
                 <th>Age</th>
+                <th>Email</th>
                 <th>Image</th>
                 <th>Actions</th>
             </tr>
@@ -42,13 +43,16 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Update Admin Details</h4>
+                <h4 class="modal-title">Update Admin Information</h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div style="padding: 0 2rem;">
-                <form id="adform" action="#" method="#" enctype="multipart/form-data">
+                <form id="adform" action="#" method="#" enctype="multipart/form-data"> {{-- just change the table form
+                    body ng isang letter base dun sa umpisa gaya dito operator kaya o --}}
                     <div class="form-group">
                         <input type="hidden" class="form-control" id="admin_id" name="admin_id">
+                        {{-- tapos ito operator id ito primary key taz sa baba mga name contact number yung iba laman ng
+                        table same dapat yan ah yun lang --}}
                     </div>
                     <div class="form-group">
                         <label for="full_name" class="control-label">Full Name</label>
@@ -56,10 +60,11 @@
                     </div>
                     <div class="form-group">
                         <label for="age" class="control-label">Age</label>
-                        <input type="text" class="form-control" id="age" name="age">
+                        <input type="number" class="form-control" id="age" name="age" min="1" max="100">
                     </div>
                     <div class="form-group">
-                        <label for="uploads" class="control-label">Admin Image</label>
+                        <label for="uploads" class="control-label">Admin Image</label> {{-- uploads name nito kasi
+                        yun name nya sa controller --}}
                         <input type="file" class="form-control" id="uploads" name="uploads">
                     </div>
                 </form>
@@ -69,6 +74,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
                 <button id="adminUpdate" type="submit" class="btn btn-info">Update</button>
+                {{-- id base den toh magkaiba yan ginagawa ah --}}
             </div>
         </div>
     </div>
