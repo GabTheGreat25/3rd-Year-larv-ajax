@@ -107,7 +107,6 @@ class adminController extends Controller
         $admin = admin::find($id);
         $admin->full_name = $request->full_name;
         $admin->age = $request->age;
-        $admin->price = $request->price;
         // $admin->user_id = $request->user_id;
 
         $files = $request->file('uploads');

@@ -1,6 +1,7 @@
 $(document).ready(function () {
     $("#adtable").DataTable({
         ajax: {
+            //laman nung html ito basically
             url: "/api/admin",
             dataSrc: "",
         },
@@ -40,7 +41,6 @@ $(document).ready(function () {
                 data: null,
                 render: function (data, type, JsonResultRow, row) {
                     return (
-                        // storage kasi dun naten nilagay publicly
                         '<img src="storage/' +
                         JsonResultRow.image_path +
                         '" height="100px" width="100px">'
@@ -161,7 +161,6 @@ $(document).ready(function () {
             dataType: "json",
             success: function (data) {
                 console.log(data);
-                localStorage.setItem("token");
                 $("#admin_id").val(data.admin_id);
                 $("#full_name").val(data.full_name);
                 $("#age").val(data.age);
