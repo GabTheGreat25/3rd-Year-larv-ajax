@@ -40,5 +40,6 @@
 <script src="js/camera.js"></script>
 <script src="js/investor.js"></script>
 <script src="js/admin.js"></script>
+<script src="js/client.js"></script>
 
 {{-- <script src="js/dashboard.js"></script> --}}
