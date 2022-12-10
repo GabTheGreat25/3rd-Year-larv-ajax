@@ -29,8 +29,8 @@
                 <th>name</th>
                 <th>age</th>
                 <th>contact_number</th>
-                <th>email</th>
-                <th>password</th>
+                {{-- <th>email</th>
+                <th>password</th> --}}
                 <th>Image</th>
                 <th>Actions</th>
             </tr>
@@ -69,14 +69,14 @@
                         <label for="contact_number" class="control-label">contact_number</label>
                         <input type="text" class="form-control" id="contact_number" name="contact_number">
                     </div>
-                    <div class="form-group">
+                    {{-- <div class="form-group">
                         <label for="email" class="control-label">email</label>
                         <input type="text" class="form-control" id="email" name="email">
                     </div>
                     <div class="form-group">
                         <label for="password" class="control-label">password</label>
                         <input type="text" class="form-control" id="password" name="password">
-                    </div>
+                    </div> --}}
                     <div class="form-group">
                         <label for="uploads" class="control-label">investor Image</label> {{-- uploads name nito kasi
                         yun name nya sa controller --}}

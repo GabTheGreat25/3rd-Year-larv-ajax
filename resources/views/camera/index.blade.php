@@ -62,7 +62,8 @@
                     </div>
                     <div class="form-group">
                         <label for="shuttercount" class="control-label">shuttercount</label>
-                        <input type="number" class="form-control" id="shuttercount" name="shuttercount" min="1" max="10">
+                        <input type="number" class="form-control" id="shuttercount" name="shuttercount" min="1"
+                            max="10">
                     </div>
                     <div class="form-group">
                         <label for="quantity" class="control-label">quantity</label>
