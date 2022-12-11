@@ -56,7 +56,7 @@ class cameraController extends Controller
         $camera->image_path = 'images/'.$files->getClientOriginalName();
         $camera->save();
         Storage::put('/public/images/'.$files->getClientOriginalName(),file_get_contents($files));
-        return response()->json(["success" => "camera Created Successfully.", "camera" => $camera, "status" => 200]);
+        return response()->json(["success" => "Camera Created Successfully.", "camera" => $camera, "status" => 200]);
     }
 
     /**
@@ -101,7 +101,7 @@ class cameraController extends Controller
         $camera->image_path = 'images/'.$files->getClientOriginalName();
         $camera->update();
         Storage::put('/public/images/'.$files->getClientOriginalName(),file_get_contents($files));
-        return response()->json(["success" => "camera Updated Successfully.", "camera" => $camera, "status" => 200]);
+        return response()->json(["success" => "Camera Updated Successfully.", "camera" => $camera, "status" => 200]);
     }
 
     /**

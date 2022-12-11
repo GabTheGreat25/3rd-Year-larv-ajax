@@ -134,13 +134,13 @@ class adminController extends Controller
 
     public function restore($id)
     {
-      $admin = admin::onlyTrashed()->find($id);
-      $admin->restore();
+        $admin = admin::onlyTrashed()->find($id);
+        $admin->restore();
 
-      $adminn =  admin::with('users')->find($id);
-      $adminn->users()->restore();
+        $adminn =  admin::with('users')->find($id);
+        $adminn->users()->restore();
 
-      $data = array('success' => 'restored', 'code' => '200');
-      return response()->json($data);
+        $data = array('success' => 'restored', 'code' => '200');
+        return response()->json($data);
     }
 }

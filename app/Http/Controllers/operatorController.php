@@ -138,13 +138,13 @@ class operatorController extends Controller
 
     public function restore($id)
     {
-      $operator = operator::onlyTrashed()->find($id);
-      $operator->restore();
+        $operator = operator::onlyTrashed()->find($id);
+        $operator->restore();
 
-      $operatorr = operator::with('users')->find($id);
-      $operatorr->users()->restore();
+        $operatorr = operator::with('users')->find($id);
+        $operatorr->users()->restore();
 
-      $data = array('success' => 'restored', 'code' => '200');
-      return response()->json($data);
+        $data = array('success' => 'restored', 'code' => '200');
+        return response()->json($data);
     }
 }
