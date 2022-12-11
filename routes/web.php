@@ -22,9 +22,11 @@ use Illuminate\Support\Facades\Route;
 //     'uses' => 'LoginController@getRegister',
 // ]);
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+Route::redirect('/', 'login');
 
 Route::post('login-auth', [
     'uses' => 'LoginController@login',
@@ -33,6 +35,7 @@ Route::post('login-auth', [
 
 Route::get('login', [
     'uses' => 'LoginController@getLogin',
+    'as' => 'login',
 ]);
 
 Route::get('logout',[
