@@ -39,6 +39,9 @@ $(document).ready(function () {
                 data: "address",
             },
             {
+                data: "email",
+            },
+            {
                 data: null,
                 render: function (data, type, JsonResultRow, row) {
                     return (
@@ -94,10 +97,7 @@ $(document).ready(function () {
             dataType: "json",
             success: function (data) {
                 console.log(data);
-                $("#operatorModal").modal("hide");
-                var $otable = $("#otable").DataTable();
-                $otable.ajax.reload();
-                $otable.row.add(data.operator).draw(false);
+                window.location = "/login";
             },
             error: function (error) {
                 console.log(error);

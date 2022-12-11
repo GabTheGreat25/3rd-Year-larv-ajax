@@ -21,14 +21,6 @@ $(document).ready(function () {
                 extend: "excel",
                 className: "btn btn-success glyphicon glyphicon-list-alt",
             },
-            {
-                text: "Add investor",
-                className: "btn btn-success",
-                action: function (e, dt, node, config) {
-                    $("#iform").trigger("reset");
-                    $("#investorModal").modal("show");
-                },
-            },
         ],
         columns: [
             {
@@ -42,6 +34,9 @@ $(document).ready(function () {
             },
             {
                 data: "contact_number",
+            },
+            {
+                data: "email",
             },
             {
                 data: null,
@@ -61,7 +56,9 @@ $(document).ready(function () {
                         data.investor_id +
                         "><i class='fa-solid fa-pen' aria-hidden='true' style='font-size:24px' ></i></a><a href='#' class='deletebtn' data-id=" +
                         data.investor_id +
-                        "><i class='fa-solid fa-trash-can' style='font-size:24px; color:red; margin-left:15px;'></a></i>"
+                        "><i class='fa-solid fa-trash-can' style='font-size:24px; color:red; margin-left:15px;'></a></i><a href='#' class='restorebtn' data-id=" +
+                        data.investor_id +
+                        "><i class='fa-solid fa-trash-can-arrow-up' style='font-size:24px; color:green; margin-left:15px;'></a></i>"
                     );
                 },
             },
@@ -84,26 +81,67 @@ $(document).ready(function () {
             data: formData,
             contentType: false,
             processData: false,
-            beforeSend: function (header) {
-                /* Authorization header */
-                header.setRequestHeader(
-                    "Authorization",
-                    "Bearer " + localStorage.getItem("token")
-                );
-            },
+            // beforeSend: function (header) {
+            //     /* Authorization header */
+            //     header.setRequestHeader(
+            //         "Authorization",
+            //         "Bearer " + localStorage.getItem("token")
+            //     );
+            // },
             headers: {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
             },
             dataType: "json",
             success: function (data) {
                 console.log(data);
-                $("#investorModal").modal("hide");
-                var $intable = $("#intable").DataTable();
-                $intable.ajax.reload();
-                $intable.row.add(data.investor).draw(false);
+                window.location = "/login";
             },
             error: function (error) {
                 console.log(error);
+            },
+        });
+    });
+
+    $("#intable tbody").on("click", "a.restorebtn", function (e) {
+        var table = $("#intable").DataTable();
+        var id = $(this).data("id");
+        console.log(id);
+        e.preventDefault();
+        bootbox.confirm({
+            message: "do you want to restore this investor",
+            buttons: {
+                confirm: {
+                    label: "yes",
+                    className: "btn-success",
+                },
+                cancel: {
+                    label: "no",
+                    className: "btn-danger",
+                },
+            },
+            callback: function (result) {
+                console.log(result);
+                if (result)
+                    $.ajax({
+                        type: "PATCH",
+                        url: `/api/investor/restore/${id}`,
+                        beforeSend: function (header) {
+                            /* Authorization header */
+                            header.setRequestHeader(
+                                "Authorization",
+                                "Bearer " + localStorage.getItem("token")
+                            );
+                        },
+                        dataType: "json",
+                        success: function (data) {
+                            console.log(data);
+                            table.ajax.reload();
+                            bootbox.alert(data.success);
+                        },
+                        error: function (error) {
+                            console.log(error);
+                        },
+                    });
             },
         });
     });
@@ -148,9 +186,7 @@ $(document).ready(function () {
                         dataType: "json",
                         success: function (data) {
                             console.log(data);
-                            $row.fadeOut(4000, function () {
-                                table.row($row).remove().draw(false);
-                            });
+                            table.ajax.reload();
                             bootbox.alert(data.success);
                         },
                         error: function (error) {
