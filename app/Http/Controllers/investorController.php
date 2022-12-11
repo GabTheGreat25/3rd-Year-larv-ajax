@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\investor;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
@@ -19,14 +20,18 @@ class investorController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   //basic get all 
-        $investor = investor::orderBy('investor_id', 'DESC')->get();
+    {    
+        $investor = investor::join('users','investor.user_id','users.id')->select('investor.*','users.email')->orderBy('investor.investor_id','DESC')->withTrashed()->get();
         return response()->json($investor);
     }
 
     public function getInvestorAll()
-    {   //get the view in resource
+    {   
         return view('investor.index');
+    }
+
+    public function getRegisterInvestor(){
+        return view('investor.register');
     }
 
     /**
@@ -46,19 +51,26 @@ class investorController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {   //basic create with image save in public storage
+    {   
+        $user = new User();
+        $user->name = $request->full_name;
+        $user->email = $request->email;
+        $user->password = Hash::make($request['password']);
+        $user->role = 'investor';
+        $user->save();
+        $lastInsertId = DB::getPdo()->lastInsertId();
+
         $investor = new investor;
+        $investor->users()->associate($lastInsertId);
         $investor->full_name = $request->full_name;
         $investor->contact_number = $request->contact_number;
         $investor->age = $request->age;
-        // $investor->email = $request->email;
-        // $investor->password = Hash::make($request->input("password"));
 
         $files = $request->file('uploads');
         $investor->image_path = 'images/'.$files->getClientOriginalName();
         $investor->save();
         Storage::put('/public/images/'.$files->getClientOriginalName(),file_get_contents($files));
-        return response()->json(["success" => "investor Created Successfully.", "investor" => $investor, "status" => 200]);
+        return response()->json(["success" => "Investor Created Successfully.", "investor" => $investor, "status" => 200]);
     }
 
     /**
@@ -79,7 +91,7 @@ class investorController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {   //find existing data returning to json
+    {  
         $investor = investor::find($id);
         return response()->json($investor);
     }
@@ -92,19 +104,17 @@ class investorController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {   //copy paste store just change new as find to override it
+    {   
         $investor = investor::find($id);
         $investor->full_name = $request->full_name;
         $investor->contact_number = $request->contact_number;
         $investor->age = $request->age;
-        // $investor->email = $request->email;
-        // $investor->password = $request->password;
 
         $files = $request->file('uploads');
         $investor->image_path = 'images/'.$files->getClientOriginalName();
         $investor->update();
         Storage::put('/public/images/'.$files->getClientOriginalName(),file_get_contents($files));
-        return response()->json(["success" => "investor Updated Successfully.", "investor" => $investor, "status" => 200]);
+        return response()->json(["success" => "Investor Updated Successfully.", "investor" => $investor, "status" => 200]);
     }
 
     /**
@@ -114,16 +124,25 @@ class investorController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {   //delete with image
+    {
+        $investor = investor::with('users')->find($id);
+        $investor->users()->delete();
         $investor = investor::findOrFail($id);
-
-        if (File::exists("storage/" . $investor->image_path)) {
-            File::delete("storage/" . $investor->image_path);
-        }
-
         $investor->delete();
 
         $data = array('success' => 'deleted', 'code' => '200');
+        return response()->json($data);
+    }
+
+    public function restore($id)
+    {
+        $investor = investor::onlyTrashed()->find($id);
+        $investor->restore();
+
+        $investorr = investor::with('users')->find($id);
+        $investorr->users()->restore();
+
+        $data = array('success' => 'restored', 'code' => '200');
         return response()->json($data);
     }
 }
