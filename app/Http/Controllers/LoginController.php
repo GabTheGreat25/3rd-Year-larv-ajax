@@ -47,7 +47,7 @@ class LoginController extends Controller
             $token = $success['token'];
 
             echo "<script type='text/JavaScript'>
-                window.location = '/'
+                window.location = '/home'
                 alert('You Login Successfully!');
                 document.write(localStorage.setItem('token', '".$token."'));
                 </script>";  
