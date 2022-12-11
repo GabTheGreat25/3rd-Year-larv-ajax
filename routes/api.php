@@ -85,27 +85,21 @@ Route::middleware('auth:api')->group(function () {
 
     Route::middleware('role:admin,client,operator')->group(function () {
         Route::view('/service-index', 'service.index');
-        Route::view('/service-register', 'service.register');
         Route::get('/service/all',['uses' => 'serviceController@getserviceAll','as' => 'service.getserviceall'] );
         Route::resource('service', 'serviceController');
         Route::post('service/post/{id}','serviceController@update');
-        Route::patch('/service/restore/{id}', 'serviceController@restore');
     });
 
     Route::middleware('role:admin,client,investor')->group(function () {
-    Route::view('/camera-index', 'camera.index');
-    Route::view('/camera-register', 'camera.register');
-    Route::get('/camera/all',['uses' => 'cameraController@getcameraAll','as' => 'camera.getcameraall'] );
-    Route::resource('camera', 'cameraController');
-    Route::post('camera/post/{id}','cameraController@update');
-    Route::patch('/camera/restore/{id}', 'cameraController@restore');
+        Route::view('/camera-index', 'camera.index');
+        Route::get('/camera/all',['uses' => 'cameraController@getcameraAll','as' => 'camera.getcameraall'] );
+        Route::resource('camera', 'cameraController');
+        Route::post('camera/post/{id}','cameraController@update');
 
-    Route::view('/accessories-index', 'accessories.index');
-    Route::view('/accessories-register', 'accessories.register');
-    Route::get('/accessories/all',['uses' => 'accessoriesController@getaccessoriesAll','as' => 'accessories.getaccessoriesall'] );
-    Route::resource('accessories', 'accessoriesController');
-    Route::post('accessories/post/{id}','accessoriesController@update');
-    Route::patch('/accessories/restore/{id}', 'accessoriesController@restore');
+        Route::view('/accessories-index', 'accessories.index');
+        Route::get('/accessories/all',['uses' => 'accessoriesController@getaccessoriesAll','as' => 'accessories.getaccessoriesall'] );
+        Route::resource('accessories', 'accessoriesController');
+        Route::post('accessories/post/{id}','accessoriesController@update');
     });
 });
 
