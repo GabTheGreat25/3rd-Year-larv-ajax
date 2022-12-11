@@ -30,6 +30,7 @@
                 <th>Contact Number</th>
                 <th>Age</th>
                 <th>Address</th>
+                <th>Email</th>
                 <th>Image</th>
                 <th>Actions</th>
             </tr>
@@ -74,7 +75,6 @@
                     </div>
                 </form>
             </div>
-
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>

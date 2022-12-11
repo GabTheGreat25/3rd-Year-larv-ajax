@@ -66,7 +66,6 @@
                 </form>
             </div>
 
-
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
                 <button id="adminUpdate" type="submit" class="btn btn-info">Update</button>
