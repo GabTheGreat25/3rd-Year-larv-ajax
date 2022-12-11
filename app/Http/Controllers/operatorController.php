@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\operator;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Hash;
 
 class operatorController extends Controller
 {
@@ -18,17 +20,18 @@ class operatorController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {  //basic get all 
-    //     $operator = operator::orderBy('operator_id', 'DESC')->get();
-    //     return response()->json($operator);
+    {
+        $operator = operator::join('users','operator.user_id','users.id')->select('operator.*','users.email')->orderBy('operator.operator_id','DESC')->withTrashed()->get();
+        return response()->json($operator);
+    }
+
+    public function getOperatorAll()
+    {
         return view('operator.index');
     }
 
-    public function getOperator()
-    {   //get the view in resource
-        $operator = operator::orderBy('operator_id', 'DESC')->get();
-        return response()->json($operator);
-       
+    public function getRegisterOperator(){
+        return view('operator.register');
     }
 
     /**
@@ -48,9 +51,18 @@ class operatorController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {   //basic create with image save in public storage
+    {   
+        $user = new User();
+        $user->name = $request->full_name;
+        $user->email = $request->email;
+        $user->password = Hash::make($request['password']);
+        $user->role = 'operator';
+        $user->save();
+        $lastInsertId = DB::getPdo()->lastInsertId();
+
         $operator = new operator;
-        $operator->name = $request->name;
+        $operator->users()->associate($lastInsertId);
+        $operator->full_name = $request->full_name;
         $operator->contact_number = $request->contact_number;
         $operator->age = $request->age;
         $operator->address = $request->address;
@@ -80,7 +92,7 @@ class operatorController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {   //find existing data returning to json
+    { 
         $operator = operator::find($id);
         return response()->json($operator);
     }
@@ -93,16 +105,16 @@ class operatorController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {   //copy paste store just change new as find to override it
+    {  
         $operator = operator::find($id);
-        $operator->name = $request->name;
+        $operator->full_name = $request->full_name;
         $operator->contact_number = $request->contact_number;
         $operator->age = $request->age;
         $operator->address = $request->address;
 
         $files = $request->file('uploads');
         $operator->image_path = 'images/'.$files->getClientOriginalName();
-        $operator->save();
+        $operator->update();
         Storage::put('/public/images/'.$files->getClientOriginalName(),file_get_contents($files));
         return response()->json(["success" => "Operator Updated Successfully.", "operator" => $operator, "status" => 200]);
     }
@@ -114,16 +126,25 @@ class operatorController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {   //delete with image
+    {   
+        $operator = operator::with('users')->find($id);
+        $operator->users()->delete();
         $operator = operator::findOrFail($id);
-
-        if (File::exists("storage/" . $operator->image_path)) {
-            File::delete("storage/" . $operator->image_path);
-        }
-
         $operator->delete();
 
         $data = array('success' => 'deleted', 'code' => '200');
+        return response()->json($data);
+    }
+
+    public function restore($id)
+    {
+        $operator = operator::onlyTrashed()->find($id);
+        $operator->restore();
+
+        $operatorr = operator::with('users')->find($id);
+        $operatorr->users()->restore();
+
+        $data = array('success' => 'restored', 'code' => '200');
         return response()->json($data);
     }
 }

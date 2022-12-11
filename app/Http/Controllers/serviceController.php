@@ -19,13 +19,12 @@ class serviceController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   // normal join to call the other table information
-       $service = service::join('operator','services.operator_id','operator.operator_id')->select('services.*','operator.name')->orderBy('services.services_id','DESC')->get();
-        // $service = service::with(['operator'])->orderBy('services_id', 'DESC')->get();
+    { 
+       $service = service::join('operator','services.operator_id','operator.operator_id')->select('services.*','operator.full_name')->orderBy('services.services_id','DESC')->get();
         return response()->json($service);
     }
 
-    public function getService()
+    public function getServiceAll()
     {
         return view('service.index');
     }
@@ -47,7 +46,7 @@ class serviceController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {   // basic operator_id request just like normal inputting data 
+    {  
         $service = new service;
 
         $service->service_type = $request->service_type;
@@ -57,7 +56,7 @@ class serviceController extends Controller
 
         $files = $request->file('uploads');
         $service->image_path = 'images/'.$files->getClientOriginalName();
-        $service->save();
+        $service->update();
         Storage::put('/public/images/'.$files->getClientOriginalName(),file_get_contents($files));
         return response()->json(["success" => "Service Created Successfully.", "service" => $service, "status" => 200]);
     }
@@ -93,7 +92,7 @@ class serviceController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {   //same with create
+    {   
         $service = service::find($id);
         $service->service_type = $request->service_type;
         $service->date_of_service = $request->date_of_service;
@@ -102,7 +101,7 @@ class serviceController extends Controller
 
         $files = $request->file('uploads');
         $service->image_path = 'images/'.$files->getClientOriginalName();
-        $service->save();
+        $service->update();
         Storage::put('/public/images/'.$files->getClientOriginalName(),file_get_contents($files));
         return response()->json(["success" => "Service Updated Successfully.", "service" => $service, "status" => 200]);
     }

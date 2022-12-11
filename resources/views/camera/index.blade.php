@@ -21,7 +21,7 @@
     }
 </style>
 
-<div class="container">{{-- all ajax is ID based remeber this --}}
+<div class="container">
     <table id="ctable" class="table table-striped table-hover">
         <thead>
             <tr>
@@ -48,13 +48,9 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div style="padding: 0 2rem;">
-                <form id="cform" action="#" method="#" enctype="multipart/form-data"> {{-- just change the table form
-                    body ng isang letter base dun sa umpisa gaya dito camera kaya o --}}
+                <form id="cform" action="#" method="#" enctype="multipart/form-data">
                     <div class="form-group">
                         <input type="hidden" class="form-control" id="camera_id" name="camera_id">
-                        {{-- tapos ito camera id ito primary key taz sa baba mga name contact number yung iba laman
-                        ng
-                        table same dapat yan ah yun lang --}}
                     </div>
                     <div class="form-group">
                         <label for="model" class="control-label">model</label>
@@ -62,7 +58,8 @@
                     </div>
                     <div class="form-group">
                         <label for="shuttercount" class="control-label">shuttercount</label>
-                        <input type="number" class="form-control" id="shuttercount" name="shuttercount" min="1" max="10">
+                        <input type="number" class="form-control" id="shuttercount" name="shuttercount" min="1"
+                            max="10">
                     </div>
                     <div class="form-group">
                         <label for="quantity" class="control-label">quantity</label>
@@ -73,8 +70,7 @@
                         <input type="text" class="form-control" id="costs" name="costs">
                     </div>
                     <div class="form-group">
-                        <label for="uploads" class="control-label">camera Image</label> {{-- uploads name nito kasi
-                        yun name nya sa controller --}}
+                        <label for="uploads" class="control-label">camera Image</label>
                         <input type="file" class="form-control" id="uploads" name="uploads">
                     </div>
                 </form>
@@ -85,7 +81,6 @@
                 <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
                 <button id="cameraSubmit" type="submit" class="btn btn-primary">Save</button>
                 <button id="cameraUpdate" type="submit" class="btn btn-info">Update</button>
-                {{-- id base den toh magkaiba yan ginagawa ah --}}
             </div>
         </div>
     </div>

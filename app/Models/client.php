@@ -6,24 +6,27 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class investor extends Model
+class client extends Model
 {
     use HasFactory;
     use SoftDeletes;
 
     protected $dates = ["deleted_at"];
-    public $table = "investor";
+    public $table = "client";
     public $timestamps = false;
-    public $primaryKey = "investor_id ";
+    public $primaryKey = "client_id";
     protected $fillable = [
         "full_name",
         "age",
+        "valid_id",
+        "billing_address",
+        "address",
         "contact_number",
         "image_path",
         "user_id",
         'deleted_at'
     ];
-    
+
     public function users() {
         return $this->belongsTo('App\Models\User','user_id','id')->withTrashed();
     }

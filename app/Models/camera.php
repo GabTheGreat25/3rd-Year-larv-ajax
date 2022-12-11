@@ -18,8 +18,4 @@ class camera extends Model
         "costs",
         "image_path"
     ];
-
-    // public function services() {
-    //     return $this->hasMany('App\Models\service');
-    // }
 }

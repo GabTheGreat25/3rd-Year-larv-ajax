@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\investor;
+use App\Models\client;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -12,7 +12,8 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 
-class investorController extends Controller
+
+class clientController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,18 +21,18 @@ class investorController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {    
-        $investor = investor::join('users','investor.user_id','users.id')->select('investor.*','users.email')->orderBy('investor.investor_id','DESC')->withTrashed()->get();
-        return response()->json($investor);
+    {
+        $client = client::join('users','client.user_id','users.id')->select('client.*','users.email')->orderBy('client.client_id','DESC')->withTrashed()->get();
+        return response()->json($client);
+    }
+    
+    public function getClientAll()
+    {
+        return view('client.index');
     }
 
-    public function getInvestorAll()
-    {   
-        return view('investor.index');
-    }
-
-    public function getRegisterInvestor(){
-        return view('investor.register');
+    public function getRegisterClient(){
+        return view('client.register');
     }
 
     /**
@@ -51,26 +52,30 @@ class investorController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {   
+    {
         $user = new User();
         $user->name = $request->full_name;
         $user->email = $request->email;
         $user->password = Hash::make($request['password']);
-        $user->role = 'investor';
+        $user->role = 'client';
         $user->save();
         $lastInsertId = DB::getPdo()->lastInsertId();
 
-        $investor = new investor;
-        $investor->users()->associate($lastInsertId);
-        $investor->full_name = $request->full_name;
-        $investor->contact_number = $request->contact_number;
-        $investor->age = $request->age;
-
+        $client = new client();
+        $client->users()->associate($lastInsertId);
+        $client->full_name = $request->full_name;
+        $client->age = $request->age;
+        $client->valid_id = $request->valid_id;
+        $client->billing_address = $request->billing_address;
+        $client->address = $request->address;
+        $client->contact_number = $request->contact_number;
+       
         $files = $request->file('uploads');
-        $investor->image_path = 'images/'.$files->getClientOriginalName();
-        $investor->save();
+        $client->image_path = 'images/'.$files->getClientOriginalName();
+        $client->save();
         Storage::put('/public/images/'.$files->getClientOriginalName(),file_get_contents($files));
-        return response()->json(["success" => "Investor Created Successfully.", "investor" => $investor, "status" => 200]);
+
+       return response()->json(["success" => "Client Created Successfully.", "client" => $client, "status" => 200]);
     }
 
     /**
@@ -91,9 +96,9 @@ class investorController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {  
-        $investor = investor::find($id);
-        return response()->json($investor);
+    {
+        $client = client::find($id);
+        return response()->json($client);
     }
 
     /**
@@ -104,17 +109,20 @@ class investorController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {   
-        $investor = investor::find($id);
-        $investor->full_name = $request->full_name;
-        $investor->contact_number = $request->contact_number;
-        $investor->age = $request->age;
+    {
+        $client = client::find($id);
+        $client->full_name = $request->full_name;
+        $client->age = $request->age;
+        $client->valid_id = $request->valid_id;
+        $client->billing_address = $request->billing_address;
+        $client->address = $request->address;
+        $client->contact_number = $request->contact_number;
 
         $files = $request->file('uploads');
-        $investor->image_path = 'images/'.$files->getClientOriginalName();
-        $investor->update();
+        $client->image_path = 'images/'.$files->getClientOriginalName();
+        $client->update();
         Storage::put('/public/images/'.$files->getClientOriginalName(),file_get_contents($files));
-        return response()->json(["success" => "Investor Updated Successfully.", "investor" => $investor, "status" => 200]);
+        return response()->json(["success" => "Client Updated Successfully.", "client" => $client, "status" => 200]);
     }
 
     /**
@@ -123,12 +131,12 @@ class investorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+  public function destroy($id)
     {
-        $investor = investor::with('users')->find($id);
-        $investor->users()->delete();
-        $investor = investor::findOrFail($id);
-        $investor->delete();
+        $client = client::with('users')->find($id);
+        $client->users()->delete();
+        $client = client::findOrFail($id);
+        $client->delete();
 
         $data = array('success' => 'deleted', 'code' => '200');
         return response()->json($data);
@@ -136,11 +144,11 @@ class investorController extends Controller
 
     public function restore($id)
     {
-        $investor = investor::onlyTrashed()->find($id);
-        $investor->restore();
+        $client = client::onlyTrashed()->find($id);
+        $client->restore();
 
-        $investorr = investor::with('users')->find($id);
-        $investorr->users()->restore();
+        $clientt = client::with('users')->find($id);
+        $clientt->users()->restore();
 
         $data = array('success' => 'restored', 'code' => '200');
         return response()->json($data);

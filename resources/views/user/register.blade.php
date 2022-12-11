@@ -25,12 +25,20 @@
         </div>
         <!-- Col -->
         <div class="w-full lg:w-1/2 bg-white p-5 rounded-lg lg:rounded-l-none">
-          <h3 class="pt-4 text-2xl text-center">Welcome to RedFrame Camera!</h3>
-          <form class="px-8 pt-6 pb-8 mb-4 bg-white rounded" action="{{ route('user.login') }}" method="POST">
+          <h3 class="pt-4 text-2xl text-center">Create an Account</h3>
+          <form class="px-8 pt-6 pb-8 mb-4 bg-white rounded" action="{{ route('user.register') }}" method="POST">
             {{ csrf_field() }}
             <div class="mb-4">
+              <label class="block mb-2 text-sm font-bold text-gray-700" for="name">
+                Name
+              </label>
+              <input
+                class="w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                id="name" name="name" type="text" placeholder="name" />
+            </div>
+            <div class="mb-4">
               <label class="block mb-2 text-sm font-bold text-gray-700" for="email">
-                email
+                Email
               </label>
               <input
                 class="w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
@@ -44,24 +52,18 @@
                 class="w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
                 id="password" name="password" type="password" placeholder="******************" />
             </div>
-            <div class="mb-4">
-              <input class="mr-2 leading-tight" type="checkbox" id="checkbox_id" />
-              <label class="text-sm" for="checkbox_id">
-                Remember Me
-              </label>
-            </div>
             <div class="mb-6 text-center">
               <button
                 class="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-full hover:bg-blue-700 focus:outline-none focus:shadow-outline"
                 type="submit">
-                Sign In
+                Sign up
               </button>
             </div>
             <hr class="mb-6 border-t" />
             <div class="text-center">
               <a class="inline-block text-sm text-red-500 align-baseline hover:text-blue-800"
-                href="{{ url('/register') }}">
-                Create an Account!
+                href="{{ url('/login') }}">
+                Have an Account?
               </a>
             </div>
           </form>

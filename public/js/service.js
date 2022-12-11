@@ -2,6 +2,13 @@ $(document).ready(function () {
     $("#stable").DataTable({
         ajax: {
             url: "/api/service",
+            beforeSend: function (header) {
+                /* Authorization header */
+                header.setRequestHeader(
+                    "Authorization",
+                    "Bearer " + localStorage.getItem("token")
+                );
+            },
             dataSrc: "",
         },
         dom: '<"top"<"left-col"B><"center-col"l><"right-col"f>>rtip',
@@ -37,14 +44,12 @@ $(document).ready(function () {
                 data: "price",
             },
             {
-                // dito na gagana join table name gamit ko pero wala name sa service
-                data: "name",
+                data: "full_name",
             },
             {
                 data: null,
                 render: function (data, type, JsonResultRow, row) {
                     return (
-                        // storage kasi dun naten nilagay publicly
                         '<img src="storage/' +
                         JsonResultRow.image_path +
                         '" height="100px" width="100px">'
@@ -82,6 +87,13 @@ $(document).ready(function () {
             data: formData,
             contentType: false,
             processData: false,
+            beforeSend: function (header) {
+                /* Authorization header */
+                header.setRequestHeader(
+                    "Authorization",
+                    "Bearer " + localStorage.getItem("token")
+                );
+            },
             headers: {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
             },
@@ -124,6 +136,13 @@ $(document).ready(function () {
                     $.ajax({
                         type: "DELETE",
                         url: `/api/service/${id}`,
+                        beforeSend: function (header) {
+                            /* Authorization header */
+                            header.setRequestHeader(
+                                "Authorization",
+                                "Bearer " + localStorage.getItem("token")
+                            );
+                        },
                         headers: {
                             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
                                 "content"
@@ -132,7 +151,6 @@ $(document).ready(function () {
                         dataType: "json",
                         success: function (data) {
                             console.log(data);
-                            // bootbox.alert('success');
                             $row.fadeOut(4000, function () {
                                 table.row($row).remove().draw(false);
                             });
@@ -158,18 +176,25 @@ $(document).ready(function () {
             contentType: false,
             cache: false,
             url: `/api/service/${id}/edit`,
+            beforeSend: function (header) {
+                /* Authorization header */
+                header.setRequestHeader(
+                    "Authorization",
+                    "Bearer " + localStorage.getItem("token")
+                );
+            },
             headers: {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
             },
             dataType: "json",
             success: function (data) {
                 console.log(data);
+                localStorage.setItem("token");
                 $("#services_id").val(data.services_id);
                 $("#service_type").val(data.service_type);
                 $("#date_of_service").val(data.date_of_service);
                 $("#price").val(data.price);
                 $("#operator_id").val(data.operator_id);
-                // dito kasama foreign key kasi diba normal lang siya iinput explain ko na yan sa controller
             },
             error: function (error) {
                 console.log(error);
@@ -195,6 +220,13 @@ $(document).ready(function () {
             data: formData,
             contentType: false,
             processData: false,
+            beforeSend: function (header) {
+                /* Authorization header */
+                header.setRequestHeader(
+                    "Authorization",
+                    "Bearer " + localStorage.getItem("token")
+                );
+            },
             headers: {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
             },

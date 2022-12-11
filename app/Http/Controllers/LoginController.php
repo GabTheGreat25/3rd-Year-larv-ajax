@@ -8,41 +8,118 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Redirect;
 
 class LoginController extends Controller
 {
-    use ResponseTrait;
+//     public function register(Request $request){
+//         $validator = Validator::make($request->all(), [
+//             'name' => 'required',
+//             'email' => 'required|email|unique:users',
+//             'password' => 'required',
+//         ]);
 
-    public function login(Request $request)
-    {
-        // Check the request if the valid user email
-        $user = User::where('email', $request->email)->first();
+//         if($validator->fails()){
+//             return $this->sendError('Validator Error', $validator->errors());
+//         }
 
-        if (!$user) {
-            return $this->responseError([], 'No user found.');
+//         $input = $request->all();
+//         $input['password'] = Hash::make($input['password']);
+//         $user = User::create($input);
+//         $redirect = Redirect::to("/login");
+//         return $redirect;
+
+//         if ($redirect == true) {
+//             response()->json(["success" => "You have registered succesfully!", "user" => $user, "status" => 200])->throwResponse();
+//         }
+//         else {
+//             return response()->json(["error" => "You have failed to register!", "user" => $user, "status" => 500]);
+//         }
+// }
+
+    public function login(Request $request){
+        if(Auth::attempt(['email' => $request->get('email'), 'password' => $request->password]))
+        {
+             $user = auth()->user();
+             if (auth()->user()->role === 'admin') {
+                $success['token'] = $user->createToken("AuthToken")->accessToken;
+                $token = $success['token'];
+
+                echo "<script type='text/JavaScript'>
+                    window.location = '/home'
+                    alert('You Login Successfully!');
+                    document.write(localStorage.setItem('token', '".$token."'));
+                    </script>";  
+            } 
+
+            else if (auth()->user()->role === 'operator'){
+                $success['token'] = $user->createToken("AuthToken")->accessToken;
+                $token = $success['token'];
+
+                echo "<script type='text/JavaScript'>
+                    window.location = '/home'
+                    alert('You Login Successfully!');
+                    document.write(localStorage.setItem('token', '".$token."'));
+                    </script>";  
+            } 
+
+            else if (auth()->user()->role === 'investor'){
+                $success['token'] = $user->createToken("AuthToken")->accessToken;
+                $token = $success['token'];
+
+                echo "<script type='text/JavaScript'>
+                    window.location = '/home'
+                    alert('You Login Successfully!');
+                    document.write(localStorage.setItem('token', '".$token."'));
+                    </script>";  
+            } 
+
+            else {
+                $success['token'] = $user->createToken("AuthToken")->accessToken;
+                $token = $success['token'];
+
+                echo "<script type='text/JavaScript'>
+                    window.location = '/home'
+                    alert('You Login Successfully!');
+                    document.write(localStorage.setItem('token', '".$token."'));
+                    </script>";  
+            }
+            // $user = auth()->user();
+            // $success['token'] = $user->createToken("AuthToken")->accessToken;
+            // $success['account'] = $user;
+            // $token = $success['token'];
+
+            // echo "<script type='text/JavaScript'>
+            //     window.location = '/home'
+            //     alert('You Login Successfully!');
+            //     document.write(localStorage.setItem('token', '".$token."'));
+            //     </script>";  
         }
-
-        // Check the password
-        if (Hash::check($request->password, $user->password)) {
-            $tokenCreated = $user->createToken('authToken');
-
-            $data = [
-                'user'         => $user,
-                'access_token' => $tokenCreated->accessToken,
-                'token_type'   => 'Bearer',
-                'expires_at'   => Carbon::parse($tokenCreated->token->expires_at)->toDateTimeString()
-            ];
-
-            return $this->responseSuccess($data, 'Logged in successfully.');
+        else {
+            return response()->json(["error" => "You have failed to login!", "user" => $user, "status" => 500]);
         }
     }
+
 
     public function getLogin(){
         return view('user.login');
     }
 
-    public function logout(){
-        Auth::logout();
-        return redirect()->guest('/');
+    // public function getRegister(){
+    //     return view('user.register');
+    // }
+
+    public function logout(Request $request){
+    if ($request->user()) { 
+        echo "<script type='text/JavaScript'>
+               window.location = '/login'
+               alert('You Logout Successfully!');
+               localStorage.removeItem('token');
+              </script>"; 
+    } else{
+        return response()->json(['error' => 'Log Out Failed'], 500);
+        }
     }
 }

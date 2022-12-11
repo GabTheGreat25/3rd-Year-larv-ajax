@@ -1,8 +1,14 @@
 $(document).ready(function () {
     $("#atable").DataTable({
         ajax: {
-            //laman nung html ito basically
             url: "/api/accessories",
+            beforeSend: function (header) {
+                /* Authorization header */
+                header.setRequestHeader(
+                    "Authorization",
+                    "Bearer " + localStorage.getItem("token")
+                );
+            },
             dataSrc: "",
         },
         dom: '<"top"<"left-col"B><"center-col"l><"right-col"f>>rtip',
@@ -63,7 +69,6 @@ $(document).ready(function () {
     });
 
     $("#accessoriesSubmit").on("click", function (e) {
-        // when you click save or create ito
         e.preventDefault();
         var data = $("#aform")[0];
         console.log(data);
@@ -79,6 +84,13 @@ $(document).ready(function () {
             data: formData,
             contentType: false,
             processData: false,
+            beforeSend: function (header) {
+                /* Authorization header */
+                header.setRequestHeader(
+                    "Authorization",
+                    "Bearer " + localStorage.getItem("token")
+                );
+            },
             headers: {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
             },
@@ -97,7 +109,6 @@ $(document).ready(function () {
     });
 
     $("#atable tbody").on("click", "a.deletebtn", function (e) {
-        // pag magbubura ka
         var table = $("#atable").DataTable();
         var id = $(this).data("id");
         var $row = $(this).closest("tr");
@@ -122,6 +133,13 @@ $(document).ready(function () {
                     $.ajax({
                         type: "DELETE",
                         url: `/api/accessories/${id}`,
+                        beforeSend: function (header) {
+                            /* Authorization header */
+                            header.setRequestHeader(
+                                "Authorization",
+                                "Bearer " + localStorage.getItem("token")
+                            );
+                        },
                         headers: {
                             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
                                 "content"
@@ -130,7 +148,6 @@ $(document).ready(function () {
                         dataType: "json",
                         success: function (data) {
                             console.log(data);
-                            // bootbox.alert('success');
                             $row.fadeOut(4000, function () {
                                 table.row($row).remove().draw(false);
                             });
@@ -145,7 +162,6 @@ $(document).ready(function () {
     });
 
     $("#atable tbody").on("click", "a.editBtn", function (e) {
-        // pag mag edit ka pero titignan nya muna if existing ito
         e.preventDefault();
         $("#accessoriesModal").modal("show");
         var id = $(this).data("id");
@@ -157,6 +173,13 @@ $(document).ready(function () {
             contentType: false,
             cache: false,
             url: `/api/accessories/${id}/edit`,
+            beforeSend: function (header) {
+                /* Authorization header */
+                header.setRequestHeader(
+                    "Authorization",
+                    "Bearer " + localStorage.getItem("token")
+                );
+            },
             headers: {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
             },
@@ -175,7 +198,6 @@ $(document).ready(function () {
     });
 
     $("#accessoriesUpdate").on("click", function (e) {
-        //dito na nya uupdate
         e.preventDefault();
         var id = $("#accessories_id").val();
         var data = $("#aform")[0];
@@ -193,6 +215,13 @@ $(document).ready(function () {
             data: formData,
             contentType: false,
             processData: false,
+            beforeSend: function (header) {
+                /* Authorization header */
+                header.setRequestHeader(
+                    "Authorization",
+                    "Bearer " + localStorage.getItem("token")
+                );
+            },
             headers: {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
             },

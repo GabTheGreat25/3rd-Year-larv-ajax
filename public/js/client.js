@@ -1,7 +1,7 @@
 $(document).ready(function () {
-    $("#ctable").DataTable({
+    $("#cltable").DataTable({
         ajax: {
-            url: "/api/camera",
+            url: "/api/client",
             beforeSend: function (header) {
                 /* Authorization header */
                 header.setRequestHeader(
@@ -21,30 +21,31 @@ $(document).ready(function () {
                 extend: "excel",
                 className: "btn btn-success glyphicon glyphicon-list-alt",
             },
-            {
-                text: "Add camera",
-                className: "btn btn-success",
-                action: function (e, dt, node, config) {
-                    $("#cform").trigger("reset");
-                    $("#cameraModal").modal("show");
-                },
-            },
         ],
         columns: [
             {
-                data: "camera_id",
+                data: "client_id",
             },
             {
-                data: "model",
+                data: "full_name",
             },
             {
-                data: "shuttercount",
+                data: "age",
             },
             {
-                data: "quantity",
+                data: "valid_id",
             },
             {
-                data: "costs",
+                data: "billing_address",
+            },
+            {
+                data: "address",
+            },
+            {
+                data: "contact_number",
+            },
+            {
+                data: "email",
             },
             {
                 data: null,
@@ -61,19 +62,21 @@ $(document).ready(function () {
                 render: function (data, type, row) {
                     return (
                         "<a href='#' class='editBtn' id='editbtn' data-id=" +
-                        data.camera_id +
+                        data.client_id +
                         "><i class='fa-solid fa-pen' aria-hidden='true' style='font-size:24px' ></i></a><a href='#' class='deletebtn' data-id=" +
-                        data.camera_id +
-                        "><i class='fa-solid fa-trash-can' style='font-size:24px; color:red; margin-left:15px;'></a></i>"
+                        data.client_id +
+                        "><i class='fa-solid fa-trash-can' style='font-size:24px; color:red; margin-left:15px;'></a></i><a href='#' class='restorebtn' data-id=" +
+                        data.client_id +
+                        "><i class='fa-solid fa-trash-can-arrow-up' style='font-size:24px; color:green; margin-left:15px;'></a></i>"
                     );
                 },
             },
         ],
     });
 
-    $("#cameraSubmit").on("click", function (e) {
+    $("#clientSubmit").on("click", function (e) {
         e.preventDefault();
-        var data = $("#cform")[0];
+        var data = $("#clform")[0];
         console.log(data);
         let formData = new FormData(data);
         console.log(formData);
@@ -83,27 +86,24 @@ $(document).ready(function () {
 
         $.ajax({
             type: "POST",
-            url: "/api/camera",
+            url: "/api/client",
             data: formData,
             contentType: false,
             processData: false,
-            beforeSend: function (header) {
-                /* Authorization header */
-                header.setRequestHeader(
-                    "Authorization",
-                    "Bearer " + localStorage.getItem("token")
-                );
-            },
+            // beforeSend: function (header) {
+            //     /* Authorization header */
+            //     header.setRequestHeader(
+            //         "Authorization",
+            //         "Bearer " + localStorage.getItem("token")
+            //     );
+            // },
             headers: {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
             },
             dataType: "json",
             success: function (data) {
                 console.log(data);
-                $("#cameraModal").modal("hide");
-                var $ctable = $("#ctable").DataTable();
-                $ctable.ajax.reload();
-                $ctable.row.add(data.camera).draw(false);
+                window.location = "/login";
             },
             error: function (error) {
                 console.log(error);
@@ -111,15 +111,59 @@ $(document).ready(function () {
         });
     });
 
-    $("#ctable tbody").on("click", "a.deletebtn", function (e) {
-        var table = $("#ctable").DataTable();
+    $("#cltable tbody").on("click", "a.restorebtn", function (e) {
+        var table = $("#cltable").DataTable();
+        var id = $(this).data("id");
+        console.log(id);
+        e.preventDefault();
+        bootbox.confirm({
+            message: "do you want to restore this client",
+            buttons: {
+                confirm: {
+                    label: "yes",
+                    className: "btn-success",
+                },
+                cancel: {
+                    label: "no",
+                    className: "btn-danger",
+                },
+            },
+            callback: function (result) {
+                console.log(result);
+                if (result)
+                    $.ajax({
+                        type: "PATCH",
+                        url: `/api/client/restore/${id}`,
+                        beforeSend: function (header) {
+                            /* Authorization header */
+                            header.setRequestHeader(
+                                "Authorization",
+                                "Bearer " + localStorage.getItem("token")
+                            );
+                        },
+                        dataType: "json",
+                        success: function (data) {
+                            console.log(data);
+                            table.ajax.reload();
+                            bootbox.alert(data.success);
+                        },
+                        error: function (error) {
+                            console.log(error);
+                        },
+                    });
+            },
+        });
+    });
+
+    $("#cltable tbody").on("click", "a.deletebtn", function (e) {
+        var table = $("#cltable").DataTable();
         var id = $(this).data("id");
         var $row = $(this).closest("tr");
 
         console.log(id);
         e.preventDefault();
         bootbox.confirm({
-            message: "do you want to delete this camera",
+            message: "do you want to delete this client",
             buttons: {
                 confirm: {
                     label: "yes",
@@ -135,7 +179,7 @@ $(document).ready(function () {
                 if (result)
                     $.ajax({
                         type: "DELETE",
-                        url: `/api/camera/${id}`,
+                        url: `/api/client/${id}`,
                         beforeSend: function (header) {
                             /* Authorization header */
                             header.setRequestHeader(
@@ -151,9 +195,7 @@ $(document).ready(function () {
                         dataType: "json",
                         success: function (data) {
                             console.log(data);
-                            $row.fadeOut(4000, function () {
-                                table.row($row).remove().draw(false);
-                            });
+                            table.ajax.reload();
                             bootbox.alert(data.success);
                         },
                         error: function (error) {
@@ -164,9 +206,9 @@ $(document).ready(function () {
         });
     });
 
-    $("#ctable tbody").on("click", "a.editBtn", function (e) {
+    $("#cltable tbody").on("click", "a.editBtn", function (e) {
         e.preventDefault();
-        $("#cameraModal").modal("show");
+        $("#clientModal").modal("show");
         var id = $(this).data("id");
 
         $.ajax({
@@ -175,7 +217,7 @@ $(document).ready(function () {
             processData: false,
             contentType: false,
             cache: false,
-            url: `/api/camera/${id}/edit`,
+            url: `/api/client/${id}/edit`,
             beforeSend: function (header) {
                 /* Authorization header */
                 header.setRequestHeader(
@@ -189,12 +231,13 @@ $(document).ready(function () {
             dataType: "json",
             success: function (data) {
                 console.log(data);
-                $("#camera_id").val(data.camera_id);
-                $("#model").val(data.model);
-                $("#shuttercount").val(data.shuttercount);
-                $("#quantity").val(data.quantity);
-                $("#costs").val(data.costs);
-                $("#image_path").val(data.image_path);
+                $("#client_id").val(data.client_id);
+                $("#full_name").val(data.full_name);
+                $("#age").val(data.age);
+                $("#valid_id").val(data.valid_id);
+                $("#billing_address").val(data.billing_address);
+                $("#address").val(data.address);
+                $("#contact_number").val(data.contact_number);
             },
             error: function (error) {
                 console.log(error);
@@ -202,21 +245,21 @@ $(document).ready(function () {
         });
     });
 
-    $("#cameraUpdate").on("click", function (e) {
+    $("#clientUpdate").on("click", function (e) {
         e.preventDefault();
-        var id = $("#camera_id").val();
-        var data = $("#cform")[0];
+        var id = $("#client_id").val();
+        var data = $("#clform")[0];
         let formData = new FormData(data);
         console.log(formData);
         for (var pair of formData.entries()) {
             console.log(pair[0] + "," + pair[1]);
         }
-        var table = $("#ctable").DataTable();
+        var table = $("#cltable").DataTable();
         console.log(id);
 
         $.ajax({
             type: "POST",
-            url: `/api/camera/post/${id}`,
+            url: `/api/client/post/${id}`,
             data: formData,
             contentType: false,
             processData: false,
@@ -233,7 +276,7 @@ $(document).ready(function () {
             dataType: "json",
             success: function (data) {
                 console.log(data);
-                $("#cameraModal").modal("hide");
+                $("#clientModal").modal("hide");
                 table.ajax.reload();
             },
             error: function (error) {

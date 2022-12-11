@@ -13,38 +13,60 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::post('register-auth', [
+//     'uses' => 'LoginController@register',
+//     'as' => 'user.register',
+// ]);
 
-Route::post('login-test', [
+// Route::get('register', [
+//     'uses' => 'LoginController@getRegister',
+// ]);
+
+Route::redirect('/', 'login');
+
+Route::post('login-auth', [
     'uses' => 'LoginController@login',
     'as' => 'user.login',
-]); 
+]);
 
 Route::get('login', [
     'uses' => 'LoginController@getLogin',
+    'as' => 'login',
 ]);
 
 Route::get('logout',[
     'uses' => 'LoginController@logout',
+    'as' => 'logout',
 ]);
 
-Route::get('/signup', function () {
-    return view('signup');
-});
+Route::view('/home', 'home');
+
+Route::resource('admin', 'adminController');
+Route::view('/admin-index', 'admin.index');
+Route::view('/admin-register', 'admin.register');
 
 Route::resource('operator', 'operatorController');
-route::view('/operator-index', 'operator.index');
-
-Route::resource('accessories', 'accessoriesController');
-route::view('/accessories-index', 'accessories.index');
-
-Route::resource('camera', 'cameraController');
-route::view('/camera-index', 'camera.index');
-
-Route::resource('service', 'serviceController');
-route::view('/service-index', 'service.index');
+Route::view('/operator-index', 'operator.index');
+Route::view('/operator-register', 'operator.register');
 
 Route::resource('investor', 'investorController');
-route::view('/investor-index', 'investor.index');
+Route::view('/investor-index', 'investor.index');
+Route::view('/investor-register', 'investor.register');
+
+Route::resource('client', 'clientController');
+Route::view('/client-index', 'client.index');
+Route::view('/client-register', 'client.register');
+
+Route::resource('service', 'serviceController');
+Route::view('/service-index', 'service.index');
+
+Route::resource('camera', 'cameraController');
+Route::view('/camera-index', 'camera.index');
+
+Route::resource('accessories', 'accessoriesController');
+Route::view('/accessories-index', 'accessories.index');
+
+
+
+
+
