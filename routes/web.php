@@ -41,7 +41,7 @@ Route::get('logout',[
 
 Route::view('/home', 'home');
 
-Route::middleware('auth:api')->group(function () {
+// Route::middleware('auth:api')->group(function () {
 
 Route::resource('admin', 'adminController');
 route::view('/admin-index', 'admin.index');
@@ -67,7 +67,7 @@ route::view('/camera-index', 'camera.index');
 
 Route::resource('accessories', 'accessoriesController');
 route::view('/accessories-index', 'accessories.index');
-});
+// });
 
 
 
