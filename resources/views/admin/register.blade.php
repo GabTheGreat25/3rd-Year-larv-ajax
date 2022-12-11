@@ -44,8 +44,8 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="js/admin.js"></script>
     <style>
-        body {
-            overflow: hidden;
+        .container {
+            margin-top: 6rem;
         }
     </style>
 </head>
