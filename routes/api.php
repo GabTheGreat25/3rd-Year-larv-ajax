@@ -36,7 +36,12 @@ Route::get('logout',[
     'uses' => 'LoginController@logout',
 ]);
 
-// Route::middleware('auth:api')->group(function () {
+Route::middleware('auth:api')->group(function () {
+
+    Route::get('/', function () {
+    return view('welcome');
+    });
+
 Route::view('/admin-index', 'admin.index');
 Route::view('/admin-register', 'admin.register');
 Route::get('/admin/all',['uses' => 'adminController@getadminAll','as' => 'admin.getadminall'] );
@@ -86,6 +91,6 @@ Route::get('/accessories/all',['uses' => 'accessoriesController@getaccessoriesAl
 Route::resource('accessories', 'accessoriesController');
 Route::post('accessories/post/{id}','accessoriesController@update');
 Route::patch('/accessories/restore/{id}', 'accessoriesController@restore');
-// });
+});
 
 
