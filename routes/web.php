@@ -22,7 +22,6 @@ use Illuminate\Support\Facades\Route;
 //     'uses' => 'LoginController@getRegister',
 // ]);
 
-
 Route::redirect('/', 'login');
 
 Route::post('login-auth', [
@@ -40,7 +39,10 @@ Route::get('logout',[
     'as' => 'logout',
 ]);
 
+Route::view('/home', 'home');
+
 Route::middleware('auth:api')->group(function () {
+
 Route::resource('admin', 'adminController');
 route::view('/admin-index', 'admin.index');
 route::view('/admin-register', 'admin.register');
