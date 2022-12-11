@@ -49,7 +49,7 @@ Route::view('/operator-register', 'operator.register');
 Route::get('/operator/all',['uses' => 'operatorController@getoperator','as' => 'operator.getoperatorall'] );
 Route::resource('operator', 'operatorController');
 Route::post('operator/post/{id}','operatorController@update');
-Route::patch('/admin/restore/{id}', 'adminController@restore');
+Route::patch('/operator/restore/{id}', 'operatorController@restore');
 
 route::view('/investor-index', 'investor.index');
 Route::view('/investor-register', 'investor.register');
