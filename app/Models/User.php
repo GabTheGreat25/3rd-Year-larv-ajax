@@ -51,4 +51,16 @@ class User extends Authenticatable
     public function admins() {
         return $this->hasOne('App\Models\admin','user_id','id')->withTrashed();
     }
+
+    public function operators() {
+        return $this->hasOne('App\Models\operator','user_id','id')->withTrashed();
+    }
+
+    public function clients() {
+        return $this->hasOne('App\Models\client','user_id','id')->withTrashed();
+    }
+
+    public function investors() {
+        return $this->hasOne('App\Models\investor','user_id','id')->withTrashed();
+    }
 }

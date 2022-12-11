@@ -1,8 +1,14 @@
 $(document).ready(function () {
     $("#adtable").DataTable({
         ajax: {
-            //laman nung html ito basically
             url: "/api/admin",
+            beforeSend: function (header) {
+                /* Authorization header */
+                header.setRequestHeader(
+                    "Authorization",
+                    "Bearer " + localStorage.getItem("token")
+                );
+            },
             dataSrc: "",
         },
         dom: '<"top"<"left-col"B><"center-col"l><"right-col"f>>rtip',
@@ -15,14 +21,6 @@ $(document).ready(function () {
                 extend: "excel",
                 className: "btn btn-success glyphicon glyphicon-list-alt",
             },
-            // {
-            //     text: "Add Admin",
-            //     className: "btn btn-success",
-            //     action: function (e, dt, node, config) {
-            //         $("#adform").trigger("reset");
-            //         $("#adminModal").modal("show");
-            //     },
-            // },
         ],
         columns: [
             {
@@ -80,16 +78,19 @@ $(document).ready(function () {
             data: formData,
             contentType: false,
             processData: false,
+            beforeSend: function (header) {
+                /* Authorization header */
+                header.setRequestHeader(
+                    "Authorization",
+                    "Bearer " + localStorage.getItem("token")
+                );
+            },
             headers: {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
             },
             dataType: "json",
             success: function (data) {
                 console.log(data);
-                // $("#adminModal").modal("hide");
-                // var $adtable = $("#adtable").DataTable();
-                // $adtable.ajax.reload();
-                // $adtable.row.add(data.admin).draw(false);
                 window.location = "/login";
             },
             error: function (error) {
@@ -121,13 +122,16 @@ $(document).ready(function () {
                     $.ajax({
                         type: "PATCH",
                         url: `/api/admin/restore/${id}`,
+                        beforeSend: function (header) {
+                            /* Authorization header */
+                            header.setRequestHeader(
+                                "Authorization",
+                                "Bearer " + localStorage.getItem("token")
+                            );
+                        },
                         dataType: "json",
                         success: function (data) {
                             console.log(data);
-                            // bootbox.alert('success');
-                            // $row.fadeOut(4000, function () {
-                            //     table.row($row).remove().draw(false);
-                            // });
                             table.ajax.reload();
                             bootbox.alert(data.success);
                         },
@@ -164,6 +168,13 @@ $(document).ready(function () {
                     $.ajax({
                         type: "DELETE",
                         url: `/api/admin/${id}`,
+                        beforeSend: function (header) {
+                            /* Authorization header */
+                            header.setRequestHeader(
+                                "Authorization",
+                                "Bearer " + localStorage.getItem("token")
+                            );
+                        },
                         headers: {
                             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
                                 "content"
@@ -172,10 +183,6 @@ $(document).ready(function () {
                         dataType: "json",
                         success: function (data) {
                             console.log(data);
-                            // bootbox.alert('success');
-                            // $row.fadeOut(4000, function () {
-                            //     table.row($row).remove().draw(false);
-                            // });
                             table.ajax.reload();
                             bootbox.alert(data.success);
                         },
@@ -199,6 +206,13 @@ $(document).ready(function () {
             contentType: false,
             cache: false,
             url: `/api/admin/${id}/edit`,
+            beforeSend: function (header) {
+                /* Authorization header */
+                header.setRequestHeader(
+                    "Authorization",
+                    "Bearer " + localStorage.getItem("token")
+                );
+            },
             headers: {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
             },
@@ -208,8 +222,6 @@ $(document).ready(function () {
                 $("#admin_id").val(data.admin_id);
                 $("#full_name").val(data.full_name);
                 $("#age").val(data.age);
-                // $("#user_id").val(data.user_id);
-                // dito kasama foreign key kasi diba normal lang siya iinput explain ko na yan sa controller
             },
             error: function (error) {
                 console.log(error);
@@ -235,6 +247,13 @@ $(document).ready(function () {
             data: formData,
             contentType: false,
             processData: false,
+            beforeSend: function (header) {
+                /* Authorization header */
+                header.setRequestHeader(
+                    "Authorization",
+                    "Bearer " + localStorage.getItem("token")
+                );
+            },
             headers: {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
             },

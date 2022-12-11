@@ -25,7 +25,7 @@ class operator extends Model
         'deleted_at'
     ];
 
-    public function services() {
-        return $this->hasMany('App\Models\service');
+    public function users() {
+        return $this->belongsTo('App\Models\User','user_id','id')->withTrashed();
     }
 }

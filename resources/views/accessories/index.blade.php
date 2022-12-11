@@ -21,7 +21,7 @@
     }
 </style>
 
-<div class="container">{{-- all ajax is ID based remeber this --}}
+<div class="container">
     <table id="atable" class="table table-striped table-hover">
         <thead>
             <tr>
@@ -47,13 +47,9 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div style="padding: 0 2rem;">
-                <form id="aform" action="#" method="#" enctype="multipart/form-data"> {{-- just change the table form
-                    body ng isang letter base dun sa umpisa gaya dito accessories kaya o --}}
+                <form id="aform" action="#" method="#" enctype="multipart/form-data">
                     <div class="form-group">
                         <input type="hidden" class="form-control" id="accessories_id" name="accessories_id">
-                        {{-- tapos ito accessories id ito primary key taz sa baba mga name contact number yung iba laman
-                        ng
-                        table same dapat yan ah yun lang --}}
                     </div>
                     <div class="form-group">
                         <label for="description" class="control-label">Description</label>
@@ -68,8 +64,7 @@
                         <input type="text" class="form-control" id="costs" name="costs">
                     </div>
                     <div class="form-group">
-                        <label for="uploads" class="control-label">accessories Image</label> {{-- uploads name nito kasi
-                        yun name nya sa controller --}}
+                        <label for="uploads" class="control-label">accessories Image</label>
                         <input type="file" class="form-control" id="uploads" name="uploads">
                     </div>
                 </form>
@@ -80,7 +75,6 @@
                 <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
                 <button id="accessoriesSubmit" type="submit" class="btn btn-primary">Save</button>
                 <button id="accessoriesUpdate" type="submit" class="btn btn-info">Update</button>
-                {{-- id base den toh magkaiba yan ginagawa ah --}}
             </div>
         </div>
     </div>

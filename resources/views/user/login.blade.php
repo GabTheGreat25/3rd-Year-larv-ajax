@@ -43,7 +43,6 @@
               <input
                 class="w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
                 id="password" name="password" type="password" placeholder="******************" />
-              {{-- <p class="text-xs italic text-red-500">Please choose a password.</p> --}}
             </div>
             <div class="mb-4">
               <input class="mr-2 leading-tight" type="checkbox" id="checkbox_id" />
@@ -65,12 +64,6 @@
                 Create an Account!
               </a>
             </div>
-            {{-- <div class="text-center">
-              <a class="inline-block text-sm text-red-500 align-baseline hover:text-blue-800"
-                href="./forgot-password.html">
-                Forgot Password?
-              </a>
-            </div> --}}
           </form>
         </div>
       </div>

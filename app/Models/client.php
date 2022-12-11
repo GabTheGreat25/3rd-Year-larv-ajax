@@ -26,4 +26,8 @@ class client extends Model
         "user_id",
         'deleted_at'
     ];
+
+    public function users() {
+        return $this->belongsTo('App\Models\User','user_id','id')->withTrashed();
+    }
 }

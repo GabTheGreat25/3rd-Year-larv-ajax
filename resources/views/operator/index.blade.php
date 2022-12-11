@@ -21,7 +21,7 @@
     }
 </style>
 
-<div class="container">{{-- all ajax is ID based remeber this --}}
+<div class="container">
     <table id="otable" class="table table-striped table-hover">
         <thead>
             <tr>
@@ -48,12 +48,9 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div style="padding: 0 2rem;">
-                <form id="oform" action="#" method="#" enctype="multipart/form-data"> {{-- just change the table form
-                    body ng isang letter base dun sa umpisa gaya dito operator kaya o --}}
+                <form id="oform" action="#" method="#" enctype="multipart/form-data">
                     <div class="form-group">
                         <input type="hidden" class="form-control" id="operator_id" name="operator_id">
-                        {{-- tapos ito operator id ito primary key taz sa baba mga name contact number yung iba laman ng
-                        table same dapat yan ah yun lang --}}
                     </div>
                     <div class="form-group">
                         <label for="full_name" class="control-label">Full Name</label>
@@ -72,8 +69,7 @@
                         <input type="text" class="form-control" id="address" name="address">
                     </div>
                     <div class="form-group">
-                        <label for="uploads" class="control-label">Operator Image</label> {{-- uploads name nito kasi
-                        yun name nya sa controller --}}
+                        <label for="uploads" class="control-label">Operator Image</label>
                         <input type="file" class="form-control" id="uploads" name="uploads">
                     </div>
                 </form>
@@ -84,7 +80,6 @@
                 <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
                 <button id="operatorSubmit" type="submit" class="btn btn-primary">Save</button>
                 <button id="operatorUpdate" type="submit" class="btn btn-info">Update</button>
-                {{-- id base den toh magkaiba yan ginagawa ah --}}
             </div>
         </div>
     </div>

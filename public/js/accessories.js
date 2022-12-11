@@ -1,7 +1,6 @@
 $(document).ready(function () {
     $("#atable").DataTable({
         ajax: {
-            //laman nung html ito basically
             url: "/api/accessories",
             dataSrc: "",
         },
@@ -63,7 +62,6 @@ $(document).ready(function () {
     });
 
     $("#accessoriesSubmit").on("click", function (e) {
-        // when you click save or create ito
         e.preventDefault();
         var data = $("#aform")[0];
         console.log(data);
@@ -97,7 +95,6 @@ $(document).ready(function () {
     });
 
     $("#atable tbody").on("click", "a.deletebtn", function (e) {
-        // pag magbubura ka
         var table = $("#atable").DataTable();
         var id = $(this).data("id");
         var $row = $(this).closest("tr");
@@ -130,7 +127,6 @@ $(document).ready(function () {
                         dataType: "json",
                         success: function (data) {
                             console.log(data);
-                            // bootbox.alert('success');
                             $row.fadeOut(4000, function () {
                                 table.row($row).remove().draw(false);
                             });
@@ -145,7 +141,6 @@ $(document).ready(function () {
     });
 
     $("#atable tbody").on("click", "a.editBtn", function (e) {
-        // pag mag edit ka pero titignan nya muna if existing ito
         e.preventDefault();
         $("#accessoriesModal").modal("show");
         var id = $(this).data("id");
@@ -175,7 +170,6 @@ $(document).ready(function () {
     });
 
     $("#accessoriesUpdate").on("click", function (e) {
-        //dito na nya uupdate
         e.preventDefault();
         var id = $("#accessories_id").val();
         var data = $("#aform")[0];

@@ -1,7 +1,6 @@
 $(document).ready(function () {
     $("#intable").DataTable({
         ajax: {
-            //laman nung html ito basically
             url: "/api/investor",
             dataSrc: "",
         },
@@ -37,12 +36,6 @@ $(document).ready(function () {
             {
                 data: "contact_number",
             },
-            // {
-            //   data: 'email',
-            // },
-            // {
-            //   data: 'password',
-            // },
             {
                 data: null,
                 render: function (data, type, JsonResultRow, row) {
@@ -69,7 +62,6 @@ $(document).ready(function () {
     });
 
     $("#investorSubmit").on("click", function (e) {
-        // when you click save or create ito
         e.preventDefault();
         var data = $("#iform")[0];
         console.log(data);
@@ -103,7 +95,6 @@ $(document).ready(function () {
     });
 
     $("#intable tbody").on("click", "a.deletebtn", function (e) {
-        // pag magbubura ka
         var table = $("#intable").DataTable();
         var id = $(this).data("id");
         var $row = $(this).closest("tr");
@@ -136,7 +127,6 @@ $(document).ready(function () {
                         dataType: "json",
                         success: function (data) {
                             console.log(data);
-                            // bootbox.alert('success');
                             $row.fadeOut(4000, function () {
                                 table.row($row).remove().draw(false);
                             });
@@ -151,7 +141,6 @@ $(document).ready(function () {
     });
 
     $("#intable tbody").on("click", "a.editBtn", function (e) {
-        // pag mag edit ka pero titignan nya muna if existing ito
         e.preventDefault();
         $("#investorModal").modal("show");
         var id = $(this).data("id");
@@ -173,8 +162,6 @@ $(document).ready(function () {
                 $("#full_name").val(data.full_name);
                 $("#age").val(data.age);
                 $("#contact_number").val(data.contact_number);
-                // $("#email").val(data.email);
-                // $("#password").val(data.password);
             },
             error: function (error) {
                 console.log(error);
@@ -183,7 +170,6 @@ $(document).ready(function () {
     });
 
     $("#investorUpdate").on("click", function (e) {
-        //dito na nya uupdate
         e.preventDefault();
         var id = $("#investor_id").val();
         var data = $("#iform")[0];

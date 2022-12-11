@@ -107,7 +107,6 @@ class adminController extends Controller
         $admin = admin::find($id);
         $admin->full_name = $request->full_name;
         $admin->age = $request->age;
-        // $admin->user_id = $request->user_id;
 
         $files = $request->file('uploads');
         $admin->image_path = 'images/'.$files->getClientOriginalName();
@@ -127,11 +126,6 @@ class adminController extends Controller
         $admin = admin::with('users')->find($id);
         $admin->users()->delete();
         $admin = admin::findOrFail($id);
-
-        // if (File::exists("storage/" . $admin->image_path)) {
-        //     File::delete("storage/" . $admin->image_path);
-        // }
-
         $admin->delete();
 
         $data = array('success' => 'deleted', 'code' => '200');

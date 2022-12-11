@@ -18,13 +18,13 @@ class cameraController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   //basic get all 
+    {  
         $camera = camera::orderBy('camera_id', 'DESC')->get();
         return response()->json($camera);
     }
 
     public function getCameraAll()
-    {   //get the view in resource
+    {   
         return view('camera.index');
     }
 
@@ -45,7 +45,7 @@ class cameraController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {   //basic create with image save in public storage
+    {   
         $camera = new camera;
         $camera->model = $request->model;
         $camera->shuttercount = $request->shuttercount;
@@ -77,7 +77,7 @@ class cameraController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {   //find existing data returning to json
+    {  
         $camera = camera::find($id);
         return response()->json($camera);
     }
@@ -90,7 +90,7 @@ class cameraController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {   //copy paste store just change new as find to override it
+    {  
         $camera = camera::find($id);
         $camera->model = $request->model;
         $camera->shuttercount = $request->shuttercount;
@@ -111,7 +111,7 @@ class cameraController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {   //delete with image
+    {   
         $camera = camera::findOrFail($id);
 
         if (File::exists("storage/" . $camera->image_path)) {

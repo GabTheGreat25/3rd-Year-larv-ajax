@@ -21,13 +21,13 @@ class accessoriesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   //basic get all 
+    {   
         $accessories = accessories::orderBy('accessories_id', 'DESC')->get();
         return response()->json($accessories);
     }
 
     public function getAccessoriesAll()
-    {   //get the view in resource
+    {   
         return view('accessories.index');
     }
 
@@ -48,7 +48,7 @@ class accessoriesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {   //basic create with image save in public storage
+    {  
         $accessories = new accessories;
         $accessories->description = $request->description;
         $accessories->quantity = $request->quantity;
@@ -79,7 +79,7 @@ class accessoriesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {   //find existing data returning to json
+    {   
         $accessories = accessories::find($id);
         return response()->json($accessories);
     }
@@ -92,7 +92,7 @@ class accessoriesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {   //copy paste store just change new as find to override it
+    {   
         $accessories = accessories::find($id);
         $accessories->description = $request->description;
         $accessories->quantity = $request->quantity;
@@ -112,7 +112,7 @@ class accessoriesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {   //delete with image
+    {  
         $accessories = accessories::findOrFail($id);
 
         if (File::exists("storage/" . $accessories->image_path)) {
