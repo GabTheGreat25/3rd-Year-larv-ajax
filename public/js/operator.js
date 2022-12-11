@@ -81,13 +81,13 @@ $(document).ready(function () {
             data: formData,
             contentType: false,
             processData: false,
-            beforeSend: function (header) {
-                /* Authorization header */
-                header.setRequestHeader(
-                    "Authorization",
-                    "Bearer " + localStorage.getItem("token")
-                );
-            },
+            // beforeSend: function (header) {
+            //     /* Authorization header */
+            //     header.setRequestHeader(
+            //         "Authorization",
+            //         "Bearer " + localStorage.getItem("token")
+            //     );
+            // },
             headers: {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
             },
@@ -189,9 +189,7 @@ $(document).ready(function () {
                         dataType: "json",
                         success: function (data) {
                             console.log(data);
-                            $row.fadeOut(4000, function () {
-                                table.row($row).remove().draw(false);
-                            });
+                            table.ajax.reload();
                             bootbox.alert(data.success);
                         },
                         error: function (error) {

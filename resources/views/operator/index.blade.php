@@ -44,7 +44,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Create new Operator</h4>
+                <h4 class="modal-title">Update Operator Information</h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div style="padding: 0 2rem;">
@@ -78,7 +78,6 @@
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
-                <button id="operatorSubmit" type="submit" class="btn btn-primary">Save</button>
                 <button id="operatorUpdate" type="submit" class="btn btn-info">Update</button>
             </div>
         </div>

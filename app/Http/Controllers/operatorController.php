@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\operator;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Hash;
 
 class operatorController extends Controller
 {
@@ -125,8 +127,8 @@ class operatorController extends Controller
      */
     public function destroy($id)
     {   
-        $operator = operator::with('operators')->find($id);
-        $operator->operators()->delete();
+        $operator = operator::with('users')->find($id);
+        $operator->users()->delete();
         $operator = operator::findOrFail($id);
         $operator->delete();
 
@@ -139,8 +141,8 @@ class operatorController extends Controller
       $operator = operator::onlyTrashed()->find($id);
       $operator->restore();
 
-      $operatorr = operator::with('operators')->find($id);
-      $operatorr->operators()->restore();
+      $operatorr = operator::with('users')->find($id);
+      $operatorr->users()->restore();
 
       $data = array('success' => 'restored', 'code' => '200');
       return response()->json($data);
