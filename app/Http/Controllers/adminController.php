@@ -110,7 +110,7 @@ class adminController extends Controller
 
         $files = $request->file('uploads');
         $admin->image_path = 'images/'.$files->getClientOriginalName();
-        $admin->save();
+        $admin->update();
         Storage::put('/public/images/'.$files->getClientOriginalName(),file_get_contents($files));
         return response()->json(["success" => "Admin Updated Successfully.", "admin" => $admin, "status" => 200]);
     }
