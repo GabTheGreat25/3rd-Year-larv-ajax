@@ -22,9 +22,6 @@ use Illuminate\Support\Facades\Route;
 //     'uses' => 'LoginController@getRegister',
 // ]);
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
 
 Route::redirect('/', 'login');
 
@@ -43,6 +40,7 @@ Route::get('logout',[
     'as' => 'logout',
 ]);
 
+Route::middleware('auth:api')->group(function () {
 Route::resource('admin', 'adminController');
 route::view('/admin-index', 'admin.index');
 route::view('/admin-register', 'admin.register');
@@ -67,7 +65,7 @@ route::view('/camera-index', 'camera.index');
 
 Route::resource('accessories', 'accessoriesController');
 route::view('/accessories-index', 'accessories.index');
-
+});
 
 
 
