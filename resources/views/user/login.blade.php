@@ -57,6 +57,11 @@
                 Sign In
               </button>
             </div>
+            <div class="mb-6">
+              <a href="#" class="w-full px-8" type="submit">
+                <img src="../storage/images/facebook.png" alt="tite">
+              </a>
+            </div>
             <hr class="mb-6 border-t" />
             <div class="text-center">
               <a class="inline-block text-sm text-red-500 align-baseline hover:text-blue-800"
