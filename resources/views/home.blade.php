@@ -10,6 +10,11 @@
     crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="./style.css" />
   <title>RedFrame Camera Rentals</title>
+  <style>
+    body {
+      overflow-x: hidden;
+    }
+  </style>
 </head>
 
 <body class="font-Poppins">
@@ -19,9 +24,21 @@
         <img src="./imgs/logo-main-dark-transparent.png" alt="" />
       </div>
       <ul class="hidden sm:flex flex-1 justify-end items-center gap-12 text-bookmark-blue uppercase text-xs">
-        <li class="cursor-pointer">Services / Transactions</li>
-        <li class="cursor-pointer">Pricings</li>
-        <li class="cursor-pointer">Contacts</li>
+        <a href="admin-index">
+          <li class="cursor-pointer">Admin Index</li>
+        </a>
+        <a href="operator-index">
+          <li class="cursor-pointer">Operator Index</li>
+        </a>
+        <a href="investor-index">
+          <li class="cursor-pointer">Investor Index</li>
+        </a>
+        <a href="client-index">
+          <li class="cursor-pointer">Client Index</li>
+        </a>
+        <a href="#">
+          <li class="cursor-pointer">Rate Our Operator</li>
+        </a>
         {{-- <div>
           <a href="{{ url('/login') }}">
             <button type="button" class="bg-bookmark-red text-white rounded-md px-7 py-3 uppercase">
