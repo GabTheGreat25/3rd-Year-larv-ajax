@@ -51,30 +51,36 @@ class LoginController extends Controller
                  document.write(localStorage.setItem('token', '".$token."'));
                  </script>";
 
-            return $session;
+             return $session;
 
              if (auth()->user()->role === 'admin') {
-                response()->json(["success" => "You have successfully log in!", "user" => $user, "status" => 200])->throwResponse();
+                response()->json(["success" => "You have successfully log in!",
+                "user" => $user, "status" => 200])->throwResponse();
             } 
 
-            else if (auth()->user()->role === 'operator'){
-                response()->json(["success" => "You have successfully log in!", "user" => $user, "status" => 200])->throwResponse();
+             else if (auth()->user()->role === 'operator'){
+                response()->json(["success" => "You have successfully log in!",
+                "user" => $user, "status" => 200])->throwResponse();
             } 
 
-            else if (auth()->user()->role === 'investor'){
-                response()->json(["success" => "You have successfully log in!", "user" => $user, "status" => 200])->throwResponse();
+             else if (auth()->user()->role === 'investor'){
+                response()->json(["success" => "You have successfully log in!",
+                "user" => $user, "status" => 200])->throwResponse();
             } 
 
-            else if (auth()->user()->role === 'client'){
-                response()->json(["success" => "You have successfully log in!", "user" => $user, "status" => 200])->throwResponse();
+             else if (auth()->user()->role === 'client'){
+                response()->json(["success" => "You have successfully log in!",
+                "user" => $user, "status" => 200])->throwResponse();
             } 
         
-            else {
-                 response()->json(["error" => "You have failed to login!", "status" => 500])->throwResponse();;
+             else {
+                 response()->json(["error" => "You have failed to login!",
+                 "status" => 500])->throwResponse();;
             }
         }
         else {
-            return response()->json(["error" => "You have failed to login!", "status" => 500]);
+            return response()->json(["error" => "You have failed to login!",
+            "status" => 500]);
         }
     }
 
