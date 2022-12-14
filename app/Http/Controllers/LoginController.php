@@ -43,62 +43,38 @@ class LoginController extends Controller
         if(Auth::attempt(['email' => $request->get('email'), 'password' => $request->password]))
         {
              $user = auth()->user();
-             if (auth()->user()->role === 'admin') {
-                $success['token'] = $user->createToken("AuthToken")->accessToken;
-                $token = $success['token'];
+             $success['token'] = $user->createToken("AuthToken")->accessToken;
+             $token = $success['token'];
+ 
+             $session = "<script type='text/JavaScript'>
+                 window.location = '/home'
+                 document.write(localStorage.setItem('token', '".$token."'));
+                 </script>";
 
-                echo "<script type='text/JavaScript'>
-                    window.location = '/home'
-                    alert('You Login Successfully!');
-                    document.write(localStorage.setItem('token', '".$token."'));
-                    </script>";  
+            return $session;
+
+             if (auth()->user()->role === 'admin') {
+                response()->json(["success" => "You have successfully log in!", "user" => $user, "status" => 200])->throwResponse();
             } 
 
             else if (auth()->user()->role === 'operator'){
-                $success['token'] = $user->createToken("AuthToken")->accessToken;
-                $token = $success['token'];
-
-                echo "<script type='text/JavaScript'>
-                    window.location = '/home'
-                    alert('You Login Successfully!');
-                    document.write(localStorage.setItem('token', '".$token."'));
-                    </script>";  
+                response()->json(["success" => "You have successfully log in!", "user" => $user, "status" => 200])->throwResponse();
             } 
 
             else if (auth()->user()->role === 'investor'){
-                $success['token'] = $user->createToken("AuthToken")->accessToken;
-                $token = $success['token'];
-
-                echo "<script type='text/JavaScript'>
-                    window.location = '/home'
-                    alert('You Login Successfully!');
-                    document.write(localStorage.setItem('token', '".$token."'));
-                    </script>";  
+                response()->json(["success" => "You have successfully log in!", "user" => $user, "status" => 200])->throwResponse();
             } 
 
+            else if (auth()->user()->role === 'client'){
+                response()->json(["success" => "You have successfully log in!", "user" => $user, "status" => 200])->throwResponse();
+            } 
+        
             else {
-                $success['token'] = $user->createToken("AuthToken")->accessToken;
-                $token = $success['token'];
-
-                echo "<script type='text/JavaScript'>
-                    window.location = '/home'
-                    alert('You Login Successfully!');
-                    document.write(localStorage.setItem('token', '".$token."'));
-                    </script>";  
+                 response()->json(["error" => "You have failed to login!", "status" => 500])->throwResponse();;
             }
-            // $user = auth()->user();
-            // $success['token'] = $user->createToken("AuthToken")->accessToken;
-            // $success['account'] = $user;
-            // $token = $success['token'];
-
-            // echo "<script type='text/JavaScript'>
-            //     window.location = '/home'
-            //     alert('You Login Successfully!');
-            //     document.write(localStorage.setItem('token', '".$token."'));
-            //     </script>";  
         }
         else {
-            return response()->json(["error" => "You have failed to login!", "user" => $user, "status" => 500]);
+            return response()->json(["error" => "You have failed to login!", "status" => 500]);
         }
     }
 
