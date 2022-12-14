@@ -28,6 +28,19 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('guest')->group(function () {
     Route::redirect('/', 'login');
 
+    Route::resource('comment', 'commentController');
+
+    Route::get('/comment/viewComment/{id}',[
+    'uses' => 'commentController@show',
+    'as' => 'comment.viewComment'
+    ]);
+
+    Route::post('/comment/updateComment/{id}', [
+    'uses' => 'commentController@update',
+    'as' => 'comment.updateComment',
+    ]);
+
+
     Route::post('login-auth', [
     'uses' => 'LoginController@login',
     'as' => 'user.login',

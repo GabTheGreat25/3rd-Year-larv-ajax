@@ -41,6 +41,18 @@ Route::get('logout',[
 
 Route::view('/home', 'home');
 
+Route::resource('comment', 'commentController');
+
+Route::get('/comment/viewComment/{id}',[
+    'uses' => 'commentController@show',
+    'as' => 'comment.viewComment'
+]);
+
+Route::post('/comment/updateComment/{id}', [
+    'uses' => 'commentController@update',
+    'as' => 'comment.updateComment',
+]);
+
 Route::resource('admin', 'adminController');
 Route::view('/admin-index', 'admin.index');
 Route::view('/admin-register', 'admin.register');
