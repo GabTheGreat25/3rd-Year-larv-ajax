@@ -36,7 +36,7 @@
         <a href="client-index">
           <li class="cursor-pointer">Client Index</li>
         </a>
-        <a href="#">
+        <a href="{{route('comment.index')}}">
           <li class="cursor-pointer">Rate Our Operator</li>
         </a>
         {{-- <div>
