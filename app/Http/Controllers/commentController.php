@@ -3,6 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\operator;
+use App\Models\comment;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Validator;
 
 class commentController extends Controller
 {
@@ -13,7 +19,8 @@ class commentController extends Controller
      */
     public function index()
     {
-        //
+        $operators = operator::all();
+        return View::make('comment.index',compact('operators'));
     }
 
     /**
@@ -43,9 +50,18 @@ class commentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function show($id)
     {
-        //
+        $operator = operator::find($id);
+        $operatorr = DB::table('operator')
+        ->rightJoin('comment','comment.operator_id','operator.operator_id')
+        ->select('comment.comment_id', 'comment.username','comment.contact_number','comment.comments', 'comment.ratings', 'comment.operator_id', 'operator.image_path')
+        ->where('comment.comment_id', $id)
+        ->orderBy('comment.comment_id','DESC')
+        ->get();
+   
+        return View::make('comment.show',compact('operator','operatorr'));
     }
 
     /**
@@ -68,7 +84,21 @@ class commentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+            $request->validate([
+                'username'=>'required',
+                'contact_number'=>'required',
+                'comments'=>'required|profanity',
+                'ratings'=>'required',
+            ]);
+
+            $comments = new comment;
+            $comments->operator_id = $id;
+            $comments->username = $request->username;
+            $comments->contact_number = $request->contact_number;
+            $comments->comments = $request->comments;
+            $comments->ratings = $request->ratings;
+            $comments->save();
+            return redirect()->back();  
     }
 
     /**
