@@ -22,7 +22,7 @@
         <li class="cursor-pointer">Services / Transactions</li>
         <li class="cursor-pointer">Pricings</li>
         <li class="cursor-pointer">Contacts</li>
-        <div>
+        {{-- <div>
           <a href="{{ url('/login') }}">
             <button type="button" class="bg-bookmark-red text-white rounded-md px-7 py-3 uppercase">
 
@@ -35,7 +35,7 @@
               Sign Up
             </button>
           </a>
-        </div>
+        </div> --}}
       </ul>
       <div class="flex sm:hidden flex-1 justify-end">
         <i class="text-2xl fas fa-bars"></i>
