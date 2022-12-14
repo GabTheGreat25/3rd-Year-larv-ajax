@@ -63,10 +63,27 @@
               </a>
             </div>
             <hr class="mb-6 border-t" />
-            <div class="text-center">
+            <div class="text-center"
+              style="display: grid; grid-template-columns: 1fr 1fr; grid-template rows: 1fr 1fr; gap:.75rem;">
               <a class="inline-block text-sm text-red-500 align-baseline hover:text-blue-800"
-                href="{{ url('/register') }}">
-                Create an Account!
+                style="border: 1px solid red; padding: .5rem .25rem; border-radius: .5rem;"
+                href="{{ url('/admin-register') }}">
+                Create an Admin!
+              </a>
+              <a class="inline-block text-sm text-red-500 align-baseline hover:text-blue-800" \
+                style="border: 1px solid red; padding: .5rem .25rem; border-radius: .5rem;"
+                href="{{ url('/investor-register') }}">
+                Create an Investor!
+              </a>
+              <a class="inline-block text-sm text-red-500 align-baseline hover:text-blue-800" \
+                style="border: 1px solid red; padding: .5rem .25rem; border-radius: .5rem;"
+                href="{{ url('/operator-register') }}">
+                Create an Operator!
+              </a>
+              <a class="inline-block text-sm text-red-500 align-baseline hover:text-blue-800" \
+                style="border: 1px solid red; padding: .5rem .25rem; border-radius: .5rem;"
+                href="{{ url('/client-register') }}">
+                Create an Client!
               </a>
             </div>
           </form>
