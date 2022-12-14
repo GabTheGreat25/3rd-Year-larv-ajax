@@ -56,7 +56,7 @@ class serviceController extends Controller
 
         $files = $request->file('uploads');
         $service->image_path = 'images/'.$files->getClientOriginalName();
-        $service->update();
+        $service->save();
         Storage::put('/public/images/'.$files->getClientOriginalName(),file_get_contents($files));
         return response()->json(["success" => "Service Created Successfully.", "service" => $service, "status" => 200]);
     }

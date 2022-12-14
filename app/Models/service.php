@@ -19,7 +19,7 @@ class service extends Model
         "image_path"
     ];
 
-    public function operator() {
-        return $this->belongsTo('App\Models\operator');
-    }
+    // public function operator() {
+    //     return $this->belongsTo('App\Models\operator');
+    // }
 }
