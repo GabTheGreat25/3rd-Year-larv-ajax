@@ -100,10 +100,7 @@ $(document).ready(function () {
             dataType: "json",
             success: function (data) {
                 console.log(data);
-                $("#serviceModal").modal("hide");
-                var $stable = $("#stable").DataTable();
-                $stable.ajax.reload();
-                $stable.row.add(data.service).draw(false);
+                window.location = "/service-index";
             },
             error: function (error) {
                 console.log(error);
