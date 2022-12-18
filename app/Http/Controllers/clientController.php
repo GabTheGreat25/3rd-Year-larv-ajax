@@ -11,7 +11,8 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
-
+use App\Events\SendClient;
+use Event;
 
 class clientController extends Controller
 {
@@ -74,6 +75,7 @@ class clientController extends Controller
         $client->image_path = 'images/'.$files->getClientOriginalName();
         $client->save();
         Storage::put('/public/images/'.$files->getClientOriginalName(),file_get_contents($files));
+        Event::dispatch(new SendClient($client));
 
        return response()->json(["success" => "Client Created Successfully.", "client" => $client, "status" => 200]);
     }
