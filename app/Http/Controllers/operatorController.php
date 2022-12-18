@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
+use App\Events\SendOperator;
+use Event;
 
 class operatorController extends Controller
 {
@@ -71,6 +73,8 @@ class operatorController extends Controller
         $operator->image_path = 'images/'.$files->getClientOriginalName();
         $operator->save();
         Storage::put('/public/images/'.$files->getClientOriginalName(),file_get_contents($files));
+        Event::dispatch(new SendOperator($operator));
+
         return response()->json(["success" => "Operator Created Successfully.", "operator" => $operator, "status" => 200]);
     }
 

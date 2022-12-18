@@ -23,7 +23,7 @@
       <div class="py-1">
         <img src="./imgs/logo-main-dark-transparent.png" alt="" />
       </div>
-      <ul class="hidden sm:flex flex-1 justify-end items-center gap-12 text-bookmark-blue uppercase text-xs">
+      <ul class="hidden sm:flex flex-1 justify-end items-center gap-4 text-bookmark-blue uppercase text-xs">
         <a href="admin-index">
           <li class="cursor-pointer">Admin Index</li>
         </a>
@@ -36,8 +36,20 @@
         <a href="client-index">
           <li class="cursor-pointer">Client Index</li>
         </a>
+        <a href="service-index">
+          <li class="cursor-pointer">Service Index</li>
+        </a>
+        <a href="camera-index">
+          <li class="cursor-pointer">Camera Index</li>
+        </a>
+        <a href="accessories-index">
+          <li class="cursor-pointer">Accessories Index</li>
+        </a>
         <a href="{{route('comment.index')}}">
           <li class="cursor-pointer">Rate Our Operator</li>
+        </a>
+        <a href="{{route('logout')}}">
+          <li class="cursor-pointer">Logout</li>
         </a>
         {{-- <div>
           <a href="{{ url('/login') }}">

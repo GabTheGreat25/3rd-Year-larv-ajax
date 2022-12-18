@@ -13,7 +13,7 @@ class client extends Model
 
     protected $dates = ["deleted_at"];
     public $table = "client";
-    public $timestamps = false;
+    // public $timestamps = false;
     public $primaryKey = "client_id";
     protected $fillable = [
         "full_name",
@@ -24,6 +24,8 @@ class client extends Model
         "contact_number",
         "image_path",
         "user_id",
+        "created_at",
+        "updated_at",
         'deleted_at'
     ];
 

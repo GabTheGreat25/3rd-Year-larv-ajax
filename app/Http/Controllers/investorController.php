@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
+use App\Events\SendInvestor;
+use Event;
 
 class investorController extends Controller
 {
@@ -63,13 +65,15 @@ class investorController extends Controller
         $investor = new investor;
         $investor->users()->associate($lastInsertId);
         $investor->full_name = $request->full_name;
-        $investor->contact_number = $request->contact_number;
         $investor->age = $request->age;
+        $investor->contact_number = $request->contact_number;
 
         $files = $request->file('uploads');
         $investor->image_path = 'images/'.$files->getClientOriginalName();
         $investor->save();
         Storage::put('/public/images/'.$files->getClientOriginalName(),file_get_contents($files));
+        Event::dispatch(new SendInvestor($investor));  
+
         return response()->json(["success" => "Investor Created Successfully.", "investor" => $investor, "status" => 200]);
     }
 
