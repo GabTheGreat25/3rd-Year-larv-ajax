@@ -14,7 +14,7 @@ class investor extends Model
     protected $dates = ["deleted_at"];
     public $table = "investor";
     public $timestamps = false;
-    public $primaryKey = "investor_id ";
+    public $primaryKey = "investor_id";
     protected $fillable = [
         "full_name",
         "age",
