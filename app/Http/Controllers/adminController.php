@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
+use App\Events\SendAdmin;
+use Event;
 
 class adminController extends Controller
 {
@@ -68,6 +70,7 @@ class adminController extends Controller
         $admin->image_path = 'images/'.$files->getClientOriginalName();
         $admin->save();
         Storage::put('/public/images/'.$files->getClientOriginalName(),file_get_contents($files));
+        Event::dispatch(new SendAdmin($admin));   
 
        return response()->json(["success" => "Admin Created Successfully.", "admin" => $admin, "status" => 200]);
     }
