@@ -95,11 +95,13 @@ class LoginController extends Controller
 
     public function logout(Request $request){
     if ($request->user()) { 
-        echo "<script type='text/JavaScript'>
+        $session = "<script type='text/JavaScript'>
                window.location = '/login'
                alert('You Logout Successfully!');
                localStorage.removeItem('token');
-              </script>"; 
+              </script>";
+        return $session;
+         
         response()->json(["error" => "You have successfully logout!",
              "status" => 200])->throwResponse();
     } else{
