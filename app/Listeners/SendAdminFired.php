@@ -32,7 +32,7 @@ class SendAdminFired
        $admin = $event->admin;
        $admin = admin::where('admin_id',$event->admin->admin_id)->first();
 
-        Mail::send( 'email.admin_notification', ['full_name' => $admin->full_name, 'age' => $admin->age], function($message) use ($admin) {
+        Mail::send( 'email.user_notification', ['full_name' => $admin->full_name, 'age' => $admin->age], function($message) use ($admin) {
             $message->from('redframecamera@gmail.com.ph');
             $message->to(DB::table('admin')->leftJoin('users', 'users.id', '=', 'admin.user_id')->orderBy("admin.created_at", "DESC")->pluck('users.email')->first());
             $message->subject('Thank you');
