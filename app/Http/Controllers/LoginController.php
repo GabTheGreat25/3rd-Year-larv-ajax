@@ -75,7 +75,7 @@ class LoginController extends Controller
         
              else {
                  response()->json(["error" => "You have failed to login!",
-                 "status" => 500])->throwResponse();;
+                 "status" => 500])->throwResponse();
             }
         }
         else {
@@ -100,6 +100,8 @@ class LoginController extends Controller
                alert('You Logout Successfully!');
                localStorage.removeItem('token');
               </script>"; 
+        response()->json(["error" => "You have successfully logout!",
+             "status" => 200])->throwResponse();
     } else{
         return response()->json(['error' => 'Log Out Failed'], 500);
         }
