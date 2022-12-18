@@ -48,6 +48,9 @@
         <a href="{{route('comment.index')}}">
           <li class="cursor-pointer">Rate Our Operator</li>
         </a>
+        <a href="{{route('logout')}}">
+          <li class="cursor-pointer">Logout</li>
+        </a>
         {{-- <div>
           <a href="{{ url('/login') }}">
             <button type="button" class="bg-bookmark-red text-white rounded-md px-7 py-3 uppercase">
