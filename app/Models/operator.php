@@ -13,7 +13,7 @@ class operator extends Model
 
     protected $dates = ["deleted_at"];
     public $table = "operator";
-    public $timestamps = false;
+    // public $timestamps = false;
     public $primaryKey = "operator_id";
     protected $fillable = [
         "full_name",
@@ -22,6 +22,8 @@ class operator extends Model
         "address",
         "image_path",
         "user_id",
+        "created_at",
+        "updated_at",
         'deleted_at'
     ];
 
