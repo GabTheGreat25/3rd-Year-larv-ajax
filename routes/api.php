@@ -28,6 +28,10 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('guest')->group(function () {
     Route::post('search','searchController@searchService')->name('search');
 
+    Route::get('/operator-chart',[
+    'uses' => 'chartController@operatorChart',
+    ]);
+
     Route::redirect('/', 'login');
 
     Route::resource('comment', 'commentController');

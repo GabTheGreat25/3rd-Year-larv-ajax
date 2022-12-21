@@ -25,6 +25,11 @@ use Illuminate\Support\Facades\Route;
 Route::view('/searchService', 'search.searchService');
 Route::get('/action','searchController@searchService' )->name('action');
 
+Route::view('/charts', 'charts.index');
+    Route::get('/operator-chart',[
+    'uses' => 'chartController@operatorChart',
+    ]);
+
 Route::redirect('/', 'login');
 
 Route::post('login-auth', [
