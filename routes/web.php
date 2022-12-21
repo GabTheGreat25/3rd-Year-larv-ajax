@@ -22,6 +22,9 @@ use Illuminate\Support\Facades\Route;
 //     'uses' => 'LoginController@getRegister',
 // ]);
 
+Route::view('/searchService', 'search.searchService');
+Route::get('/action','searchController@searchService' )->name('action');
+
 Route::redirect('/', 'login');
 
 Route::post('login-auth', [

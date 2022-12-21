@@ -26,6 +26,8 @@ use Illuminate\Support\Facades\Route;
 // ]);
 
 Route::middleware('guest')->group(function () {
+    Route::post('search','searchController@searchService')->name('search');
+
     Route::redirect('/', 'login');
 
     Route::resource('comment', 'commentController');
