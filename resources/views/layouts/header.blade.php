@@ -40,3 +40,4 @@
 <script src="js/investor.js"></script>
 <script src="js/admin.js"></script>
 <script src="js/client.js"></script>
+<script src="js/chart.js"></script>
