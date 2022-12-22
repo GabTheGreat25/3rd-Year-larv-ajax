@@ -49,7 +49,7 @@
         @foreach($ooperator as $operator)
         <div class="col-sm-6 col-md-4">
             <div class="thumbnail">
-                <img src="{{ asset($operator->image_path) }}" width="100" height="100" class="img-circle">
+                <img src="storage/{{ $operator->image_path }}" width="100" height="100" class="img-circle">
                 <h3>
                     <strong><span>{{$operator->full_name}}</span></strong>
                 </h3>
