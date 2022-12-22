@@ -57,8 +57,8 @@ class commentController extends Controller
         $operatorr = DB::table('operator')
         ->rightJoin('comment','comment.operator_id','operator.operator_id')
         ->select('comment.comment_id', 'comment.username','comment.contact_number','comment.comments', 'comment.ratings', 'comment.operator_id', 'operator.image_path')
-        ->where('comment.comment_id', $id)
-        ->orderBy('comment.comment_id','DESC')
+        ->where('comment.operator_id', $id)
+        ->orderBy('comment.operator_id','DESC')
         ->get();
    
         return View::make('comment.show',compact('operator','operatorr'));
@@ -88,7 +88,7 @@ class commentController extends Controller
                 'username'=>'required',
                 'contact_number'=>'required',
                 'comments'=>'required|profanity',
-                'ratings'=>'required',
+                'ratings'=>'required|min:1|max:5',
             ]);
 
             $comments = new comment;
@@ -98,7 +98,7 @@ class commentController extends Controller
             $comments->comments = $request->comments;
             $comments->ratings = $request->ratings;
             $comments->save();
-            return redirect()->back();  
+            return response()->json(["success" => "Comment Created Successfully.", "comment" => $comments, "status" => 200]);
     }
 
     /**
