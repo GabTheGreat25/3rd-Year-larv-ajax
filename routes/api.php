@@ -26,6 +26,16 @@ use Illuminate\Support\Facades\Route;
 // ]);
 
 Route::middleware('guest')->group(function () {
+            Route::view('/camera-index', 'camera.index');
+        Route::get('/camera/all',['uses' => 'cameraController@getcameraAll','as' => 'camera.getcameraall'] );
+        Route::resource('camera', 'cameraController');
+        Route::post('camera/post/{id}','cameraController@update');
+        Route::view('/camera-transaction', 'transaction.camera-transaction');
+    Route::post('/camera/checkout',[
+    'uses' => 'cameraController@postCheckout',
+    'as' => 'checkout'
+    ]); 
+
     Route::post('search','searchController@searchService')->name('search');
 
     Route::get('/operator-chart',[
@@ -114,10 +124,7 @@ Route::middleware('auth:api')->group(function () {
     });
 
     Route::middleware('role:admin,client,investor')->group(function () {
-        Route::view('/camera-index', 'camera.index');
-        Route::get('/camera/all',['uses' => 'cameraController@getcameraAll','as' => 'camera.getcameraall'] );
-        Route::resource('camera', 'cameraController');
-        Route::post('camera/post/{id}','cameraController@update');
+
 
         Route::view('/accessories-index', 'accessories.index');
         Route::get('/accessories/all',['uses' => 'accessoriesController@getaccessoriesAll','as' => 'accessories.getaccessoriesall'] );
