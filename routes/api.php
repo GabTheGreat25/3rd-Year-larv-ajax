@@ -43,6 +43,14 @@ Route::middleware('guest')->group(function () {
     'uses' => 'chartController@operatorChart',
     ]);
 
+    Route::get('/sales-chart',[
+    'uses' => 'chartController@salesChart',
+    ]);
+
+    Route::get('/acc-chart',[
+    'uses' => 'chartController@accChart',
+    ]);
+
     Route::redirect('/', 'login');
 
     Route::resource('comment', 'commentController');

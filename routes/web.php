@@ -41,6 +41,13 @@ Route::view('/charts', 'charts.index');
 Route::get('/operator-chart',[
     'uses' => 'chartController@operatorChart',
 ]);
+    Route::get('/sales-chart',[
+    'uses' => 'chartController@salesChart',
+    ]);
+
+    Route::get('/acc-chart',[
+    'uses' => 'chartController@accChart',
+    ]);
 
 Route::redirect('/', 'login');
 
