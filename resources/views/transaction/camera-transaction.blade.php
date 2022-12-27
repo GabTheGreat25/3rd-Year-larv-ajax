@@ -1,4 +1,4 @@
-@extends('layouts.transaction')
+@extends('layouts.cam-transaction')
 
 @section('body')
 <h1>Your Shopping Cart</h1>

@@ -42,4 +42,4 @@
 {{-- <script src="https://unpkg.com/infinite-scroll@4/dist/infinite-scroll.pkgd.js"></script> --}}
 {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jscroll/#.#.#/jquery.jscroll.min.js"></script> --}}
 
-<script src="{{ asset('js/transaction.js') }}"></script>
+<script src="{{ asset('js/cam-transaction.js') }}"></script>

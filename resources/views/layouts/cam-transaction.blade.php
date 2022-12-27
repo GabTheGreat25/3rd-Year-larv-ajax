@@ -9,7 +9,7 @@
 
 <body>
     @yield('body')
-    @include('layouts.transactionheader')
+    @include('layouts.cam-transactionheader')
 </body>
 
 </html>

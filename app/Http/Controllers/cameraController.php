@@ -141,7 +141,7 @@ class cameraController extends Controller
             DB::beginTransaction();
             $transaction = new transaction();
             $client =  client::where(auth()->id())->first();
-            // $try = DB::table('client')->leftJoin('users', 'users.id', '=', 'client.user_id')->orderBy("client.created_at", "DESC")->select('client.client_id')->first();
+            // $try = DB::table('users')->rightJoin('client', 'client.user_id', '=', 'users.id')->where('users.id',auth()->id())->first();
             $transaction->client_id = $client->client_id;
             $transaction->date_of_rent = now();
             $transaction->payment_type = 'cash';
