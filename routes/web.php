@@ -23,8 +23,14 @@ use Illuminate\Support\Facades\Route;
 // ]);
 
 Route::view('/camera-transaction', 'transaction.camera-transaction');
+Route::view('/accessories-transaction', 'transaction.accessories-transaction');
+
     Route::post('/camera/checkout',[
     'uses' => 'cameraController@postCheckout',
+    'as' => 'checkout'
+    ]); 
+    Route::post('/accessories/checkout',[
+    'uses' => 'accessoriesController@postCheckout',
     'as' => 'checkout'
     ]); 
 
