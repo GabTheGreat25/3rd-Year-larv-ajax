@@ -72,20 +72,6 @@
         <a href="{{route('logout')}}">
           <li class="cursor-pointer">Logout</li>
         </a>
-        {{-- <div>
-          <a href="{{ url('/login') }}">
-            <button type="button" class="bg-bookmark-red text-white rounded-md px-7 py-3 uppercase">
-
-              Login
-
-            </button>
-          </a>
-          <a href="{{ url('/signup') }}">
-            <button type="button" class="bg-bookmark-red text-white rounded-md px-7 py-3 uppercase">
-              Sign Up
-            </button>
-          </a>
-        </div> --}}
       </ul>
       <div class="flex sm:hidden flex-1 justify-end">
         <i class="text-2xl fas fa-bars"></i>
@@ -112,20 +98,16 @@
           </button>
         </div>
       </div>
-      <!-- Image -->
       <div class="flex justify-center flex-1 mb-10 md:mb-16 lg:mb-0 z-10">
         <img class="w-5/6 h-5/6 sm:w-3/4 sm:h-3/4 md:w-full md:h-full" src="./imgs/camera-intro.png" alt="" />
       </div>
     </div>
-    <!-- Rounded Rectangle -->
     <div
       class="hidden md:block overflow-hidden bg-bookmark-red rounded-l-full absolute h-80 w-2/4 top-32 right-0 lg: -bottom-28 lg:-right-36">
     </div>
   </section>
 
-  <!-- Features -->
   <section class="bg-bookmark-white py-20 mt-20 lg:mt-60">
-    <!-- Heading -->
     <div class="sm:w-3/4 lg:w-5/12 mx-auto px-2">
       <h1 class="text-3xl text-center text-bookmark-blue">
         Mission / Vision
@@ -134,14 +116,11 @@
         We provide backup camera's for those in need.
       </p>
     </div>
-    <!-- Feature #1 -->
     <div class="relative mt-20 lg:mt-24">
       <div class="container flex flex-col lg:flex-row items-center justify-center gap-x-24">
-        <!-- Image -->
         <div class="flex flex-1 justify-center z-10 mb-10 lg:mb-0">
           <img class="w-5/6 h-5/6 sm:w-3/4 sm:h-3/4 md:w-full md:h-full" src="./imgs/camera-intro.png" alt="" />
         </div>
-        <!-- Content -->
         <div class="flex flex-1 flex-col items-center lg:items-start">
           <h1 class="text-3xl text-bookmark-blue">
             Inquire / Submit Requirements
@@ -159,19 +138,15 @@
           </button>
         </div>
       </div>
-      <!-- Rounded Rectangle -->
       <div
         class="hidden lg:block overflow-hidden bg-bookmark-red rounded-r-full absolute h-80 w-2/4 -bottom-24 -left-36">
       </div>
     </div>
-    <!-- Feature #2 -->
     <div class="relative mt-20 lg:mt-52">
       <div class="container flex flex-col lg:flex-row-reverse items-center justify-center gap-x-24">
-        <!-- Image -->
         <div class="flex flex-1 justify-center z-10 mb-10 lg:mb-0">
           <img class="w-5/6 h-5/6 sm:w-3/4 sm:h-3/4 md:w-full md:h-full" src="./imgs/camera-intro.png" alt="" />
         </div>
-        <!-- Content -->
         <div class="flex flex-1 flex-col items-center lg:items-start">
           <h1 class="text-3xl text-bookmark-blue">Fast Delivery</h1>
           <p class="text-bookmark-grey my-4 text-center lg:text-left sm:w-3/4 lg:w-full">
@@ -184,19 +159,15 @@
           </button>
         </div>
       </div>
-      <!-- Rounded Rectangle -->
       <div
         class="hidden lg:block overflow-hidden bg-bookmark-red rounded-l-full absolute h-80 w-2/4 -bottom-24 -right-36">
       </div>
     </div>
-    <!-- Feature #3 -->
     <div class="relative mt-20 lg:mt-52">
       <div class="container flex flex-col lg:flex-row items-center justify-center gap-x-24">
-        <!-- Image -->
         <div class="flex flex-1 justify-center z-10 mb-10 lg:mb-0">
           <img class="w-5/6 h-5/6 sm:w-3/4 sm:h-3/4 md:w-full md:h-full" src="./imgs/camera-intro.png" alt="" />
         </div>
-        <!-- Content -->
         <div class="flex flex-1 flex-col items-center lg:items-start">
           <h1 class="text-3xl text-bookmark-blue">Enjoy</h1>
           <p class="text-bookmark-grey my-4 text-center lg:text-left sm:w-3/4 lg:w-full">
@@ -208,17 +179,14 @@
           </button>
         </div>
       </div>
-      <!-- Rounded Rectangle -->
       <div
         class="hidden lg:block overflow-hidden bg-bookmark-red rounded-r-full absolute h-80 w-2/4 -bottom-24 -left-36">
       </div>
     </div>
   </section>
 
-  <!-- FAQ -->
   <section class="bg-bookmark-white py-20">
     <div class="container">
-      <!-- Heading -->
       <div class="sm:w-3/4 lg:w-5/12 mx-auto px-2">
         <h1 class="text-3xl text-center text-bookmark-blue">
           Frequently Asked Questions
@@ -228,7 +196,6 @@
           like answered please feel free to email us.
         </p>
       </div>
-      <!-- FAQ Items -->
       <div class="flex flex-col sm:w-3/4 lg:w-5/12 mt-12 mx-auto">
         <div class="flex items-center border-b py-4">
           <span class="flex-1">How to Rent?</span>
@@ -254,7 +221,6 @@
     </div>
   </section>
 
-  <!-- Contact Us -->
   <section class="bg-bookmark-grey text-white py-20">
     <div class="container">
       <div class="sm:w-3/4 lg:w-2/4 mx-auto">

@@ -12,7 +12,6 @@
         </h1>
         <hr>
         <h2 style="text-align: center; font-weight: 700; padding: 1rem 0;">Your Receipt</h2>
-        {{-- {{dd($transactions)}} --}}
         @foreach ($transactions as $transaction)
         <div class="panel panel-default">
             <div class="panel-body">

@@ -50,12 +50,10 @@
         }
 
         .be-comment-block {
-            /* margin-bottom: 50px !important; */
             margin-top: 7rem;
             background-color: #edeff2;
             border-radius: 2px;
             padding: 1.5rem 8rem 4rem 8rem;
-            /* border: 1px solid #ffffff; */
         }
 
         .be-comment-text {
@@ -90,7 +88,6 @@
             font-size: 1.5rem;
             line-height: 50px;
             font-weight: 400;
-            /* color: #b4b7c1; */
             width: 100%;
             height: 50px;
             padding-left: 20px;

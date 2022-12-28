@@ -16,7 +16,6 @@
         <h2>Items in your cart</h2>
         <i class="fa fa-times-circle-o fa-3x openCloseCart" aria-hidden="true"></i>
         <div id="cartItems">
-            {{-- <button class="removeItem">Remove Item</button> --}}
         </div>
         <button class="btn btn-primary" id="checkout">Checkout</button>
         <span id="cartTotal"></span>

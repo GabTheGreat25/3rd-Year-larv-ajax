@@ -314,7 +314,6 @@
         <tbody>
 
             @foreach ($transactions as $transaction)
-
             <tr>
 
                 <td>{{ $transaction->date_of_rent }}</td>
@@ -372,17 +371,12 @@
         </div>
 
         <div class="footer-right">
-
             <p class="footer-company-about">
                 <span>About Us</span>
                 Lorem ipsum dolor sit amet, consectateur adispicing elit. Fusce euismod convallis velit, eu auctor lacus
                 vehicula sit amet.
             </p>
-
         </div>
-
-
-
     </footer>
 </body>
 
