@@ -15,14 +15,14 @@ $(document).ready(function () {
                             label: "Most Operator That Is Hired",
                             data: data.data,
                             backgroundColor: [
-                                "rgba(75, 192, 192, 0.2)",
-                                "rgba(255, 99, 132, 0.2)",
-                                "rgb(255,0,0)",
-                                "rgb(255,0,255)",
+                                "rgba(58, 227, 116,1.0)",
+                                "rgba(103, 230, 220,1.0)",
+                                "rgb(125, 95, 255)",
+                                "rgb(255, 250, 101)",
                             ],
                             borderColor: [
-                                "rgba(75, 192, 192, 1)",
-                                "rgba(255,99,132,1)",
+                                "rgba(255, 56, 56,1.0)",
+                                "rgba(205, 132, 241,1.0)",
                             ],
                             borderWidth: 2,
                             borderRadius: Number.MAX_VALUE,
@@ -77,8 +77,8 @@ $(document).ready(function () {
                             label: "Monthly sales",
                             data: data.data,
                             backgroundColor: [
-                                "rgba(75, 192, 192, 0.2)",
-                                "rgba(255, 99, 132, 0.2)",
+                                "rgba(41, 128, 185,0.4)",
+                                "rgba(192, 57, 43,0.4)",
                             ],
                             borderColor: [
                                 "rgba(75, 192, 192, 1)",
@@ -127,8 +127,6 @@ $(document).ready(function () {
                             label: "number of accessories sold",
                             data: data.data,
                             backgroundColor: () => {
-                                //generates random colours and puts them in string
-
                                 var colors = [];
                                 for (var i = 0; i < data.data.length; i++) {
                                     var letters = "0123456789ABCDEF".split("");
@@ -144,8 +142,8 @@ $(document).ready(function () {
                                 return colors;
                             },
                             borderColor: [
-                                "rgba(75, 192, 192, 1)",
-                                "rgba(255,99,132,1)",
+                                "rgba(27, 156, 252,1.0)",
+                                "rgba(252, 66, 123,1.0)",
                             ],
                             borderWidth: 1,
                             responsive: true,
