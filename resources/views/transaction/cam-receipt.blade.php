@@ -25,6 +25,8 @@
                         <li class="list-group-item">
                             <span>${{ $transaction->costs }} </span>
                             Camera Model: {{ $transaction->model }}
+                            <img src="storage/{{ $transaction->image_path }}" width="100" height="100"
+                                class="img-circle">
                             @php
                             $total += $transaction->costs;
                             @endphp
