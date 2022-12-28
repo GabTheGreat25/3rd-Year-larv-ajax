@@ -22,12 +22,35 @@ use Illuminate\Support\Facades\Route;
 //     'uses' => 'LoginController@getRegister',
 // ]);
 
+Route::view('/camera-transaction', 'transaction.camera-transaction');
+Route::view('/accessories-transaction', 'transaction.accessories-transaction');
+
+    Route::post('/camera/checkout',[
+    'uses' => 'cameraController@postCheckout',
+    'as' => 'checkout'
+    ]); 
+    Route::post('/accessories/checkout',[
+    'uses' => 'accessoriesController@postCheckout',
+    'as' => 'checkout'
+    ]); 
+
 Route::view('/searchService', 'search.searchService');
+Route::view('/searchCamTransaction', 'search.searchCamTransaction');
+Route::view('/searchAccTransaction', 'search.searchAccTransaction');
 Route::get('/action','searchController@searchService' )->name('action');
+Route::get('/action1','searchController@searchCamTransaction' )->name('action1');
+Route::get('/action2','searchController@searchAccTransaction' )->name('action2');
 
 Route::view('/charts', 'charts.index');
-    Route::get('/operator-chart',[
+Route::get('/operator-chart',[
     'uses' => 'chartController@operatorChart',
+]);
+    Route::get('/sales-chart',[
+    'uses' => 'chartController@salesChart',
+    ]);
+
+    Route::get('/acc-chart',[
+    'uses' => 'chartController@accChart',
     ]);
 
 Route::redirect('/', 'login');

@@ -26,10 +26,31 @@ use Illuminate\Support\Facades\Route;
 // ]);
 
 Route::middleware('guest')->group(function () {
-    Route::post('search','searchController@searchService')->name('search');
+
+    Route::post('/camera/checkout',[
+    'uses' => 'cameraController@postCheckout',
+    'as' => 'checkout'
+    ]); 
+
+    Route::post('/accessories/checkout',[
+    'uses' => 'accessoriesController@postCheckout',
+    'as' => 'checkout'
+    ]); 
+
+    Route::post('search','searchController@searchService');
+    Route::post('searchh','searchController@searchCamTransaction');
+    Route::post('searchhh','searchController@searchAccTransaction');
 
     Route::get('/operator-chart',[
     'uses' => 'chartController@operatorChart',
+    ]);
+
+    Route::get('/sales-chart',[
+    'uses' => 'chartController@salesChart',
+    ]);
+
+    Route::get('/acc-chart',[
+    'uses' => 'chartController@accChart',
     ]);
 
     Route::redirect('/', 'login');
@@ -113,17 +134,19 @@ Route::middleware('auth:api')->group(function () {
         Route::post('service/post/{id}','serviceController@update');
     });
 
-    Route::middleware('role:admin,client,investor')->group(function () {
+    // Route::middleware('role:admin,client,investor')->group(function () {
+    // });
+});
+
         Route::view('/camera-index', 'camera.index');
         Route::get('/camera/all',['uses' => 'cameraController@getcameraAll','as' => 'camera.getcameraall'] );
         Route::resource('camera', 'cameraController');
         Route::post('camera/post/{id}','cameraController@update');
+        Route::view('/camera-transaction', 'transaction.camera-transaction');
 
         Route::view('/accessories-index', 'accessories.index');
         Route::get('/accessories/all',['uses' => 'accessoriesController@getaccessoriesAll','as' => 'accessories.getaccessoriesall'] );
         Route::resource('accessories', 'accessoriesController');
         Route::post('accessories/post/{id}','accessoriesController@update');
-    });
-});
-
+        Route::view('/accessories-transaction', 'transaction.accessories-transaction');
 

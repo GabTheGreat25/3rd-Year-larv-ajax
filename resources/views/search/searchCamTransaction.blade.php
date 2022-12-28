@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=xdevice-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Search Operator</title>
+    <title>Search Camera</title>
     <link rel="stylesheet" href="{{  asset('css/app.css') }}" type="text/css" media="screen" title="no title"
         charset="utf-8">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
@@ -51,22 +51,28 @@
 
 <body>
     <div class="container">
-        <h3 align="center">Operator History</h3><br />
+        <h3 align="center">Camera Transaction History</h3><br />
         <div class="row">
-            <h2>Operators Total Data In Service: <span id="total_records"></span></h2>
+            <h2>Camera Transaction Total Data: <span id="total_records"></span></h2>
             <div class="col-12">
                 <div class="form-group">
                     <input type="text" name="search" id="search" class="form-control"
-                        placeholder="Search Operator Data" />
+                        placeholder="Search Camera Transaction Data" />
                 </div>
                 <div class="table-responsive">
-                    <table id="operatortb" class="table table-striped table-bordered">
+                    <table id="Transactiontb" class="table table-striped table-bordered">
                         <thead>
                             <tr>
-                                <th>Service Type</th>
-                                <th>Date Of Service</th>
-                                <th>Price</th>
+                                <th>Transaction ID</th>
+                                <th>Model</th>
+                                <th>Shuttercount</th>
+                                <th>Costs</th>
                                 <th>Image</th>
+                                <th>Quantity</th>
+                                <th>Date Of Rent</th>
+                                <th>Payment Type</th>
+                                <th>Shipment Type</th>
+                                <th>Status</th>
                             </tr>
                         </thead>
                         <tbody></tbody>
@@ -79,18 +85,18 @@
     <script>
         $(document).ready(function() {
 
-            fetch_operator_data();
+            fetch_Transaction_data();
 
-            function fetch_operator_data(query = '') {
+            function fetch_Transaction_data(query = '') {
                 $.ajax({
-                    url: "{{ route('action') }}",
+                    url: "{{ route('action1') }}",
                     method: 'GET',
                     data: {
                         query: query
                     },
                     dataType: 'json',
                     success: function(data) {
-                        $('#operatortb tbody').html(data.table_data);
+                        $('#Transactiontb tbody').html(data.table_data);
                         $('#total_records').text(data.total_data);
                     }
                 })
@@ -98,7 +104,7 @@
 
             $(document).on('keyup', '#search', function() {
                 var query = $(this).val();
-                fetch_operator_data(query);
+                fetch_Transaction_data(query);
             });
         });
     </script>

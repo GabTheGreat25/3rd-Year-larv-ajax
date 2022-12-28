@@ -4,11 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\camera;
+use App\Models\transaction;
+use App\Models\client;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Auth;
 
 class cameraController extends Controller
 {
@@ -19,6 +22,9 @@ class cameraController extends Controller
      */
     public function index()
     {  
+        // $client =  client::where('user_id',Auth::id())->first();
+        // $client->transactions();
+        // dd($client);
         $camera = camera::orderBy('camera_id', 'DESC')->get();
         return response()->json($camera);
     }
@@ -122,5 +128,42 @@ class cameraController extends Controller
 
         $data = array('success' => 'deleted', 'code' => '200');
         return response()->json($data);
+    }
+
+    public function getCameraTransaction(){
+        return view('transaction.camera-transaction');
+    }
+
+    public function postCheckout(Request $request){
+        $cameras = json_decode($request->getContent(),true);
+        Log::info(print_r($cameras, true));
+          try {
+            DB::beginTransaction();
+            $transaction = new transaction();
+            $client =  client::where(auth()->id())->first();
+            // $try = DB::table('users')->rightJoin('client', 'client.user_id', '=', 'users.id')->where('users.id',auth()->id())->first();
+            $transaction->client_id = $client->client_id;
+            $transaction->date_of_rent = now();
+            $transaction->payment_type = 'cash';
+            $transaction->shipment_type = 'delivery';
+            // $client =  client::find(1);
+            // $client->transactions()->save($transaction);
+            $transaction->save();
+            
+            foreach($cameras as $camera) {
+               $id = $camera['camera_id'];
+               $transaction->cameras()->attach($transaction->transaction_id,['quantity'=> $camera['quantity'],'camera_id'=>$id]);
+               $stock = camera::find($id);
+               $stock->quantity = $stock->quantity - $camera['quantity'];
+               $stock->save();
+            }
+            
+          }
+        catch (\Exception $e) {
+              DB::rollback();
+              return response()->json(array('status' => 'Order failed','code'=>409,'error'=>$e->getMessage()));
+        }
+          DB::commit();
+          return response()->json(array('status' => 'Order Success','code'=>200,'transaction id'=>$transaction->transaction_id));
     }
 }

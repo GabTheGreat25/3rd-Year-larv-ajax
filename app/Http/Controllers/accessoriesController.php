@@ -4,11 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\accessories;
+use App\Models\transaction;
+use App\Models\client;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Auth;
 use App\Traits\ResponseTrait;
 
 class accessoriesController extends Controller
@@ -123,5 +126,39 @@ class accessoriesController extends Controller
 
         $data = array('success' => 'deleted', 'code' => '200');
         return response()->json($data);
+    }
+
+    public function getAccessoriesTransaction(){
+        return view('transaction.accessories-transaction');
+    }
+
+    public function postCheckout(Request $request){
+        $accessories = json_decode($request->getContent(),true);
+        Log::info(print_r($accessories, true));
+          try {
+            DB::beginTransaction();
+            $transaction = new transaction();
+            $client =  client::where(auth()->id())->first();
+            $transaction->client_id = $client->client_id;
+            $transaction->date_of_rent = now();
+            $transaction->payment_type = 'cash';
+            $transaction->shipment_type = 'delivery';
+            $transaction->save();
+            
+            foreach($accessories as $acc) {
+               $id = $acc['accessories_id'];
+               $transaction->accessories()->attach($transaction->transaction_id,['quantity'=> $acc['quantity'],'accessories_id'=>$id]);
+               $stock = accessories::find($id);
+               $stock->quantity = $stock->quantity - $acc['quantity'];
+               $stock->save();
+            }
+            
+          }
+        catch (\Exception $e) {
+              DB::rollback();
+              return response()->json(array('status' => 'Order failed','code'=>409,'error'=>$e->getMessage()));
+        }
+          DB::commit();
+          return response()->json(array('status' => 'Order Success','code'=>200,'transaction id'=>$transaction->transaction_id));
     }
 }

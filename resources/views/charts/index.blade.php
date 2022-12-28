@@ -17,7 +17,7 @@
     </div>
 
     <div class="t">
-        <canvas id="itemsChart"></canvas>
+        <canvas id="accChart"></canvas>
     </div>
 </div>
 
