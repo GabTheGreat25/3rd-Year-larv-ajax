@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Auth;
 use App\Traits\ResponseTrait;
+use PDF;
 
 class accessoriesController extends Controller
 {
@@ -160,5 +161,34 @@ class accessoriesController extends Controller
         }
           DB::commit();
           return response()->json(array('status' => 'Order Success','code'=>200,'transaction id'=>$transaction->transaction_id));
+    }
+
+    public function getAccessoriesReceipt(Request $request)
+    {
+        // $client = client::where('user_id',Auth::id())->first();
+        $client =  client::find(1);
+        $transactions = transaction::join('accessories_transaction_line','transaction.transaction_id','accessories_transaction_line.transaction_id')
+        ->join('accessories','accessories.accessories_id','accessories_transaction_line.accessories_id')
+        ->select('transaction.transaction_id','accessories_transaction_line.quantity','accessories.description','accessories.costs','accessories.image_path')
+        ->where('client_id',$client->client_id)
+        ->orderBy('transaction.transaction_id', 'DESC')
+        ->take("1")
+        ->get(); 
+        // dd($client, $transactions);
+        return view('transaction.acc-receipt',compact('transactions'));
+    }
+
+    public function downloadAccessoriesPDF(){
+        // $client = client::where('user_id',Auth::id())->first();
+        $client =  client::find(1);
+        $transactions = transaction::join('accessories_transaction_line','transaction.transaction_id','accessories_transaction_line.transaction_id')
+        ->join('accessories','accessories.accessories_id','accessories_transaction_line.accessories_id')
+        ->select('transaction.transaction_id','transaction.date_of_rent','transaction.status','accessories.description','accessories.costs')
+        ->where('client_id',$client->client_id)
+        ->orderBy('transaction.transaction_id', 'DESC')
+        ->take("1")
+        ->get(); 
+        $pdf = PDF::loadView('accessories-receipt', compact('transactions'));
+        return $pdf->download('accessories-receipt.pdf');
     }
 }

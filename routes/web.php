@@ -109,6 +109,30 @@ Route::view('/camera-index', 'camera.index');
 Route::resource('accessories', 'accessoriesController');
 Route::view('/accessories-index', 'accessories.index');
 
+Route::resource('transaction', 'transactionController');
+Route::view('/transaction-index', 'transaction.index');
+
+Route::get("/camera-receipt", [
+    "uses" => 'cameraController@getCameraReceipt',
+    "as" => "camera.receipt",
+]);
+
+Route::get("download-camera-pdf", [
+    "uses" => 'cameraController@downloadCameraPDF',
+    "as" => "camera.downloadPDF",
+]);
+
+Route::get("/accessories-receipt", [
+    "uses" => 'accessoriesController@getAccessoriesReceipt',
+    "as" => "accessories.receipt",
+]);
+
+Route::get("download-accessories-pdf", [
+    "uses" => 'accessoriesController@downloadAccessoriesPDF',
+    "as" => "accessories.downloadPDF",
+]);
+
+
 
 
 

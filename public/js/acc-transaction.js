@@ -8,6 +8,13 @@ $(document).ready(function () {
         type: "GET",
         url: "/api/accessories",
         dataType: "json",
+        beforeSend: function (header) {
+            /* Authorization header */
+            header.setRequestHeader(
+                "Authorization",
+                "Bearer " + localStorage.getItem("token")
+            );
+        },
         success: function (data) {
             console.log(data);
             $.each(data, function (key, value) {
@@ -103,6 +110,13 @@ $(document).ready(function () {
             type: "POST",
             url: "/api/accessories/checkout",
             data: data,
+            beforeSend: function (header) {
+                /* Authorization header */
+                header.setRequestHeader(
+                    "Authorization",
+                    "Bearer " + localStorage.getItem("token")
+                );
+            },
             headers: {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
             },
@@ -111,7 +125,8 @@ $(document).ready(function () {
             contentType: "application/json; charset=utf-8",
             success: function (data) {
                 console.log(data);
-                alert(data.status);
+                window.location = "/accessories-receipt";
+                // alert(data.status);
             },
             error: function (error) {
                 // alert(data.status);
