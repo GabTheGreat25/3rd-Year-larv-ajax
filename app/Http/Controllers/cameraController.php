@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Auth;
+use PDF;
 
 class cameraController extends Controller
 {
@@ -165,5 +166,34 @@ class cameraController extends Controller
         }
           DB::commit();
           return response()->json(array('status' => 'Order Success','code'=>200,'transaction id'=>$transaction->transaction_id));
+    }
+
+    public function getCameraReceipt(Request $request)
+    {
+        // $client = client::where(Auth::id())->first();
+        $client =  client::find(1);
+        $transactions = transaction::join('camera_transaction_line','transaction.transaction_id','camera_transaction_line.transaction_id')
+        ->join('camera','camera.camera_id','camera_transaction_line.camera_id')
+        ->select('transaction.transaction_id','camera_transaction_line.quantity','camera.model','camera.costs','camera.image_path')
+        ->where('client_id',$client->client_id)
+        ->orderBy('transaction.transaction_id', 'DESC')
+        ->take("1")
+        ->get(); 
+        // dd($client, $transactions);
+        return view('transaction.receipt',compact('transactions'));
+    }
+
+    public function downloadCameraPDF(){
+        // $client = client::where(Auth::id())->first();
+        $client =  client::find(1);
+        $transactions = transaction::join('camera_transaction_line','transaction.transaction_id','camera_transaction_line.transaction_id')
+        ->join('camera','camera.camera_id','camera_transaction_line.camera_id')
+        ->select('transaction.transaction_id','transaction.date_of_rent','transaction.status','camera.model','camera.costs')
+        ->where('client_id',$client->client_id)
+        ->orderBy('transaction.transaction_id', 'DESC')
+        ->take("1")
+        ->get(); 
+        $pdf = PDF::loadView('resibo', compact('transactions'));
+        return $pdf->download('receipt.pdf');
     }
 }
