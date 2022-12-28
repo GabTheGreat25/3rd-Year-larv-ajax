@@ -125,7 +125,8 @@ $(document).ready(function () {
             contentType: "application/json; charset=utf-8",
             success: function (data) {
                 console.log(data);
-                alert(data.status);
+                window.location = "/accessories-receipt";
+                // alert(data.status);
             },
             error: function (error) {
                 // alert(data.status);
