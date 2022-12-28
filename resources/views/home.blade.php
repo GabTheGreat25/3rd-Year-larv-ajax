@@ -23,7 +23,7 @@
       <div class="py-1">
         <img src="./imgs/logo-main-dark-transparent.png" alt="" />
       </div>
-      <ul class="hidden sm:flex flex-1 justify-end items-center gap-1 text-bookmark-blue uppercase text-xs">
+      <ul class="hidden sm:flex flex-1 justify-end items-center text-bookmark-blue uppercase text-xs">
         <a href="admin-index">
           <li class="cursor-pointer">Admin Index</li>
         </a>
@@ -62,6 +62,9 @@
         </a>
         <a href="searchAccTransaction">
           <li class="cursor-pointer">Search Accessories Transaction</li>
+        </a>
+        <a href="charts">
+          <li class="cursor-pointer">Charts</li>
         </a>
         <a href="{{route('comment.index')}}">
           <li class="cursor-pointer">Rate Our Operator</li>
