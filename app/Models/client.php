@@ -13,7 +13,6 @@ class client extends Model
 
     protected $dates = ["deleted_at"];
     public $table = "client";
-    // public $timestamps = false;
     public $primaryKey = "client_id";
     protected $fillable = [
         "full_name",

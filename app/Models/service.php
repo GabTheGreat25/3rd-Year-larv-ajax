@@ -18,8 +18,4 @@ class service extends Model
         "operator_id",
         "image_path"
     ];
-
-    // public function operator() {
-    //     return $this->belongsTo('App\Models\operator');
-    // }
 }

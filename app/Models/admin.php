@@ -13,7 +13,6 @@ class admin extends Model
 
     protected $dates = ["deleted_at"];
     public $table = "admin";
-    // public $timestamps = false;
     public $primaryKey = "admin_id";
     protected $fillable = [
         "name",
