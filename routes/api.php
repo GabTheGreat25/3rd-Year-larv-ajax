@@ -37,7 +37,9 @@ Route::middleware('guest')->group(function () {
     'as' => 'checkout'
     ]); 
 
-    Route::post('search','searchController@searchService')->name('search');
+    Route::post('search','searchController@searchService');
+    Route::post('searchh','searchController@searchCamTransaction');
+    Route::post('searchhh','searchController@searchAccTransaction');
 
     Route::get('/operator-chart',[
     'uses' => 'chartController@operatorChart',

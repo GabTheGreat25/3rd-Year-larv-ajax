@@ -35,7 +35,11 @@ Route::view('/accessories-transaction', 'transaction.accessories-transaction');
     ]); 
 
 Route::view('/searchService', 'search.searchService');
+Route::view('/searchCamTransaction', 'search.searchCamTransaction');
+Route::view('/searchAccTransaction', 'search.searchAccTransaction');
 Route::get('/action','searchController@searchService' )->name('action');
+Route::get('/action1','searchController@searchCamTransaction' )->name('action1');
+Route::get('/action2','searchController@searchAccTransaction' )->name('action2');
 
 Route::view('/charts', 'charts.index');
 Route::get('/operator-chart',[
