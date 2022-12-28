@@ -194,6 +194,6 @@ class cameraController extends Controller
         ->take("1")
         ->get(); 
         $pdf = PDF::loadView('resibo', compact('transactions'));
-        return $pdf->download('receipt.pdf');
+        return $pdf->download('camera-receipt.pdf');
     }
 }
