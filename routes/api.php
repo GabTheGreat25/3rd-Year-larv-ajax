@@ -15,16 +15,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::post('login', [LoginController::class, 'login']);
-// Route::post('register-auth', [
-//     'uses' => 'LoginController@register',
-//     'as' => 'user.register',
-// ]);
-
-// Route::get('register', [
-//     'uses' => 'LoginController@getRegister',
-// ]);
-
 Route::middleware('guest')->group(function () {
 
     Route::post('/camera/checkout',[

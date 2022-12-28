@@ -13,15 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::post('register-auth', [
-//     'uses' => 'LoginController@register',
-//     'as' => 'user.register',
-// ]);
-
-// Route::get('register', [
-//     'uses' => 'LoginController@getRegister',
-// ]);
-
 Route::view('/camera-transaction', 'transaction.camera-transaction');
 Route::view('/accessories-transaction', 'transaction.accessories-transaction');
 
