@@ -14,31 +14,6 @@ use Illuminate\Support\Facades\Redirect;
 
 class LoginController extends Controller
 {
-//     public function register(Request $request){
-//         $validator = Validator::make($request->all(), [
-//             'name' => 'required',
-//             'email' => 'required|email|unique:users',
-//             'password' => 'required',
-//         ]);
-
-//         if($validator->fails()){
-//             return $this->sendError('Validator Error', $validator->errors());
-//         }
-
-//         $input = $request->all();
-//         $input['password'] = Hash::make($input['password']);
-//         $user = User::create($input);
-//         $redirect = Redirect::to("/login");
-//         return $redirect;
-
-//         if ($redirect == true) {
-//             response()->json(["success" => "You have registered succesfully!", "user" => $user, "status" => 200])->throwResponse();
-//         }
-//         else {
-//             return response()->json(["error" => "You have failed to register!", "user" => $user, "status" => 500]);
-//         }
-// }
-
     public function login(Request $request){
         if(Auth::attempt(['email' => $request->get('email'), 'password' => $request->password]))
         {
@@ -88,10 +63,6 @@ class LoginController extends Controller
     public function getLogin(){
         return view('user.login');
     }
-
-    // public function getRegister(){
-    //     return view('user.register');
-    // }
 
     public function logout(Request $request){
     if ($request->user()) { 

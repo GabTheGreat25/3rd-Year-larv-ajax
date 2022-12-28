@@ -70,10 +70,6 @@ class searchController extends Controller
             $search = '';
             $query = $request->get('query');
             if($query != '') {
-                // $try = DB::table('accessories as a')
-                //     ->leftJoin('accessories_transaction_line as al', 'a.accessories_id', '=', 'al.accessories_id')
-                //     ->leftJoin('transaction as tr', 'al.transaction_id', '=', 'tr.transaction_id');
-
                 $data = camera::join('camera_transaction_line as cl', 'cl.camera_id', '=', 'camera.camera_id')
                     ->join('transaction as tr', 'tr.transaction_id', '=', 'cl.transaction_id')
                     ->select('camera.*','cl.quantity','tr.transaction_id','tr.date_of_rent','tr.payment_type','tr.shipment_type','tr.status')
@@ -81,10 +77,6 @@ class searchController extends Controller
                     ->orderBy('camera_id', 'desc')
                     ->get();
             } else {
-            //    $try = DB::table('accessories as a')
-            //         ->leftJoin('accessories_transaction_line as al', 'a.accessories_id', '=', 'al.accessories_id')
-            //         ->leftJoin('transaction as tr', 'al.transaction_id', '=', 'tr.transaction_id');
-
                 $data = camera::join('camera_transaction_line as cl', 'cl.camera_id', '=', 'camera.camera_id')
                     ->join('transaction as tr', 'tr.transaction_id', '=', 'cl.transaction_id')
                     ->select('camera.*','cl.quantity','tr.transaction_id','tr.date_of_rent','tr.payment_type','tr.shipment_type','tr.status')

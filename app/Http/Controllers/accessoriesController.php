@@ -12,13 +12,10 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Auth;
-use App\Traits\ResponseTrait;
 use PDF;
 
 class accessoriesController extends Controller
 {
-    use ResponseTrait;
-
     /**
      * Display a listing of the resource.
      *

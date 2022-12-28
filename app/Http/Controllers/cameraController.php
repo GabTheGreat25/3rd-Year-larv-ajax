@@ -23,9 +23,6 @@ class cameraController extends Controller
      */
     public function index()
     {  
-        // $client =  client::where('user_id',Auth::id())->first();
-        // $client->transactions();
-        // dd($client);
         $camera = camera::orderBy('camera_id', 'DESC')->get();
         return response()->json($camera);
     }
