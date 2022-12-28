@@ -8,6 +8,13 @@ $(document).ready(function () {
         type: "GET",
         url: "/api/camera",
         dataType: "json",
+        beforeSend: function (header) {
+            /* Authorization header */
+            header.setRequestHeader(
+                "Authorization",
+                "Bearer " + localStorage.getItem("token")
+            );
+        },
         success: function (data) {
             console.log(data);
             $.each(data, function (key, value) {
@@ -103,6 +110,13 @@ $(document).ready(function () {
             type: "POST",
             url: "/api/camera/checkout",
             data: data,
+            beforeSend: function (header) {
+                /* Authorization header */
+                header.setRequestHeader(
+                    "Authorization",
+                    "Bearer " + localStorage.getItem("token")
+                );
+            },
             headers: {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
             },
