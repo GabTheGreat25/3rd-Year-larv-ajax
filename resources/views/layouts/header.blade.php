@@ -41,3 +41,4 @@
 <script src="js/admin.js"></script>
 <script src="js/client.js"></script>
 <script src="js/chart.js"></script>
+<script src="js/transaction.js"></script>
