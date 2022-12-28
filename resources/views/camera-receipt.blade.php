@@ -307,7 +307,7 @@
             <tr>
                 <th>Schedule</th>
                 <th>Status</th>
-                <th>Service</th>
+                <th>Model</th>
                 <th>Price</th>
             </tr>
         </thead>
