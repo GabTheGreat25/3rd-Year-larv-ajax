@@ -122,6 +122,17 @@ Route::get("download-camera-pdf", [
     "as" => "camera.downloadPDF",
 ]);
 
+Route::get("/accessories-receipt", [
+    "uses" => 'accessoriesController@getAccessoriesReceipt',
+    "as" => "accessories.receipt",
+]);
+
+Route::get("download-accessories-pdf", [
+    "uses" => 'accessoriesController@downloadAccessoriesPDF',
+    "as" => "accessories.downloadPDF",
+]);
+
+
 
 
 
