@@ -333,7 +333,7 @@
 
         <div class="footer-left">
 
-            <h3>Red Frame<span>Camera</span></h3>
+            <h3>Red Frame<span>Ca</span></h3>
 
             <p class="footer-links">
                 <a href="#" class="link-1">Home</a>
