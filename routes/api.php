@@ -125,6 +125,8 @@ Route::middleware('auth:api')->group(function () {
         Route::get('/client/all',['uses' => 'clientController@getclientAll','as' => 'client.getclientall'] );
         Route::post('client/post/{id}','clientController@update');
         Route::patch('/client/restore/{id}', 'clientController@restore');
+        Route::view('/camera-transaction', 'transaction.camera-transaction');
+        Route::view('/accessories-transaction', 'transaction.accessories-transaction');
     });
 
     Route::middleware('role:admin,client,operator')->group(function () {
@@ -142,11 +144,9 @@ Route::middleware('auth:api')->group(function () {
         Route::get('/camera/all',['uses' => 'cameraController@getcameraAll','as' => 'camera.getcameraall'] );
         Route::resource('camera', 'cameraController');
         Route::post('camera/post/{id}','cameraController@update');
-        Route::view('/camera-transaction', 'transaction.camera-transaction');
 
         Route::view('/accessories-index', 'accessories.index');
         Route::get('/accessories/all',['uses' => 'accessoriesController@getaccessoriesAll','as' => 'accessories.getaccessoriesall'] );
         Route::resource('accessories', 'accessoriesController');
         Route::post('accessories/post/{id}','accessoriesController@update');
-        Route::view('/accessories-transaction', 'transaction.accessories-transaction');
 
