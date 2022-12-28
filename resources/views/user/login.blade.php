@@ -24,19 +24,15 @@
 </head>
 
 <body class="font-mono bg-gray-400">
-  <!-- Container -->
   <div class="container mx-auto" style="position: absolute;
     left: 50%;
     top: 50%;
     transform: translate(-50%,-50%);">
     <div class="flex justify-center px-6 my-12">
-      <!-- Row -->
       <div class="w-full xl:w-3/4 lg:w-11/12 flex">
-        <!-- Col -->
         <div class="w-full h-auto bg-gray-400 hidden lg:block lg:w-1/2 bg-cover rounded-l-lg"
           style="background-image: url('https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80')">
         </div>
-        <!-- Col -->
         <div class="w-full lg:w-1/2 bg-white p-5 rounded-lg lg:rounded-l-none">
           <h3 class="pt-4 text-2xl text-center">Welcome to RedFrame Camera!</h3>
           <form id="loginform" class="px-8 pt-6 pb-8 mb-4 bg-white rounded" action="{{ route('user.login') }}"
@@ -70,11 +66,6 @@
                 type="submit">
                 Sign In
               </button>
-            </div>
-            <div class="mb-6">
-              <a href="#" class="w-full px-8" type="submit">
-                <img src="../storage/images/facebook.png" alt="tite">
-              </a>
             </div>
             <hr class="mb-6 border-t" />
             <div class="text-center"
