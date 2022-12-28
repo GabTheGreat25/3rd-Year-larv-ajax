@@ -3,7 +3,6 @@ $(document).ready(function () {
         ajax: {
             url: "/api/camera",
             beforeSend: function (header) {
-                /* Authorization header */
                 header.setRequestHeader(
                     "Authorization",
                     "Bearer " + localStorage.getItem("token")
@@ -88,7 +87,6 @@ $(document).ready(function () {
             contentType: false,
             processData: false,
             beforeSend: function (header) {
-                /* Authorization header */
                 header.setRequestHeader(
                     "Authorization",
                     "Bearer " + localStorage.getItem("token")
@@ -137,7 +135,6 @@ $(document).ready(function () {
                         type: "DELETE",
                         url: `/api/camera/${id}`,
                         beforeSend: function (header) {
-                            /* Authorization header */
                             header.setRequestHeader(
                                 "Authorization",
                                 "Bearer " + localStorage.getItem("token")
@@ -177,7 +174,6 @@ $(document).ready(function () {
             cache: false,
             url: `/api/camera/${id}/edit`,
             beforeSend: function (header) {
-                /* Authorization header */
                 header.setRequestHeader(
                     "Authorization",
                     "Bearer " + localStorage.getItem("token")
@@ -221,7 +217,6 @@ $(document).ready(function () {
             contentType: false,
             processData: false,
             beforeSend: function (header) {
-                /* Authorization header */
                 header.setRequestHeader(
                     "Authorization",
                     "Bearer " + localStorage.getItem("token")

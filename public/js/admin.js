@@ -3,7 +3,6 @@ $(document).ready(function () {
         ajax: {
             url: "/api/admin",
             beforeSend: function (header) {
-                /* Authorization header */
                 header.setRequestHeader(
                     "Authorization",
                     "Bearer " + localStorage.getItem("token")
@@ -78,13 +77,6 @@ $(document).ready(function () {
             data: formData,
             contentType: false,
             processData: false,
-            // beforeSend: function (header) {
-            //     /* Authorization header */
-            //     header.setRequestHeader(
-            //         "Authorization",
-            //         "Bearer " + localStorage.getItem("token")
-            //     );
-            // },
             headers: {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
             },
@@ -123,7 +115,6 @@ $(document).ready(function () {
                         type: "PATCH",
                         url: `/api/admin/restore/${id}`,
                         beforeSend: function (header) {
-                            /* Authorization header */
                             header.setRequestHeader(
                                 "Authorization",
                                 "Bearer " + localStorage.getItem("token")
@@ -169,7 +160,6 @@ $(document).ready(function () {
                         type: "DELETE",
                         url: `/api/admin/${id}`,
                         beforeSend: function (header) {
-                            /* Authorization header */
                             header.setRequestHeader(
                                 "Authorization",
                                 "Bearer " + localStorage.getItem("token")
@@ -207,7 +197,6 @@ $(document).ready(function () {
             cache: false,
             url: `/api/admin/${id}/edit`,
             beforeSend: function (header) {
-                /* Authorization header */
                 header.setRequestHeader(
                     "Authorization",
                     "Bearer " + localStorage.getItem("token")
@@ -248,7 +237,6 @@ $(document).ready(function () {
             contentType: false,
             processData: false,
             beforeSend: function (header) {
-                /* Authorization header */
                 header.setRequestHeader(
                     "Authorization",
                     "Bearer " + localStorage.getItem("token")

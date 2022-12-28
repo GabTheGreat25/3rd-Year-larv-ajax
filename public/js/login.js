@@ -14,13 +14,6 @@ $(document).ready(function () {
             data: formData,
             contentType: false,
             processData: false,
-            // beforeSend: function (header) {
-            //     /* Authorization header */
-            //     header.setRequestHeader(
-            //         "Authorization",
-            //         "Bearer " + localStorage.getItem("token")
-            //     );
-            // },
             headers: {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
             },

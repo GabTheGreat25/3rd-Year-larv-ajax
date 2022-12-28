@@ -9,7 +9,6 @@ $(document).ready(function () {
         url: "/api/accessories",
         dataType: "json",
         beforeSend: function (header) {
-            /* Authorization header */
             header.setRequestHeader(
                 "Authorization",
                 "Bearer " + localStorage.getItem("token")
@@ -62,7 +61,6 @@ $(document).ready(function () {
         itemCount--;
         $("#itemCount").text(itemCount);
 
-        // Remove Cost of Deleted Item from Total Price
         var price = parseInt($(this).siblings().find(".price").text());
         priceTotal -= price;
         $("#cartTotal").text("Total: php" + priceTotal);
@@ -89,7 +87,6 @@ $(document).ready(function () {
         $("#cartItems")
             .find(".itemDetails")
             .each(function (i, element) {
-                // console.log(element);
                 let accessoriesid = 0;
                 let qty = 0;
 
@@ -111,7 +108,6 @@ $(document).ready(function () {
             url: "/api/accessories/checkout",
             data: data,
             beforeSend: function (header) {
-                /* Authorization header */
                 header.setRequestHeader(
                     "Authorization",
                     "Bearer " + localStorage.getItem("token")
@@ -126,10 +122,8 @@ $(document).ready(function () {
             success: function (data) {
                 console.log(data);
                 window.location = "/accessories-receipt";
-                // alert(data.status);
             },
             error: function (error) {
-                // alert(data.status);
                 console.log(error);
             },
         });

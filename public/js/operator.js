@@ -3,7 +3,6 @@ $(document).ready(function () {
         ajax: {
             url: "/api/operator",
             beforeSend: function (header) {
-                /* Authorization header */
                 header.setRequestHeader(
                     "Authorization",
                     "Bearer " + localStorage.getItem("token")
@@ -84,13 +83,6 @@ $(document).ready(function () {
             data: formData,
             contentType: false,
             processData: false,
-            // beforeSend: function (header) {
-            //     /* Authorization header */
-            //     header.setRequestHeader(
-            //         "Authorization",
-            //         "Bearer " + localStorage.getItem("token")
-            //     );
-            // },
             headers: {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
             },
@@ -129,7 +121,6 @@ $(document).ready(function () {
                         type: "PATCH",
                         url: `/api/operator/restore/${id}`,
                         beforeSend: function (header) {
-                            /* Authorization header */
                             header.setRequestHeader(
                                 "Authorization",
                                 "Bearer " + localStorage.getItem("token")
@@ -180,7 +171,6 @@ $(document).ready(function () {
                             ),
                         },
                         beforeSend: function (header) {
-                            /* Authorization header */
                             header.setRequestHeader(
                                 "Authorization",
                                 "Bearer " + localStorage.getItem("token")
@@ -212,7 +202,6 @@ $(document).ready(function () {
             contentType: false,
             cache: false,
             beforeSend: function (header) {
-                /* Authorization header */
                 header.setRequestHeader(
                     "Authorization",
                     "Bearer " + localStorage.getItem("token")
@@ -220,7 +209,6 @@ $(document).ready(function () {
             },
             url: `/api/operator/${id}/edit`,
             beforeSend: function (header) {
-                /* Authorization header */
                 header.setRequestHeader(
                     "Authorization",
                     "Bearer " +
@@ -267,7 +255,6 @@ $(document).ready(function () {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
             },
             beforeSend: function (header) {
-                /* Authorization header */
                 header.setRequestHeader(
                     "Authorization",
                     "Bearer " + localStorage.getItem("token")

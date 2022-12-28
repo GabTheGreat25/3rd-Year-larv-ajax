@@ -3,7 +3,6 @@ $(document).ready(function () {
         ajax: {
             url: "/api/transaction",
             beforeSend: function (header) {
-                /* Authorization header */
                 header.setRequestHeader(
                     "Authorization",
                     "Bearer " + localStorage.getItem("token")
@@ -92,7 +91,6 @@ $(document).ready(function () {
                         type: "DELETE",
                         url: `/api/transaction/${id}`,
                         beforeSend: function (header) {
-                            /* Authorization header */
                             header.setRequestHeader(
                                 "Authorization",
                                 "Bearer " + localStorage.getItem("token")
@@ -131,7 +129,6 @@ $(document).ready(function () {
             cache: false,
             url: `/api/transaction/${id}/edit`,
             beforeSend: function (header) {
-                /* Authorization header */
                 header.setRequestHeader(
                     "Authorization",
                     "Bearer " + localStorage.getItem("token")
@@ -171,7 +168,6 @@ $(document).ready(function () {
             contentType: false,
             processData: false,
             beforeSend: function (header) {
-                /* Authorization header */
                 header.setRequestHeader(
                     "Authorization",
                     "Bearer " + localStorage.getItem("token")
