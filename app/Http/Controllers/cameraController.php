@@ -170,7 +170,7 @@ class cameraController extends Controller
 
     public function getCameraReceipt(Request $request)
     {
-        // $client = client::where(Auth::id())->first();
+        // $client = client::where('user_id',Auth::id())->first();
         $client =  client::find(1);
         $transactions = transaction::join('camera_transaction_line','transaction.transaction_id','camera_transaction_line.transaction_id')
         ->join('camera','camera.camera_id','camera_transaction_line.camera_id')
@@ -184,7 +184,7 @@ class cameraController extends Controller
     }
 
     public function downloadCameraPDF(){
-        // $client = client::where(Auth::id())->first();
+        // $client = client::where('user_id',Auth::id())->first();
         $client =  client::find(1);
         $transactions = transaction::join('camera_transaction_line','transaction.transaction_id','camera_transaction_line.transaction_id')
         ->join('camera','camera.camera_id','camera_transaction_line.camera_id')
@@ -193,7 +193,7 @@ class cameraController extends Controller
         ->orderBy('transaction.transaction_id', 'DESC')
         ->take("1")
         ->get(); 
-        $pdf = PDF::loadView('resibo', compact('transactions'));
+        $pdf = PDF::loadView('camera-receipt', compact('transactions'));
         return $pdf->download('camera-receipt.pdf');
     }
 }
