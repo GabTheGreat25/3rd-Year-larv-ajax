@@ -2,7 +2,7 @@
 namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Support\Facades\Auth;
-class Role //Sagot Sa Unit 2
+class Role
 {
     /**
      * Handle an incoming request.
