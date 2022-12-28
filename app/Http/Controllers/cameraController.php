@@ -180,7 +180,7 @@ class cameraController extends Controller
         ->take("1")
         ->get(); 
         // dd($client, $transactions);
-        return view('transaction.receipt',compact('transactions'));
+        return view('transaction.cam-receipt',compact('transactions'));
     }
 
     public function downloadCameraPDF(){
