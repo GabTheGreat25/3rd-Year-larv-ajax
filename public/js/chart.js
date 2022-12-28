@@ -2,6 +2,12 @@ $(document).ready(function () {
     $.ajax({
         type: "GET",
         url: "/api/operator-chart",
+        beforeSend: function (header) {
+            header.setRequestHeader(
+                "Authorization",
+                "Bearer " + localStorage.getItem("token")
+            );
+        },
         dataType: "json",
         success: function (data) {
             console.log(data);
@@ -48,6 +54,12 @@ $(document).ready(function () {
     $.ajax({
         type: "GET",
         url: "/api/sales-chart",
+        beforeSend: function (header) {
+            header.setRequestHeader(
+                "Authorization",
+                "Bearer " + localStorage.getItem("token")
+            );
+        },
         dataType: "json",
         success: function (data) {
             console.log(data);
@@ -114,6 +126,12 @@ $(document).ready(function () {
     $.ajax({
         type: "GET",
         url: "/api/acc-chart",
+        beforeSend: function (header) {
+            header.setRequestHeader(
+                "Authorization",
+                "Bearer " + localStorage.getItem("token")
+            );
+        },
         dataType: "json",
         success: function (data) {
             console.log(data);
