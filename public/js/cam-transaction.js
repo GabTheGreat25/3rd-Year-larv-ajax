@@ -125,7 +125,8 @@ $(document).ready(function () {
             contentType: "application/json; charset=utf-8",
             success: function (data) {
                 console.log(data);
-                alert(data.status);
+                window.location = "/camera-receipt";
+                // alert(data.status);
             },
             error: function (error) {
                 // alert(data.status);
