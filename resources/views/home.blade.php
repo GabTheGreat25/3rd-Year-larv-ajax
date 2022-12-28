@@ -45,6 +45,15 @@
         <a href="accessories-index">
           <li class="cursor-pointer">Accessories Index</li>
         </a>
+        <a href="transaction-index">
+          <li class="cursor-pointer">Transaction Index</li>
+        </a>
+        <a href="camera-transaction">
+          <li class="cursor-pointer">Camera Transaction</li>
+        </a>
+        <a href="accessories-transaction">
+          <li class="cursor-pointer">Accessories Transaction</li>
+        </a>
         <a href="{{route('comment.index')}}">
           <li class="cursor-pointer">Rate Our Operator</li>
         </a>
