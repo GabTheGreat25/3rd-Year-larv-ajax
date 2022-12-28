@@ -109,6 +109,9 @@ Route::view('/camera-index', 'camera.index');
 Route::resource('accessories', 'accessoriesController');
 Route::view('/accessories-index', 'accessories.index');
 
+Route::resource('transaction', 'transactionController');
+Route::view('/transaction-index', 'transaction.index');
+
 
 
 
