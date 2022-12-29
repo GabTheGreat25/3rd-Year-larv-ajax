@@ -136,7 +136,7 @@ class accessoriesController extends Controller
           try {
             DB::beginTransaction();
             $transaction = new transaction();
-            $client =  client::where(auth()->id())->first();
+            $client =  client::where(Auth::id())->first();
             $transaction->client_id = $client->client_id;
             $transaction->date_of_rent = now();
             $transaction->payment_type = 'cash';
@@ -162,8 +162,8 @@ class accessoriesController extends Controller
 
     public function getAccessoriesReceipt(Request $request)
     {
-        // $client = client::where('user_id',Auth::id())->first();
-        $client =  client::find(1);
+        $client = client::where('user_id',Auth::id())->first();
+        // $client =  client::find(1);
         $transactions = transaction::join('accessories_transaction_line','transaction.transaction_id','accessories_transaction_line.transaction_id')
         ->join('accessories','accessories.accessories_id','accessories_transaction_line.accessories_id')
         ->select('transaction.transaction_id','accessories_transaction_line.quantity','accessories.description','accessories.costs','accessories.image_path')
@@ -176,8 +176,8 @@ class accessoriesController extends Controller
     }
 
     public function downloadAccessoriesPDF(){
-        // $client = client::where('user_id',Auth::id())->first();
-        $client =  client::find(1);
+        $client = client::where('user_id',Auth::id())->first();
+        // $client =  client::find(1);
         $transactions = transaction::join('accessories_transaction_line','transaction.transaction_id','accessories_transaction_line.transaction_id')
         ->join('accessories','accessories.accessories_id','accessories_transaction_line.accessories_id')
         ->select('transaction.transaction_id','transaction.date_of_rent','transaction.status','accessories.description','accessories.costs')

@@ -136,9 +136,9 @@ class cameraController extends Controller
         $cameras = json_decode($request->getContent(),true);
         Log::info(print_r($cameras, true));
           try {
+            $client =  client::where(Auth::id())->first();
             DB::beginTransaction();
             $transaction = new transaction();
-            $client =  client::where(auth()->id())->first();
             // $try = DB::table('users')->rightJoin('client', 'client.user_id', '=', 'users.id')->where('users.id',auth()->id())->first();
             $transaction->client_id = $client->client_id;
             $transaction->date_of_rent = now();
@@ -167,8 +167,8 @@ class cameraController extends Controller
 
     public function getCameraReceipt(Request $request)
     {
-        // $client = client::where('user_id',Auth::id())->first();
-        $client =  client::find(1);
+        $client = client::where('user_id',Auth::id())->first();
+        // $client =  client::find(1);
         $transactions = transaction::join('camera_transaction_line','transaction.transaction_id','camera_transaction_line.transaction_id')
         ->join('camera','camera.camera_id','camera_transaction_line.camera_id')
         ->select('transaction.transaction_id','camera_transaction_line.quantity','camera.model','camera.costs','camera.image_path')
@@ -181,8 +181,8 @@ class cameraController extends Controller
     }
 
     public function downloadCameraPDF(){
-        // $client = client::where('user_id',Auth::id())->first();
-        $client =  client::find(1);
+        $client = client::where('user_id',Auth::id())->first();
+        // $client =  client::find(1);
         $transactions = transaction::join('camera_transaction_line','transaction.transaction_id','camera_transaction_line.transaction_id')
         ->join('camera','camera.camera_id','camera_transaction_line.camera_id')
         ->select('transaction.transaction_id','transaction.date_of_rent','transaction.status','camera.model','camera.costs')
