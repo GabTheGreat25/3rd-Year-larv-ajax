@@ -136,9 +136,9 @@ class cameraController extends Controller
         $cameras = json_decode($request->getContent(),true);
         Log::info(print_r($cameras, true));
           try {
-            $client =  client::where(Auth::id())->first();
             DB::beginTransaction();
             $transaction = new transaction();
+            $client =  client::where(Auth::id())->first();
             // $try = DB::table('users')->rightJoin('client', 'client.user_id', '=', 'users.id')->where('users.id',auth()->id())->first();
             $transaction->client_id = $client->client_id;
             $transaction->date_of_rent = now();
