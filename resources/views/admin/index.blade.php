@@ -1,25 +1,5 @@
 @extends('layouts.base')
 @section('body')
-<style>
-    * {
-        margin-top: 10px;
-    }
-
-    .left-col {
-        float: left;
-        width: 25%;
-    }
-
-    .center-col {
-        float: left;
-        width: 50%;
-    }
-
-    .right-col {
-        float: left;
-        width: 25%;
-    }
-</style>
 
 <div class="container">
     <table id="adtable" class="table table-striped table-hover">
