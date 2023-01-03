@@ -100,9 +100,9 @@ class serviceController extends Controller
         $service->operator_id = $request->operator_id;
 
         $files = $request->file('uploads');
-        $service->image_path = 'images/'.$files->getClientOriginalName();
+        // $service->image_path = 'images/'.$files->getClientOriginalName();
         $service->update();
-        Storage::put('/public/images/'.$files->getClientOriginalName(),file_get_contents($files));
+        // Storage::put('/public/images/'.$files->getClientOriginalName(),file_get_contents($files));
         return response()->json(["success" => "Service Updated Successfully.", "service" => $service, "status" => 200]);
     }
 
