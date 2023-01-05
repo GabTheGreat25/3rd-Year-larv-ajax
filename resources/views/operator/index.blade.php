@@ -3,6 +3,7 @@
 <style>
     * {
         margin-top: 5px;
+
     }
 
     .left-col {
@@ -19,8 +20,12 @@
         float: left;
         width: 25%;
     }
-</style>
 
+    th,
+    td {
+        color: white !important;
+    }
+</style>
 <div class="container font-bold text-white my-6">
     <table id="otable" class="table table-striped table-hover">
         <thead>

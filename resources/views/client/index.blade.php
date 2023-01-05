@@ -3,6 +3,7 @@
 <style>
     * {
         margin-top: 5px;
+
     }
 
     .left-col {
@@ -18,6 +19,11 @@
     .right-col {
         float: left;
         width: 25%;
+    }
+
+    th,
+    td {
+        color: white !important;
     }
 </style>
 <div class="container font-bold text-white my-6">

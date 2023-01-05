@@ -120,7 +120,8 @@
         }
     </style>
 
-<body>
+<body class="w-full h-auto bg-cover"
+    style="background-image: url('https://wallpapers.com/images/file/canon-dslr-zoom-photography-lenses-evtrr0i1swpetu82.jpg');">
     <section>
         <form action="#" method="#" enctype="multipart/form-data">
             <div style="display: grid; justify-content: end;">
@@ -159,39 +160,38 @@
                                         </div>
                                     </div>
                                 </div>
-
-                                <div class="col-xs-12 col-sm-6">
-                                    <div class="form-group fl_icon">
-                                        <div class="icon"><i class="fa fa-plus-star"></i></div>
-                                        <input class="form-input" type="number" min="1" max="5" placeholder="Rating"
-                                            id="ratings" name="ratings">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group fl_icon">
+                                            <div class="icon"><i class="fa fa-bar-chart"></i></div>
+                                            <input class="form-input" type="number" min="1" max="5" placeholder="Rating"
+                                                id="ratings" name="ratings">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
 
-                    </div>
-
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <div class="form-group">
-                                <textarea class="form-input" placeholder="Comment" id="comments"
-                                    name="comments"></textarea>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="form-group">
+                                        <textarea class="form-input" placeholder="Comment" id="comments"
+                                            name="comments"></textarea>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div style="display: grid; grid-template-columns: 10rem 1fr;">
-                        <div>
-                            <button id="addCommentBtn" type="submit" class="btn btn-primary"
-                                onclick="return confirm('Do you want to add this comment?')">Save
-                                &#128190;
-                            </button>
-                        </div>
-                        <div>
-                            <a href="{{url()->previous()}}" class="btn btn-default" style="padding: .7rem 1.5rem;"
-                                role="button">Cancel</a>
-                        </div>
-                    </div>
-        </form>
+                            <div style="display: grid; grid-template-columns: 10rem 1fr;">
+                                <div>
+                                    <button id="addCommentBtn" type="submit" class="btn btn-primary"
+                                        onclick="return confirm('Do you want to add this comment?')">Save
+                                        &#128190;
+                                    </button>
+                                </div>
+                                <div>
+                                    <a href="{{url()->previous()}}" class="btn btn-default"
+                                        style="padding: .7rem 1.5rem;" role="button">Cancel</a>
+                                </div>
+                            </div>
+                        </form>
     </section>
 
     <section>

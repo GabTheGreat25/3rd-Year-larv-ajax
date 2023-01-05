@@ -2,7 +2,8 @@
 @section('body')
 <style>
     * {
-        margin-top: 10px;
+        margin-top: 5px;
+
     }
 
     .left-col {
@@ -18,6 +19,11 @@
     .right-col {
         float: left;
         width: 25%;
+    }
+
+    th,
+    td {
+        color: white !important;
     }
 </style>
 

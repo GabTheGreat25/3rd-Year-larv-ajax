@@ -3,6 +3,7 @@
 <style>
     * {
         margin-top: 5px;
+
     }
 
     .left-col {
@@ -18,6 +19,11 @@
     .right-col {
         float: left;
         width: 25%;
+    }
+
+    th,
+    td {
+        color: white !important;
     }
 </style>
 
@@ -67,7 +73,8 @@
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-default font-bold text-white my-6" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-default font-bold text-white my-6"
+                    data-bs-dismiss="modal">Close</button>
                 <button id="adminUpdate" type="submit" class="btn btn-info font-bold text-white my-6">Update</button>
             </div>
         </div>
