@@ -102,9 +102,9 @@ class cameraController extends Controller
         $camera->costs = $request->costs;
 
         $files = $request->file('uploads');
-        // $camera->image_path = 'images/'.$files->getClientOriginalName();
+        $camera->image_path = 'images/'.$files->getClientOriginalName();
         $camera->update();
-        // Storage::put('/public/images/'.$files->getClientOriginalName(),file_get_contents($files));
+        Storage::put('/public/images/'.$files->getClientOriginalName(),file_get_contents($files));
         return response()->json(["success" => "Camera Updated Successfully.", "camera" => $camera, "status" => 200]);
     }
 

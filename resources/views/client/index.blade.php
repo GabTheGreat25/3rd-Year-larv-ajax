@@ -2,7 +2,7 @@
 @section('body')
 <style>
     * {
-        margin-top: 10px;
+        margin-top: 5px;
     }
 
     .left-col {
@@ -20,7 +20,12 @@
         width: 25%;
     }
 </style>
-
+<div style="display: grid; justify-content: end;">
+    <a href="/home" class="btn btn-danger"
+        style="padding: .7rem 1.5rem; margin: 3rem 6rem 0 3rem; font-size: 2rem; font-weight: 500; font-style:italic;"
+        role="button">Go
+        Back</a>
+</div>
 <div class="container">
     <table id="cltable" class="table table-striped table-hover">
         <thead>

@@ -117,9 +117,9 @@ class operatorController extends Controller
         $operator->address = $request->address;
 
         $files = $request->file('uploads');
-        // $operator->image_path = 'images/'.$files->getClientOriginalName();
+        $operator->image_path = 'images/'.$files->getClientOriginalName();
         $operator->update();
-        // Storage::put('/public/images/'.$files->getClientOriginalName(),file_get_contents($files));
+        Storage::put('/public/images/'.$files->getClientOriginalName(),file_get_contents($files));
         return response()->json(["success" => "Operator Updated Successfully.", "operator" => $operator, "status" => 200]);
     }
 

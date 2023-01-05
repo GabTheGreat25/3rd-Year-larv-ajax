@@ -1,6 +1,31 @@
 @extends('layouts.base')
 @section('body')
+<style>
+    * {
+        margin-top: 5px;
+    }
 
+    .left-col {
+        float: left;
+        width: 25%;
+    }
+
+    .center-col {
+        float: left;
+        width: 50%;
+    }
+
+    .right-col {
+        float: left;
+        width: 25%;
+    }
+</style>
+<div style="display: grid; justify-content: end;">
+    <a href="/home" class="btn btn-danger"
+        style="padding: .7rem 1.5rem; margin: 3rem 6rem 0 3rem; font-size: 2rem; font-weight: 500; font-style:italic;"
+        role="button">Go
+        Back</a>
+</div>
 <div class="container">
     <table id="adtable" class="table table-striped table-hover">
         <thead>
