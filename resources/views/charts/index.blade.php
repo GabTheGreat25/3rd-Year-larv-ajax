@@ -1,46 +1,20 @@
 @extends('layouts.base')
 @section('body')
-<style>
-    .container-fluid {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        gap: 1rem;
-        padding-top: 1rem;
-    }
 
-    .one,
-    .two {
-        padding-top: 10rem;
-        background: rgba(171, 171, 171, 0.507);
-        border-radius: .75rem;
-    }
-
-    .three {
-        background: rgba(171, 171, 171, 0.507);
-        border-radius: .75rem;
-    }
-
-    h1 {
-        text-align: center;
-    }
-</style>
-<div style="display: grid; justify-content: end;">
-    <a href="/home" class="btn btn-danger"
-        style="padding: .7rem 1.5rem; margin: 3rem 6rem 0 3rem; font-size: 2rem; font-weight: 500; font-style:italic;"
-        role="button">Go
-        Back</a>
-</div>
-<h1>CHARTS</h1>
-<div class="container-fluid">
-    <div class="one">
+<blockquote class="my-4 text-3xl italic font-semibold text-center text-gray-50 dark:text-white">
+    <p>"My List of Charts"</p>
+</blockquote>
+<hr class="w-48 h-1 mx-auto my-4 bg-gray-50 border-0 rounded md:my-10 dark:bg-gray-50">
+<div class="container-fluid grid grid-cols-3">
+    <div class="one block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
         <canvas id="operatorChart"></canvas>
     </div>
 
-    <div class="two">
+    <div class="two block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
         <canvas id="salesChart"></canvas>
     </div>
 
-    <div class="three">
+    <div class="three block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
         <canvas id="accChart"></canvas>
     </div>
 </div>
