@@ -20,13 +20,8 @@
         width: 25%;
     }
 </style>
-<div style="display: grid; justify-content: end;">
-    <a href="/home" class="btn btn-danger"
-        style="padding: .7rem 1.5rem; margin: 3rem 6rem 0 3rem; font-size: 2rem; font-weight: 500; font-style:italic;"
-        role="button">Go
-        Back</a>
-</div>
-<div class="container">
+
+<div class="container font-bold text-white my-6">
     <table id="intable" class="table table-striped table-hover">
         <thead>
             <tr>
@@ -45,7 +40,7 @@
 </div>
 </div>
 
-<div class="modal fade" id="investorModal" role="dialog" style="display:none">
+<div class="modal fade font-bold text-white my-6" id="investorModal" role="dialog" style="display:none">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
