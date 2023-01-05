@@ -2,7 +2,8 @@
 @section('body')
 <style>
     * {
-        margin-top: 10px;
+        margin-top: 5px;
+
     }
 
     .left-col {
@@ -19,12 +20,17 @@
         float: left;
         width: 25%;
     }
+
+    th,
+    td {
+        color: white !important;
+    }
 </style>
 
-<div class="container">
-    <table id="adtable" class="table table-striped table-hover">
+<div class="container font-bold text-white my-6">
+    <table id="adtable" class="table table-striped table-hover font-bold text-white my-6">
         <thead>
-            <tr>
+            <tr class="font-bold text-white my-6">
                 <th>Admin ID</th>
                 <th>Full Name</th>
                 <th>Age</th>
@@ -39,7 +45,7 @@
 </div>
 </div>
 
-<div class="modal fade" id="adminModal" role="dialog" style="display:none">
+<div class="modal fade " id="adminModal" role="dialog" style="display:none">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -52,23 +58,24 @@
                         <input type="hidden" class="form-control" id="admin_id" name="admin_id">
                     </div>
                     <div class="form-group">
-                        <label for="full_name" class="control-label">Full Name</label>
+                        <label for="full_name" class="control-label font-bold text-white my-6">Full Name</label>
                         <input type="text" class="form-control" id="full_name" name="full_name">
                     </div>
                     <div class="form-group">
-                        <label for="age" class="control-label">Age</label>
+                        <label for="age" class="control-label font-bold text-white my-6">Age</label>
                         <input type="number" class="form-control" id="age" name="age" min="1" max="100">
                     </div>
                     <div class="form-group">
-                        <label for="uploads" class="control-label">Admin Image</label>
+                        <label for="uploads" class="control-label font-bold text-white my-6">Admin Image</label>
                         <input type="file" class="form-control" id="uploads" name="uploads">
                     </div>
                 </form>
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
-                <button id="adminUpdate" type="submit" class="btn btn-info">Update</button>
+                <button type="button" class="btn btn-default font-bold text-white my-6"
+                    data-bs-dismiss="modal">Close</button>
+                <button id="adminUpdate" type="submit" class="btn btn-info font-bold text-white my-6">Update</button>
             </div>
         </div>
     </div>

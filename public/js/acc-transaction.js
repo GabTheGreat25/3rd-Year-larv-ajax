@@ -20,16 +20,16 @@ $(document).ready(function () {
                 console.log(key);
                 id = value.accessories_id;
                 var accessories =
-                    "<div class='item'><div class='itemDetails'><div class='itemImage'><img src=" +
+                    "<form class='bg-white pt-2' style='padding-left: 13.5rem;'><div class='item'><div class='itemDetails'><div class='itemImage'><img src=" +
                     "/storage/" +
                     value.image_path +
-                    " width='200px', height='200px'/></div><div class='itemText'><p class='price-container'>Price: Php <span class='price'>" +
+                    " width='200px', height='200px'/></div><div class='itemText'><p class='price-container font-bold'>Price: ₱<span class='price'>" +
                     value.costs +
                     "</span></p><p>" +
                     value.description +
-                    "</p></div><input type='number' class='qty' name='quantity' min='1' max='5'><p class='accessoriesid' hidden>" +
+                    "</p></div><input type='number' class='bg-gray-300 text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-full w-20 rounded-l cursor-pointer outline-none qty' name='quantity' min='1' max='5'><p class='accessoriesid' hidden>" +
                     value.accessories_id +
-                    "</p>      </div><button type='button' class='btn btn-primary add' style='margin-top:5px;'>Add to cart</button></div>";
+                    "</p>      </div><button type='button' class='text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 my-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 add'>Add to cart</button></div></form>";
                 $("#accessories").append(accessories);
             });
         },

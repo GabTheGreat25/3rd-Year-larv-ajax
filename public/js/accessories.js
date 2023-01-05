@@ -13,14 +13,6 @@ $(document).ready(function () {
         dom: '<"top"<"left-col"B><"center-col"l><"right-col"f>>rtip',
         buttons: [
             {
-                extend: "pdf",
-                className: "btn btn-success glyphicon glyphicon-file",
-            },
-            {
-                extend: "excel",
-                className: "btn btn-success glyphicon glyphicon-list-alt",
-            },
-            {
                 text: "Add Accessories",
                 className: "btn btn-success",
                 action: function (e, dt, node, config) {

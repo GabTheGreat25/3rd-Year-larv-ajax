@@ -2,6 +2,19 @@
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\adminController;
+use App\Http\Controllers\investorController;
+use App\Http\Controllers\operatorController;
+use App\Http\Controllers\clientController;
+use App\Http\Controllers\cameraController;
+use App\Http\Controllers\accessoriesController;
+use App\Http\Controllers\serviceController;
+
+
+
+
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,7 +26,45 @@ use Illuminate\Support\Facades\Route;
 | routes are loaded by the RouteServiceProvider within a group which
 | is assigned the "api" middleware group. Enjoy building your API!
 |
-*/
+*/  
+
+Route::post('/auth', [AuthController::class, "login"]);
+
+Route::post('/admin', [adminController::class, "login"]);
+Route::get('/admin', [adminController::class, "index"]);
+Route::post('/admin', [adminController::class, "store"]);
+Route::patch('/admin/{id}', [adminController::class, "update"]);
+Route::delete('/admin/{id}', [adminController::class, "destroy"]);
+
+Route::get('/investor', [investorController::class, "index"]);
+Route::post('/investor', [investorController::class, "store"]);
+Route::patch('/investor/{id}', [investorController::class, "update"]);
+Route::delete('/investor/{id}', [investorController::class, "destroy"]);
+
+Route::get('/operator', [operatorController::class, "index"]);
+Route::post('/operator', [operatorController::class, "store"]);
+Route::patch('/operator/{id}', [operatorController::class, "update"]);
+Route::delete('/operator/{id}', [operatorController::class, "destroy"]);
+
+Route::get('/client', [clientController::class, "index"]);
+Route::post('/client', [clientController::class, "store"]);
+Route::patch('/client/{id}', [clientController::class, "update"]);
+Route::delete('/client/{id}', [clientController::class, "destroy"]);
+
+Route::get('/camera', [cameraController::class, "index"]);
+Route::post('/camera', [cameraController::class, "store"]);
+Route::patch('/camera/{id}', [cameraController::class, "update"]);
+Route::delete('/camera/{id}', [cameraController::class, "destroy"]);
+
+Route::get('/accessories', [accessoriesController::class, "index"]);
+Route::post('/accessories', [accessoriesController::class, "store"]);
+Route::patch('/accessories/{id}', [accessoriesController::class, "update"]);
+Route::delete('/accessories/{id}', [accessoriesController::class, "destroy"]);
+
+Route::get('/service', [serviceController::class, "index"]);
+Route::post('/service', [serviceController::class, "store"]);
+Route::patch('/service/{id}', [serviceController::class, "update"]);
+Route::delete('/service/{id}', [serviceController::class, "destroy"]);
 
 Route::middleware('guest')->group(function () {
     Route::post('/camera/checkout',['uses' => 'cameraController@postCheckout',]); 

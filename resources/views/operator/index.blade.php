@@ -2,7 +2,8 @@
 @section('body')
 <style>
     * {
-        margin-top: 10px;
+        margin-top: 5px;
+
     }
 
     .left-col {
@@ -19,9 +20,13 @@
         float: left;
         width: 25%;
     }
-</style>
 
-<div class="container">
+    th,
+    td {
+        color: white !important;
+    }
+</style>
+<div class="container font-bold text-white my-6">
     <table id="otable" class="table table-striped table-hover">
         <thead>
             <tr>
@@ -41,7 +46,7 @@
 </div>
 </div>
 
-<div class="modal fade" id="operatorModal" role="dialog" style="display:none">
+<div class="modal fade font-bold text-white my-6" id="operatorModal" role="dialog" style="display:none">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">

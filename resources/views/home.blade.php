@@ -15,10 +15,140 @@
       overflow-x: hidden;
     }
   </style>
+  <header class="z-5 relative ">
+    <div x-data="{ open: false }"
+      class="flex flex-col max-w-screen-xl px-4 mx-auto md:items-center md:justify-between md:flex-row md:px-6 lg:px-8">
+      <div class="p-4 flex flex-row items-center justify-between">
+        <a href="home"
+          class="text-lg font-semibold tracking-widest text-gray-50 uppercase rounded-lg dark-mode:text-white">RedFrame
+          CAM RENT</a>
+        <button class="md:hidden rounded-lg focus:outline-none focus:shadow-outline" @click="open = !open">
+          <svg fill="currentColor" viewBox="0 50 20 20" class="w-6 h-6">
+            <path x-show="!open" fill-rule="evenodd"
+              d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM9 15a1 1 0 011-1h6a1 1 0 110 2h-6a1 1 0 01-1-1z"
+              clip-rule="evenodd"></path>
+            <path x-show="open" fill-rule="evenodd"
+              d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+              clip-rule="evenodd"></path>
+          </svg>
+        </button>
+
+      </div>
+      <nav :class="{'flex': open, 'hidden': !open}"
+        class="flex-col flex-grow pb-4 md:pb-0 hidden md:flex md:justify-end md:flex-row">
+        <div @click.away="open = false" class="relative" x-data="{ open: false }">
+          <button @click="open = !open"
+            class="text-gray-50 flex flex-row items-center w-full px-4 py-2 mt-2 text-sm font-semibold text-left bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:focus:bg-gray-600 dark-mode:hover:bg-gray-600 md:w-auto md:inline md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
+            <span>Index</span>
+            <svg fill="currentColor" viewBox="0 0 20 20" :class="{'rotate-180': open, 'rotate-0': !open}"
+              class="inline w-4 h-4 mt-1 ml-1 transition-transform duration-200 transform md:-mt-1">
+              <path fill-rule="evenodd"
+                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                clip-rule="evenodd"></path>
+            </svg>
+          </button>
+          <div x-show="open" x-transition:enter="transition ease-out duration-100"
+            x-transition:enter-start="transform opacity-0 scale-95"
+            x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75"
+            x-transition:leave-start="transform opacity-100 scale-100"
+            x-transition:leave-end="transform opacity-0 scale-95"
+            class="absolute right-0 w-full mt-2 origin-top-right rounded-md shadow-lg md:w-48">
+            <div class="px-2 py-2 bg-white rounded-md shadow dark-mode:bg-gray-800">
+              <a class="block px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                href="admin-index">Admin Index</a>
+              <a class="block px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                href="operator-index">Operator Index</a>
+              <a class="block px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                href="investor-index">Investor Index</a>
+              <a class="block px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                href="client-index">Client Index</a>
+              <a class="block px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                href="service-index">Service Index</a>
+              <a class="block px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                href="camera-index">Camera Index</a>
+              <a class="block px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                href="accessories-index">Accessories Index</a>
+              <a class="block px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                href="transaction-index">Transaction Index</a>
+
+            </div>
+          </div>
+        </div>
+        {{-- <a
+          class="text-gray-50 px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+          href="{{route('comment.index')}}">Rate</a> --}}
+        <a class="text-gray-50 px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+          href="charts">Charts</a>
+        <div @click.away="open = false" class="relative" x-data="{ open: false }">
+          <button @click="open = !open"
+            class="text-gray-50 flex flex-row items-center w-full px-4 py-2 mt-2 text-sm font-semibold text-left bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:focus:bg-gray-600 dark-mode:hover:bg-gray-600 md:w-auto md:inline md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
+            <span>Search</span>
+            <svg fill="currentColor" viewBox="0 0 20 20" :class="{'rotate-180': open, 'rotate-0': !open}"
+              class="inline w-4 h-4 mt-1 ml-1 transition-transform duration-200 transform md:-mt-1">
+              <path fill-rule="evenodd"
+                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                clip-rule="evenodd"></path>
+            </svg>
+          </button>
+          <div x-show="open" x-transition:enter="transition ease-out duration-100"
+            x-transition:enter-start="transform opacity-0 scale-95"
+            x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75"
+            x-transition:leave-start="transform opacity-100 scale-100"
+            x-transition:leave-end="transform opacity-0 scale-95"
+            class="absolute right-0 w-full mt-2 origin-top-right rounded-md shadow-lg md:w-48">
+            <div class="px-2 py-2 bg-white rounded-md shadow dark-mode:bg-gray-800">
+              <a class="block px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                href="searchAccTransaction">Search Accessories Transaction</a>
+              <a class="block px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                href="searchCamTransaction">Search Camera Transaction</a>
+              <a class="block px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                href="searchService">Search Service</a>
+            </div>
+          </div>
+        </div>
+        <div @click.away="open = false" class="relative" x-data="{ open: false }">
+          <button @click="open = !open"
+            class="text-gray-50 flex flex-row items-center w-full px-4 py-2 mt-2 text-sm font-semibold text-left bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:focus:bg-gray-600 dark-mode:hover:bg-gray-600 md:w-auto md:inline md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
+            <span>Transactions</span>
+            <svg fill="currentColor" viewBox="0 0 20 20" :class="{'rotate-180': open, 'rotate-0': !open}"
+              class="inline w-4 h-4 mt-1 ml-1 transition-transform duration-200 transform md:-mt-1">
+              <path fill-rule="evenodd"
+                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                clip-rule="evenodd"></path>
+            </svg>
+          </button>
+          <div x-show="open" x-transition:enter="transition ease-out duration-100"
+            x-transition:enter-start="transform opacity-0 scale-95"
+            x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75"
+            x-transition:leave-start="transform opacity-100 scale-100"
+            x-transition:leave-end="transform opacity-0 scale-95"
+            class="absolute right-0 w-full mt-2 origin-top-right rounded-md shadow-lg md:w-48">
+            <div class="px-2 py-2 bg-white rounded-md shadow dark-mode:bg-gray-800">
+              <a class="block px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                href="accessories-transaction">Accessories Transaction</a>
+              <a class="block px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                href="camera-transaction">Camera Transaction</a>
+
+            </div>
+          </div>
+        </div>
+        <a class=" px-4 py-2 mt-2 text-sm font-semibold text-gray-900 bg-gray-200 rounded-lg dark-mode:bg-gray-700 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+          href="{{route('logout')}}">Log Out</a>
+    </div>
+    </nav>
+    </div>
+  </header>
 </head>
 
-<body class="font-Poppins">
-  <header>
+<body class="w-full h-auto bg-no-repeat bg-cover"
+  style="background-image: url('https://wallpapers.com/images/file/canon-dslr-zoom-photography-lenses-evtrr0i1swpetu82.jpg');">
+
+  <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+  <div class="w-full text-gray-700 bg-transparent dark-mode:text-gray-200 dark-mode:bg-gray-800">
+
+
+  </div>
+  {{-- <header>
     <nav class="container flex items-center py-4 mt-4 sm:mt-12">
       <div class="py-1">
         <img src="./imgs/logo-main-dark-transparent.png" alt="" />
@@ -77,115 +207,73 @@
         <i class="text-2xl fas fa-bars"></i>
       </div>
     </nav>
-  </header>
-
-  <section class="relative">
-    <div class="container flex flex-col-reverse lg:flex-row items-center gap-12 mt-14 lg:mt-28">
-      <div class="flex flex-1 flex-col items-center lg:items-start">
-        <h2 class="text-bookmark-blue text-3xl md:text-4 lg:text-5xl text-center lg:text-left mb-6">
+  </header> --}}
+  <section class="z-0">
+    <div class="flex flex-col gap-12 mt-14 lg:mt-28">
+      <div class="sm:w-3/4 lg:w-2/4 mx-auto">
+        <h2 class="text-gray-50 text-3xl md:text-4 lg:text-5xl text-center lg:text-center mb-6">
           RedFrame Camera Rentals
         </h2>
-        <p class="text-bookmark-grey text-lg text-center lg:text-left mb-6">
+        <p class="text-gray-50 text-lg text-center lg:text-center mb-1">
           Rent our camera for smooth/fast reliable transactions. No
           downpayment needed just fill out the requirements
         </p>
-        <div class="flex justify-center flex-wrap gap-6">
-          <button type="button" class="btn bg-bookmark-red text-white hover:bg-bookmark-white hover:text-black">
-            Book now!
-          </button>
-          <button type="button" class="btn btn-white hover:bg-bookmark-red hover:text-white">
-            Services
-          </button>
+        <br>
+        <div class="grid place-items-center">
+          <a href="{{route('comment.index')}}"
+            class="bg-transparent text center text-gray-50  font-semibold py-2 px-4 border border-white border-transparent rounded">
+            Rate our Services!
+          </a>
         </div>
       </div>
-      <div class="flex justify-center flex-1 mb-10 md:mb-16 lg:mb-0 z-10">
-        <img class="w-5/6 h-5/6 sm:w-3/4 sm:h-3/4 md:w-full md:h-full" src="./imgs/camera-intro.png" alt="" />
-      </div>
-    </div>
-    <div
-      class="hidden md:block overflow-hidden bg-bookmark-red rounded-l-full absolute h-80 w-2/4 top-32 right-0 lg: -bottom-28 lg:-right-36">
+
     </div>
   </section>
+  {{-- <button
+    class="bg-transparent hover:bg-blue text-blue-dark font-semibold hover:text-white py-2 px-4 border border-blue hover:border-transparent rounded">
+    Button
+  </button>
+  <section class="relative">
+    <div class="container">
+      <div class="sm:w-3/4 lg:w-5/12 mx-auto px-2">
+        <h1 class="text-3xl text-center text-gray-50">
+          Frequently Asked Questions
+        </h1>
+        <p class="text-center text-gray-50 mt-4">
+          Here are some of our FAQs. If you have any other questions you’d
+          like answered please feel free to email us.
+        </p>
+      </div>
+      <div class="flex flex-col sm:w-3/4 lg:w-5/12 mt-12 mx-auto">
+        <div class="flex items-center border-b py-4">
+          <span class="text-gray-50 flex-1">How to Rent?</span>
+          <i class=text-gray-50 fas fa-chevron-down"></i>
+        </div>
+        <div class="flex items-center border-b py-4">
+          <span class="text-gray-50 flex-1">What are the requirements?</span>
+          <i class=text-gray-50 fas fa-chevron-down"></i>
+        </div>
+        <div class="flex items-center border-b py-4">
+          <span class="text-gray-50 flex-1">What is your location?</span>
+          <i class=text-gray-50 fas fa-chevron-down"></i>
+        </div>
+        <div class="flex items-center border-b py-4">
+          <span class="text-gray-50 flex-1">Do you offer COD / Pickup?</span>
+          <i class=text-gray-50 fas fa-chevron-down"></i>
+        </div>
+        <button type="button"
+          class="mt-12 flex self-center btn bg-bookmark-red text-white hover:bg-bookmark-white hover:text-black">
+          More Info
+        </button>
+      </div>
+    </div>
+  </section> --}}
 
-  <section class="bg-bookmark-white py-20 mt-20 lg:mt-60">
-    <div class="sm:w-3/4 lg:w-5/12 mx-auto px-2">
-      <h1 class="text-3xl text-center text-bookmark-blue">
-        Mission / Vision
-      </h1>
-      <p class="text-center text-bookmark-grey mt-4">
-        We provide backup camera's for those in need.
-      </p>
-    </div>
-    <div class="relative mt-20 lg:mt-24">
-      <div class="container flex flex-col lg:flex-row items-center justify-center gap-x-24">
-        <div class="flex flex-1 justify-center z-10 mb-10 lg:mb-0">
-          <img class="w-5/6 h-5/6 sm:w-3/4 sm:h-3/4 md:w-full md:h-full" src="./imgs/camera-intro.png" alt="" />
-        </div>
-        <div class="flex flex-1 flex-col items-center lg:items-start">
-          <h1 class="text-3xl text-bookmark-blue">
-            Inquire / Submit Requirements
-          </h1>
-          <p class="text-bookmark-grey my-4 text-center lg:text-left sm:w-3/4 lg:w-full">
-            Know the availability and current rates of our camera to pick the
-            best for you! Kindly view &amp; fill out the form to proceed on
-            renting
-          </p>
-          <button type="button" class="btn bg-bookmark-red text-white hover:bg-bookmark-white hover:text-black">
-            <a
-              href="https://docs.google.com/forms/d/e/1FAIpQLSe7olaNeEheTItNmwVQOjQxgpYSOpnx7z3eupFf2kQVrN-A0A/viewform">
-              Click Me!
-            </a>
-          </button>
-        </div>
-      </div>
-      <div
-        class="hidden lg:block overflow-hidden bg-bookmark-red rounded-r-full absolute h-80 w-2/4 -bottom-24 -left-36">
-      </div>
-    </div>
-    <div class="relative mt-20 lg:mt-52">
-      <div class="container flex flex-col lg:flex-row-reverse items-center justify-center gap-x-24">
-        <div class="flex flex-1 justify-center z-10 mb-10 lg:mb-0">
-          <img class="w-5/6 h-5/6 sm:w-3/4 sm:h-3/4 md:w-full md:h-full" src="./imgs/camera-intro.png" alt="" />
-        </div>
-        <div class="flex flex-1 flex-col items-center lg:items-start">
-          <h1 class="text-3xl text-bookmark-blue">Fast Delivery</h1>
-          <p class="text-bookmark-grey my-4 text-center lg:text-left sm:w-3/4 lg:w-full">
-            We offer pickup and delivery Through Lalamove, Joyride, Angkas, &
-            Grab couriers. Note that shipping expense are client’s expense
-            back and forth.
-          </p>
-          <button type="button" class="btn bg-bookmark-red hover:bg-bookmark-white hover:text-black">
-            More Info
-          </button>
-        </div>
-      </div>
-      <div
-        class="hidden lg:block overflow-hidden bg-bookmark-red rounded-l-full absolute h-80 w-2/4 -bottom-24 -right-36">
-      </div>
-    </div>
-    <div class="relative mt-20 lg:mt-52">
-      <div class="container flex flex-col lg:flex-row items-center justify-center gap-x-24">
-        <div class="flex flex-1 justify-center z-10 mb-10 lg:mb-0">
-          <img class="w-5/6 h-5/6 sm:w-3/4 sm:h-3/4 md:w-full md:h-full" src="./imgs/camera-intro.png" alt="" />
-        </div>
-        <div class="flex flex-1 flex-col items-center lg:items-start">
-          <h1 class="text-3xl text-bookmark-blue">Enjoy</h1>
-          <p class="text-bookmark-grey my-4 text-center lg:text-left sm:w-3/4 lg:w-full">
-            Enjoy and We'd be happy to hear QA and feedback we are happy to
-            hear and consider every opinion
-          </p>
-          <button type="button" class="btn bg-bookmark-red hover:bg-bookmark-white hover:text-black">
-            More Info
-          </button>
-        </div>
-      </div>
-      <div
-        class="hidden lg:block overflow-hidden bg-bookmark-red rounded-r-full absolute h-80 w-2/4 -bottom-24 -left-36">
-      </div>
-    </div>
-  </section>
 
-  <section class="bg-bookmark-white py-20">
+
+
+
+  {{-- <section class="bg-bookmark-white py-20">
     <div class="container">
       <div class="sm:w-3/4 lg:w-5/12 mx-auto px-2">
         <h1 class="text-3xl text-center text-bookmark-blue">
@@ -241,7 +329,7 @@
         </div>
       </div>
     </div>
-  </section>
+  </section> --}}
 </body>
 
 </html>

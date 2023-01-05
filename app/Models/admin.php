@@ -15,7 +15,7 @@ class admin extends Model
     public $table = "admin";
     public $primaryKey = "admin_id";
     protected $fillable = [
-        "name",
+        "full_name",
         "age",
         "image_path",
         "user_id",

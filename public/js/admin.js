@@ -11,16 +11,7 @@ $(document).ready(function () {
             dataSrc: "",
         },
         dom: '<"top"<"left-col"B><"center-col"l><"right-col"f>>rtip',
-        buttons: [
-            {
-                extend: "pdf",
-                className: "btn btn-success glyphicon glyphicon-file",
-            },
-            {
-                extend: "excel",
-                className: "btn btn-success glyphicon glyphicon-list-alt",
-            },
-        ],
+        buttons: [],
         columns: [
             {
                 data: "admin_id",
