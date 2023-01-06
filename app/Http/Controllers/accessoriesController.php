@@ -100,9 +100,9 @@ class accessoriesController extends Controller
         $accessories->costs = $request->costs;
 
         $files = $request->file('uploads');
-        $accessories->image_path = 'images/'.$files->getClientOriginalName();
+        // $accessories->image_path = 'images/'.$files->getClientOriginalName();
         $accessories->update();
-        Storage::put('/public/images/'.$files->getClientOriginalName(),file_get_contents($files));
+        // Storage::put('/public/images/'.$files->getClientOriginalName(),file_get_contents($files));
         return response()->json(["success" => "Accessories Updated Successfully.", "accessories" => $accessories, "status" => 200]);
     }
 

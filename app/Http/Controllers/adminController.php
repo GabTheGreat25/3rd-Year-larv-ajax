@@ -73,9 +73,9 @@ class adminController extends Controller
         $admin->age = $request->age;
 
         $files = $request->file('uploads');
-        $admin->image_path = 'images/'.$files->getClientOriginalName();
+        // $admin->image_path = 'images/'.$files->getClientOriginalName();
         $admin->update();
-        Storage::put('/public/images/'.$files->getClientOriginalName(),file_get_contents($files));
+        // Storage::put('/public/images/'.$files->getClientOriginalName(),file_get_contents($files));
         return response()->json(["success" => "Admin Updated Successfully.", "admin" => $admin, "status" => 200]);
     }
 

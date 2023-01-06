@@ -72,7 +72,7 @@ class investorController extends Controller
         $investor->image_path = 'images/'.$files->getClientOriginalName();
         $investor->save();
         Storage::put('/public/images/'.$files->getClientOriginalName(),file_get_contents($files));
-        Event::dispatch(new SendInvestor($investor));  
+        // Event::dispatch(new SendInvestor($investor));  
 
         return response()->json(["success" => "Investor Created Successfully.", "investor" => $investor, "status" => 200]);
     }

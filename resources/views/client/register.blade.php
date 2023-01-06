@@ -190,7 +190,7 @@
                                     id="uploads" name="uploads" type="file" />
                             </div>
                             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: .75rem;">
-                                <button id="operatorSubmit"
+                                <button id="clientSubmit"
                                     class="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-full hover:bg-blue-700 focus:outline-none focus:shadow-outline"
                                     type="submit">
                                     Sign up
