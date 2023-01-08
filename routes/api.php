@@ -118,6 +118,21 @@ Route::middleware('auth:api')->group(function () {
         Route::get('/admin/all',['uses' => 'adminController@getadminAll','as' => 'admin.getadminall'] );
         Route::post('admin/post/{id}','adminController@update');
         Route::patch('/admin/restore/{id}', 'adminController@restore');
+        Route::view('/client-index', 'client.index');
+        Route::resource('client', 'clientController')->except(['create', 'store']);
+        Route::get('/client/all',['uses' => 'clientController@getclientAll','as' => 'client.getclientall'] );
+        Route::post('client/post/{id}','clientController@update');
+        Route::patch('/client/restore/{id}', 'clientController@restore');
+        Route::view('/operator-index', 'operator.index');
+        Route::resource('operator', 'operatorController')->except(['create', 'store']);
+        Route::get('/operator/all',['uses' => 'operatorController@getoperator','as' => 'operator.getoperatorall'] );
+        Route::post('operator/post/{id}','operatorController@update');
+        Route::patch('/operator/restore/{id}', 'operatorController@restore');
+        Route::view('/investor-index', 'investor.index');
+        Route::resource('investor', 'investorController')->except(['create', 'store']);
+        Route::get('/investor/all',['uses' => 'investorController@getinvestorAll','as' => 'investor.getinvestorall'] );
+        Route::post('investor/post/{id}','investorController@update');
+        Route::patch('/investor/restore/{id}', 'investorController@restore');
         Route::view('/transaction-index', 'transaction.index');
         Route::resource('transaction', 'transactionController');
         Route::get('/transaction/all',['uses' => 'transactionController@gettransactionAll','as' => 'transaction.gettransactionall'] );
@@ -125,27 +140,22 @@ Route::middleware('auth:api')->group(function () {
     });
 
     Route::middleware('role:operator')->group(function () {
-        Route::view('/operator-index', 'operator.index');
-        Route::resource('operator', 'operatorController')->except(['create', 'store']);
-        Route::get('/operator/all',['uses' => 'operatorController@getoperator','as' => 'operator.getoperatorall'] );
-        Route::post('operator/post/{id}','operatorController@update');
-        Route::patch('/operator/restore/{id}', 'operatorController@restore');
+        // Route::view('/operator-index', 'operator.index');
+        // Route::resource('operator', 'operatorController')->except(['create', 'store']);
+        // Route::get('/operator/all',['uses' => 'operatorController@getoperator','as' => 'operator.getoperatorall'] );
+        // Route::post('operator/post/{id}','operatorController@update');
+        // Route::patch('/operator/restore/{id}', 'operatorController@restore');
     });
 
     Route::middleware('role:investor')->group(function () {
-        Route::view('/investor-index', 'investor.index');
-        Route::resource('investor', 'investorController')->except(['create', 'store']);
-        Route::get('/investor/all',['uses' => 'investorController@getinvestorAll','as' => 'investor.getinvestorall'] );
-        Route::post('investor/post/{id}','investorController@update');
-        Route::patch('/investor/restore/{id}', 'investorController@restore');
+        // Route::view('/investor-index', 'investor.index');
+        // Route::resource('investor', 'investorController')->except(['create', 'store']);
+        // Route::get('/investor/all',['uses' => 'investorController@getinvestorAll','as' => 'investor.getinvestorall'] );
+        // Route::post('investor/post/{id}','investorController@update');
+        // Route::patch('/investor/restore/{id}', 'investorController@restore');
     });
 
     Route::middleware('role:client')->group(function () {
-        Route::view('/client-index', 'client.index');
-        Route::resource('client', 'clientController')->except(['create', 'store']);
-        Route::get('/client/all',['uses' => 'clientController@getclientAll','as' => 'client.getclientall'] );
-        Route::post('client/post/{id}','clientController@update');
-        Route::patch('/client/restore/{id}', 'clientController@restore');
         Route::view('/camera-transaction', 'transaction.camera-transaction');
         Route::view('/accessories-transaction', 'transaction.accessories-transaction');
     });
