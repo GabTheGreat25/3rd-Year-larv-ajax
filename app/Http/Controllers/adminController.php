@@ -38,6 +38,15 @@ class adminController extends Controller
 
     public function store(Request $request)
     {
+
+        $request->validate([
+            'full_name'=>'required',
+            'email'=>'required|unique',
+            'password'=>'required|min:4|max:8',
+            'age'=>'required|min:1|max:120',
+            'uploads'=>'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
         $user = new User();
         $user->name = $request->full_name;
         $user->email = $request->email;
@@ -68,6 +77,13 @@ class adminController extends Controller
 
     public function update(Request $request, $id)
     {
+
+        $request->validate([
+            'full_name'=>'required',
+            'age'=>'required|min:1|max:120',
+            'uploads'=>'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
         $admin = admin::find($id);
         $admin->full_name = $request["full_name"];
         $admin->age = $request->age;
