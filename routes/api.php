@@ -189,7 +189,8 @@ Route::middleware('auth:api')->group(function () {
         Route::post('search','searchController@searchService');
         Route::post('searchh','searchController@searchCamTransaction');
         Route::post('searchhh','searchController@searchAccTransaction');
-
+        
+        Route::view('/charts', 'charts.index');
         Route::get('/operator-chart',[
             'uses' => 'chartController@operatorChart',
         ]);
