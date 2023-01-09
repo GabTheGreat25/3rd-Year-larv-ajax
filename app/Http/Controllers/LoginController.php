@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Admin;
 use App\Traits\ResponseTrait;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -11,6 +12,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Redirect;
+use Laravel\Socialite\Facades\Socialite;
+use DB;
 
 class LoginController extends Controller
 {
@@ -77,6 +80,44 @@ class LoginController extends Controller
              "status" => 200])->throwResponse();
     } else{
         return response()->json(['error' => 'Log Out Failed'], 500);
+        }
+    }
+
+    public function facebookRedirect(){
+        return Socialite::driver('facebook')->redirect();
+    }
+
+    public function facebookCallback(){
+        $user = Socialite::driver('facebook')->user();
+        $this->createOrUpdateUser($user, 'facebook');
+        return redirect()->back();
+    }
+
+    private function createOrUpdateUser($data,$provider){
+        $user=User::where('email', $data->email)->first();
+        if($user){
+            $user->update([
+                'provider'=>$provider,
+                'provider_id'=>$data->id,
+                'avatar'=>$data->avatar
+            ]);
+        }else{
+            $user=User::create([
+                'name'=>$data->name,
+                'email'=>$data->email,
+                'password'=> Hash::make('12345678'),
+                'provider'=>$provider,
+                'provider_id'=>$data->id,
+                'avatar'=>$data->avatar
+            ]);
+
+            $lastInsertId = DB::getPdo()->lastInsertId();
+
+            $user=Admin::create([
+                'user_id'=>$lastInsertId,
+                'full_name'=>$data->name,
+                'age'=> '21',
+            ]);
         }
     }
 }

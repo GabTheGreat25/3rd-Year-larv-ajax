@@ -61,6 +61,16 @@ Route::get('logout',[
     'as' => 'logout',
 ]);
 
+Route::get('auth/facebook/redirect',[
+    'uses' => 'LoginController@facebookRedirect',
+    'as' => 'facebookRedirect',
+]);
+
+Route::get('auth/facebook/callback',[
+    'uses' => 'LoginController@facebookCallback',
+    'as' => 'facebookCallback',
+]);
+
 Route::view('/home', 'home');
 
 Route::resource('comment', 'commentController');
