@@ -38,15 +38,6 @@ class adminController extends Controller
 
     public function store(Request $request)
     {
-
-        $request->validate([
-            'full_name'=>'required',
-            'email'=>'required|unique',
-            'password'=>'required|min:4|max:8',
-            'age'=>'required|min:1|max:120',
-            'uploads'=>'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]);
-
         $user = new User();
         $user->name = $request->full_name;
         $user->email = $request->email;
@@ -54,6 +45,14 @@ class adminController extends Controller
         $user->role = 'admin';
         $user->save();
         $lastInsertId = DB::getPdo()->lastInsertId();
+
+        $request->validate([
+            'full_name'=>'required',
+            'email'=>'required',
+            'password'=>'required',
+            'age'=>'required',
+            'uploads'=>'required',
+        ]);
 
         $admin = new admin();
         $admin->users()->associate($lastInsertId);
